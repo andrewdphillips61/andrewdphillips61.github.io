@@ -373,13 +373,12 @@
 <body>
     <!-- Splash Screen with Optimized Logo -->
     <div id="splash">
-        <img src="https://res.cloudinary.com/dhpl09d00/image/upload/f_auto,q_auto,w_300,h_120,c_scale,e_colorize:100,co_rgb:2B59E9/e251cc600855de4f677b171c1aad74be" alt="Stratix Automation Logo">
+        <img src="https://res.cloudinary.com/dhpl09d00/image/upload/f_auto,q_auto,w_300/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix Automation Logo">
     </div>
-
     <header>
         <nav>
             <div class="logo">
-                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/f_auto,q_auto,w_200,h_80,c_scale/e251cc600855de4f677b171c1aad74be" alt="Stratix Automation">
+                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/f_auto,q_auto,w_200/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix Automation">
             </div>
             <div class="nav-links">
                 <a href="#about">About</a>
@@ -391,14 +390,12 @@
             <button id="menu-toggle" aria-label="Toggle Navigation">☰</button>
         </nav>
     </header>
-
     <main>
         <section class="hero fade-in" id="hero">
             <h1>Transform Your Business with AI</h1>
             <p>Streamline operations, enhance decision-making, and drive growth with our cutting-edge AI solutions tailored to your needs.</p>
             <button onclick="window.location.href='#contact'">Book a Free Consultation</button>
         </section>
-
         <section id="about" class="fade-in">
             <h2>About Us</h2>
             <div class="about-content">
@@ -420,7 +417,6 @@
                 </div>
             </div>
         </section>
-
         <section id="services" class="fade-in">
             <h2>Our Services</h2>
             <div class="services-list">
@@ -446,7 +442,6 @@
                 </div>
             </div>
         </section>
-
         <section id="industries" class="fade-in">
             <h2>Industries We Serve</h2>
             <div class="industries-list">
@@ -476,7 +471,6 @@
                 </div>
             </div>
         </section>
-
         <section id="contact" class="fade-in">
             <h2>Ready to Transform Your Business?</h2>
             <div class="contact-form">
@@ -517,11 +511,10 @@
             </div>
         </section>
     </main>
-
     <footer>
         <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: left; padding-bottom: 2rem;">
             <div>
-                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/f_auto,q_auto,w_200,h_80,c_scale,e_colorize:100,co_white/e251cc600855de4f677b171c1aad74be" alt="Stratix Automation Logo" style="height: 40px; margin-bottom: 1rem;">
+                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/f_auto,q_auto,w_200,e_colorize:100,co_white/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix Automation Logo" style="height: 40px; margin-bottom: 1rem;">
                 <p>Innovative AI solutions for forward-thinking businesses.</p>
             </div>
             <div>
@@ -544,9 +537,7 @@
             <p>&copy; 2025 Stratix Automation. All rights reserved. | <a href="#" style="color: white; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: white; text-decoration: none;">Terms of Service</a></p>
         </div>
     </footer>
-
     <button id="back-to-top" aria-label="Back to top">↑</button>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Splash screen
@@ -555,7 +546,6 @@
                 splash.style.opacity = '0';
                 setTimeout(() => splash.style.display = 'none', 1000);
             }, 2000);
-            
             // Mobile menu toggle
             const menuToggle = document.getElementById('menu-toggle');
             const navLinks = document.querySelector('.nav-links');
@@ -563,7 +553,6 @@
                 navLinks.classList.toggle('show');
                 menuToggle.innerHTML = navLinks.classList.contains('show') ? '✕' : '☰';
             });
-            
             // Close mobile menu when clicking a link
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
@@ -571,7 +560,6 @@
                     menuToggle.innerHTML = '☰';
                 });
             });
-            
             // Header scroll effect
             const header = document.querySelector('header');
             window.addEventListener('scroll', () => {
@@ -581,7 +569,6 @@
                     header.classList.remove('scrolled');
                 }
             });
-            
             // Back to top button
             const backToTop = document.getElementById('back-to-top');
             window.addEventListener('scroll', () => {
@@ -597,7 +584,6 @@
                     behavior: 'smooth'
                 });
             });
-            
             // Form submission
             const contactForm = document.getElementById('contactForm');
             contactForm.addEventListener('submit', (e) => {
@@ -606,7 +592,6 @@
                 alert('Thank you for your message! We will get back to you soon.');
                 contactForm.reset();
             });
-            
             // Animate elements when they come into view
             const fadeEls = document.querySelectorAll('.fade-in');
             const observer = new IntersectionObserver((entries) => {
