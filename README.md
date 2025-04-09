@@ -398,13 +398,13 @@
     <main>
         <section class="hero fade-in" id="hero">
             <h1>Practical AI for Growing Businesses</h1>
-            <p>We're building affordable automation tools to help small and medium businesses work smarter, not harder.</p>
+            <p>We're building affordable automation tools to help businesses work smarter, not harder.</p>
             <button onclick="window.location.href='#contact'">Join Our Beta</button>
         </section>
         <section id="about" class="fade-in">
             <h2>Our Startup Story</h2>
             <div class="about-content">
-                <p>Founded in 2024 by Andrew Phillips, Stratix Automation is bootstrapping its way to create genuinely useful AI tools.</p>
+                <p>Founded in 2025, Stratix Automation is bootstrapping its way to create genuinely useful AI tools.</p>
                 <p>We're not another AI hype company - we're focused on delivering real value through simple, effective solutions.</p>
                 <div class="stats-grid">
                     <div>
@@ -431,7 +431,7 @@
                 </div>
                 <div>
                     <h3><i class="fas fa-comment-dots" style="margin-right: 10px;"></i> Chat Automation</h3>
-                    <p>Simple chatbot solutions for handling common customer inquiries. Limited to basic Q&A functionality currently.</p>
+                    <p>Advanced chatbot solutions for instantly handling common customer inquiries. </p>
                 </div>
                 <div>
                     <h3><i class="fas fa-chart-line" style="margin-right: 10px;"></i> Data Reports</h3>
@@ -444,7 +444,7 @@
             <div class="industries-list">
                 <div>
                     <h3><i class="fas fa-store" style="margin-right: 10px;"></i> Small Retail</h3>
-                    <p>Tools to help local shops manage inventory and customer interactions.</p>
+                    <p>Tools to help local real estate companies manage customer interactions.</p>
                 </div>
                 <div>
                     <h3><i class="fas fa-briefcase" style="margin-right: 10px;"></i> Professional Services</h3>
@@ -519,7 +519,7 @@
             </div>
         </div>
         <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 1.5rem;">
-            <p>&copy; 2024 Stratix Automation. A bootstrapped startup.</p>
+            <p>&copy; 2025 Stratix Automation. A bootstrapped startup.</p>
         </div>
     </footer>
     <button id="back-to-top" aria-label="Back to top">↑</button>
