@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Stratix Automation - Cutting-edge AI solutions for businesses">
-    <title>Stratix Automation | AI Solutions for Business Growth</title>
+    <meta name="description" content="Stratix Automation - Practical AI solutions for growing businesses">
+    <title>Stratix Automation | AI Tools for SMBs</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -31,7 +30,6 @@
             background-color: var(--light);
             overflow-x: hidden;
         }
-        /* Splash Screen */
         #splash {
             position: fixed;
             top: 0;
@@ -55,7 +53,6 @@
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
-        /* Header */
         header {
             position: fixed;
             top: 0;
@@ -130,7 +127,6 @@
             cursor: pointer;
             color: var(--dark);
         }
-        /* Main Content */
         main {
             padding-top: 80px;
             max-width: 1400px;
@@ -148,11 +144,11 @@
             margin-bottom: 1.5rem;
         }
         h1 {
-            font-size: 3.5rem;
+            font-size: 2.8rem;
             font-weight: 700;
         }
         h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             text-align: center;
             margin-bottom: 3rem;
             position: relative;
@@ -169,14 +165,13 @@
             border-radius: 2px;
         }
         h3 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--primary);
         }
         p {
             margin-bottom: 1rem;
             color: var(--gray);
         }
-        /* Hero Section */
         .hero {
             min-height: 80vh;
             display: flex;
@@ -187,7 +182,7 @@
             background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(255, 255, 255, 1) 100%);
         }
         .hero p {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             max-width: 700px;
             margin-bottom: 2rem;
         }
@@ -207,10 +202,9 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
         }
-        /* Grid Layouts */
         .services-list, .industries-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
@@ -223,10 +217,9 @@
             list-style: none;
         }
         .services-list li:hover, .industries-list li:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
-        /* Contact Form */
         .contact-form {
             max-width: 600px;
             margin: 0 auto;
@@ -278,7 +271,6 @@
         form button:hover {
             background-color: var(--primary-dark);
         }
-        /* Footer */
         footer {
             text-align: center;
             padding: 2rem;
@@ -288,7 +280,6 @@
         footer p {
             color: white;
         }
-        /* Animations */
         .fade-in {
             opacity: 0;
             animation: fadeIn 1s ease forwards;
@@ -296,13 +287,50 @@
         @keyframes fadeIn {
             to { opacity: 1; }
         }
-        /* Mobile Styles */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .stats-grid h3 {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        #back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        #back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        #back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
             h2 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             .nav-links {
                 position: fixed;
@@ -339,142 +367,99 @@
             .logo img {
                 height: 40px;
             }
-        }
-        /* Back to Top Button */
-        #back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 50px;
-            height: 50px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 99;
-        }
-        #back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        #back-to-top:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-5px);
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Splash Screen with Optimized Logo -->
+    <!-- Splash Screen -->
     <div id="splash">
-        <img src="https://res.cloudinary.com/dhpl09d00/image/upload/f_auto,q_auto,w_300/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix Automation Logo">
+        <img src="https://res.cloudinary.com/dhpl09d00/image/upload/f_auto,q_auto,w_300/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" 
+             alt="Stratix Automation Logo">
     </div>
     <header>
         <nav>
             <div class="logo">
-                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/f_auto,q_auto,w_200/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix Automation">
+                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/f_auto,q_auto,w_200/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" 
+                     alt="Stratix Automation">
             </div>
             <div class="nav-links">
                 <a href="#about">About</a>
-                <a href="#services">Services</a>
+                <a href="#services">Solutions</a>
                 <a href="#industries">Industries</a>
                 <a href="#contact">Contact</a>
-                <a class="cta-btn" href="#signup">Free Demo</a>
+                <a class="cta-btn" href="#contact">Early Access</a>
             </div>
             <button id="menu-toggle" aria-label="Toggle Navigation">☰</button>
         </nav>
     </header>
     <main>
         <section class="hero fade-in" id="hero">
-            <h1>Transform Your Business with AI</h1>
-            <p>Streamline operations, enhance decision-making, and drive growth with our cutting-edge AI solutions tailored to your needs.</p>
-            <button onclick="window.location.href='#contact'">Book a Free Consultation</button>
+            <h1>Practical AI for Growing Businesses</h1>
+            <p>We're building affordable automation tools to help small and medium businesses work smarter, not harder.</p>
+            <button onclick="window.location.href='#contact'">Join Our Beta</button>
         </section>
         <section id="about" class="fade-in">
-            <h2>About Us</h2>
+            <h2>Our Startup Story</h2>
             <div class="about-content">
-                <p>Stratix Automation pioneers intelligent automation solutions that redefine industry standards.</p>
-                <p>Founded and led by Andrew Phillips, our team of AI engineers combine technological excellence with practical business acumen to deliver solutions that work in the real world. We don't just implement AI - we build strategic partnerships that drive continuous innovation.</p>
-                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; text-align: center;">
+                <p>Founded in 2024 by Andrew Phillips, Stratix Automation is bootstrapping its way to create genuinely useful AI tools.</p>
+                <p>We're not another AI hype company - we're focused on delivering real value through simple, effective solutions.</p>
+                <div class="stats-grid">
                     <div>
-                        <h3 style="font-size: 2rem; color: var(--primary);">200+</h3>
-                        <p>Clients Served</p>
+                        <h3>5+</h3>
+                        <p>Pilot Clients</p>
                     </div>
                     <div>
-                        <h3 style="font-size: 2rem; color: var(--primary);">15</h3>
-                        <p>Industries</p>
+                        <h3>3</h3>
+                        <p>Core Features</p>
                     </div>
                     <div>
-                        <h3 style="font-size: 2rem; color: var(--primary);">98%</h3>
-                        <p>Client Retention</p>
+                        <h3>100%</h3>
+                        <p>Founder-Led</p>
                     </div>
                 </div>
             </div>
         </section>
         <section id="services" class="fade-in">
-            <h2>Our Services</h2>
+            <h2>Our Current Focus</h2>
             <div class="services-list">
                 <div>
-                    <h3><i class="fas fa-robot" style="margin-right: 10px;"></i> AI Consulting</h3>
-                    <p>Comprehensive AI strategy development and implementation roadmaps tailored to your business objectives and technical capabilities.</p>
+                    <h3><i class="fas fa-robot" style="margin-right: 10px;"></i> Smart CRM Assistant</h3>
+                    <p>Basic AI tools to help manage customer relationships more effectively. Currently in beta testing with select clients.</p>
                 </div>
                 <div>
-                    <h3><i class="fas fa-brain" style="margin-right: 10px;"></i> Machine Learning</h3>
-                    <p>Custom ML models for predictive analytics, recommendation systems, and process optimization with continuous learning capabilities.</p>
+                    <h3><i class="fas fa-comment-dots" style="margin-right: 10px;"></i> Chat Automation</h3>
+                    <p>Simple chatbot solutions for handling common customer inquiries. Limited to basic Q&A functionality currently.</p>
                 </div>
                 <div>
-                    <h3><i class="fas fa-comment-dots" style="margin-right: 10px;"></i> NLP Solutions</h3>
-                    <p>Advanced natural language processing for sentiment analysis, chatbots, document processing, and multilingual support.</p>
-                </div>
-                <div>
-                    <h3><i class="fas fa-eye" style="margin-right: 10px;"></i> CRM Conversion</h3>
-                    <p>Advanced instant outreach and automated followup for high conversion rates, turning cold leads into clients.</p>
-                </div>
-                <div>
-                    <h3><i class="fas fa-puzzle-piece" style="margin-right: 10px;"></i> AI Integration</h3>
-                    <p>Seamless integration with your existing systems and workflows with robust APIs and microservices architecture.</p>
+                    <h3><i class="fas fa-chart-line" style="margin-right: 10px;"></i> Data Reports</h3>
+                    <p>Automated business insights from your existing data. Currently supports basic spreadsheet analysis.</p>
                 </div>
             </div>
         </section>
         <section id="industries" class="fade-in">
-            <h2>Industries We Serve</h2>
+            <h2>Who We're Building For</h2>
             <div class="industries-list">
                 <div>
-                    <h3><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i> E-commerce</h3>
-                    <p>Personalized recommendations, dynamic pricing, fraud detection, and visual search to boost conversions and reduce churn.</p>
+                    <h3><i class="fas fa-store" style="margin-right: 10px;"></i> Small Retail</h3>
+                    <p>Tools to help local shops manage inventory and customer interactions.</p>
                 </div>
                 <div>
-                    <h3><i class="fas fa-heartbeat" style="margin-right: 10px;"></i> Healthcare</h3>
-                    <p>Diagnostic assistance, patient monitoring, drug discovery, and administrative automation to improve outcomes.</p>
+                    <h3><i class="fas fa-briefcase" style="margin-right: 10px;"></i> Professional Services</h3>
+                    <p>Basic automation for consultants, lawyers, and accountants.</p>
                 </div>
                 <div>
-                    <h3><i class="fas fa-chart-line" style="margin-right: 10px;"></i> Finance</h3>
-                    <p>Algorithmic trading, risk assessment, fraud prevention, and personalized banking experiences.</p>
-                </div>
-                <div>
-                    <h3><i class="fas fa-industry" style="margin-right: 10px;"></i> Manufacturing</h3>
-                    <p>Predictive maintenance, quality control, supply chain optimization, and autonomous robotics.</p>
-                </div>
-                <div>
-                    <h3><i class="fas fa-bullseye" style="margin-right: 10px;"></i> Marketing</h3>
-                    <p>Customer segmentation, campaign optimization, content generation, and sentiment analysis.</p>
-                </div>
-                <div>
-                    <h3><i class="fas fa-wifi" style="margin-right: 10px;"></i> Technology</h3>
-                    <p>AI-powered SaaS solutions, developer tools, and infrastructure optimization for tech companies.</p>
+                    <h3><i class="fas fa-utensils" style="margin-right: 10px;"></i> Restaurants</h3>
+                    <p>Simple solutions for reservations and customer feedback.</p>
                 </div>
             </div>
         </section>
         <section id="contact" class="fade-in">
-            <h2>Ready to Transform Your Business?</h2>
+            <h2>Work With Us</h2>
             <div class="contact-form">
-                <p>Get in touch with our AI experts for a free consultation and discover how we can help you achieve your goals.</p>
+                <p>We're currently onboarding a limited number of beta testers. Let's chat about how we might help your business.</p>
                 <form id="contactForm" action="#" method="POST">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                         <div>
@@ -487,23 +472,21 @@
                         </div>
                     </div>
                     <div>
-                        <label for="company">Company</label>
+                        <label for="company">Business Name</label>
                         <input type="text" id="company" name="company">
                     </div>
                     <div>
-                        <label for="service">Service of Interest</label>
+                        <label for="service">Interest Area</label>
                         <select id="service" name="service">
-                            <option value="">Select a service</option>
-                            <option value="consulting">AI Consulting</option>
-                            <option value="ml">Machine Learning</option>
-                            <option value="nlp">NLP Solutions</option>
-                            <option value="vision">Computer Vision</option>
-                            <option value="data">Data Solutions</option>
-                            <option value="integration">AI Integration</option>
+                            <option value="">Select an option</option>
+                            <option value="crm">CRM Assistant</option>
+                            <option value="chat">Chat Automation</option>
+                            <option value="data">Data Reports</option>
+                            <option value="other">Just Exploring</option>
                         </select>
                     </div>
                     <div>
-                        <label for="message">How can we help you?*</label>
+                        <label for="message">What challenges are you facing?*</label>
                         <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
                     <button type="submit">Send Message <i class="fas fa-paper-plane" style="margin-left: 8px;"></i></button>
@@ -514,27 +497,29 @@
     <footer>
         <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: left; padding-bottom: 2rem;">
             <div>
-                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/f_auto,q_auto,w_200,e_colorize:100,co_white/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix Automation Logo" style="height: 40px; margin-bottom: 1rem;">
-                <p>Innovative AI solutions for forward-thinking businesses.</p>
+                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/f_auto,q_auto,w_200,e_colorize:100,co_white/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" 
+                     alt="Stratix Automation Logo" 
+                     style="height: 40px; margin-bottom: 1rem;">
+                <p>Building practical AI tools for real businesses.</p>
             </div>
             <div>
                 <h3 style="color: white; margin-bottom: 1rem;">Quick Links</h3>
                 <ul style="list-style: none;">
-                    <li style="margin-bottom: 0.5rem;"><a href="#about" style="color: white; text-decoration: none;">About Us</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="#services" style="color: white; text-decoration: none;">Services</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#about" style="color: white; text-decoration: none;">Our Story</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#services" style="color: white; text-decoration: none;">Solutions</a></li>
                     <li style="margin-bottom: 0.5rem;"><a href="#industries" style="color: white; text-decoration: none;">Industries</a></li>
-                    <li style="margin-bottom: 0.5rem;"><a href="#contact" style="color: white; text-decoration: none;">Contact</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#contact" style="color: white; text-decoration: none;">Beta Program</a></li>
                 </ul>
             </div>
             <div>
-                <h3 style="color: white; margin-bottom: 1rem;">Contact Info</h3>
-                <p><i class="fas fa-user" style="margin-right: 10px;"></i> Andrew Phillips, CEO</p>
+                <h3 style="color: white; margin-bottom: 1rem;">Contact</h3>
+                <p><i class="fas fa-user" style="margin-right: 10px;"></i> Andrew Phillips, Founder</p>
                 <p><i class="fas fa-phone" style="margin-right: 10px;"></i> <a href="tel:6159559515" style="color: white; text-decoration: none;">(615) 955-9515</a></p>
                 <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> <a href="mailto:stratixautomation@gmail.com" style="color: white; text-decoration: none;">stratixautomation@gmail.com</a></p>
             </div>
         </div>
         <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 1.5rem;">
-            <p>&copy; 2025 Stratix Automation. All rights reserved. | <a href="#" style="color: white; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: white; text-decoration: none;">Terms of Service</a></p>
+            <p>&copy; 2024 Stratix Automation. A bootstrapped startup.</p>
         </div>
     </footer>
     <button id="back-to-top" aria-label="Back to top">↑</button>
@@ -588,8 +573,7 @@
             const contactForm = document.getElementById('contactForm');
             contactForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                // Here you would typically send the form data to your server
-                alert('Thank you for your message! We will get back to you soon.');
+                alert('Thanks for your interest! We\'ll be in touch soon about our beta program.');
                 contactForm.reset();
             });
             // Animate elements when they come into view
