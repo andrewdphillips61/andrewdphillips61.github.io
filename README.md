@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Stratix AI - Cutting-edge AI solutions for businesses">
-    <title>Stratix AI | AI Solutions for Business Growth</title>
+    <meta name="description" content="Stratix Automation - Cutting-edge AI solutions for businesses">
+    <title>Stratix Automation | AI Solutions for Business Growth</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -368,12 +368,12 @@
 </head>
 <body>
     <div id="splash">
-        <img src="https://asset.cloudinary.com/dhpl09d00/e251cc600855de4f677b171c1aad74be" alt="Stratix AI Logo">
+        <img src="https://asset.cloudinary.com/dhpl09d00/e251cc600855de4f677b171c1aad74be" alt="Stratix Automation Logo">
     </div>
     <header>
         <nav>
             <div class="logo">
-                <img src="https://asset.cloudinary.com/dhpl09d00/e251cc600855de4f677b171c1aad74be">
+                <img src="https://asset.cloudinary.com/dhpl09d00/e251cc600855de4f677b171c1aad74be" alt="Stratix Automation">
             </div>
             <div class="nav-links">
                 <a href="#about">About</a>
@@ -394,8 +394,8 @@
         <section id="about" class="fade-in">
             <h2>About Us</h2>
             <div class="about-content">
-                <p>Stratix AI pioneers intelligent automation solutions that redefine industry standards. </p>
-                <p>Our team of AI engineers combine technological excellence with practical business acumen to deliver solutions that work in the real world. We don't just implement AI - we build strategic partnerships that drive continuous innovation.</p>
+                <p>Stratix Automation pioneers intelligent automation solutions that redefine industry standards.</p>
+                <p>Founded and led by Andrew Phillips, our team of AI engineers combine technological excellence with practical business acumen to deliver solutions that work in the real world. We don't just implement AI - we build strategic partnerships that drive continuous innovation.</p>
                 <div class="stats-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; text-align: center;">
                     <div>
                         <h3 style="font-size: 2rem; color: var(--primary);">200+</h3>
@@ -499,7 +499,7 @@
                     </div>
                     <div>
                         <label for="message">How can we help you?*</label>
-                        <textarea ia="message" name="message" rows="5" required></textarea>
+                        <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
                     <button type="submit">Send Message <i class="fas fa-paper-plane" style="margin-left: 8px;"></i></button>
                 </form>
@@ -509,7 +509,7 @@
     <footer>
         <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: left; padding-bottom: 2rem;">
             <div>
-                <img src="https://asset.cloudinary.com/dhpl09d00/e251cc600855de4f677b171c1aad74be" alt="Stratix AI Logo" style="height: 40px; margin-bottom: 1rem; filter: brightness(0) invert(1);">
+                <img src="https://asset.cloudinary.com/dhpl09d00/e251cc600855de4f677b171c1aad74be" alt="Stratix Automation Logo" style="height: 40px; margin-bottom: 1rem; filter: brightness(0) invert(1);">
                 <p>Innovative AI solutions for forward-thinking businesses.</p>
             </div>
             <div>
@@ -523,13 +523,13 @@
             </div>
             <div>
                 <h3 style="color: white; margin-bottom: 1rem;">Contact Info</h3>
-                <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> 123 AI Avenue, Tech City</p>
-                <p><i class="fas fa-phone" style="margin-right: 10px;"></i> (555) 123-4567</p>
-                <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> info@stratixai.com</p>
+                <p><i class="fas fa-user" style="margin-right: 10px;"></i> Andrew Phillips, CEO</p>
+                <p><i class="fas fa-phone" style="margin-right: 10px;"></i> <a href="tel:6159559515" style="color: white; text-decoration: none;">(615) 955-9515</a></p>
+                <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> <a href="mailto:stratixautomation@gmail.com" style="color: white; text-decoration: none;">stratixautomation@gmail.com</a></p>
             </div>
         </div>
         <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 1.5rem;">
-            <p>&copy; 2025 Stratix AI. All rights reserved. | <a href="#" style="color: white; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: white; text-decoration: none;">Terms of Service</a></p>
+            <p>&copy; 2025 Stratix Automation. All rights reserved. | <a href="#" style="color: white; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: white; text-decoration: none;">Terms of Service</a></p>
         </div>
     </footer>
     <button id="back-to-top" aria-label="Back to top">↑</button>
@@ -601,6 +601,4 @@
         });
     </script>
 </body>
-
 </html>
-
