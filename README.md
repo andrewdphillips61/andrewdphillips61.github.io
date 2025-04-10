@@ -2,14 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Stratix AI - Cutting-edge AI solutions for businesses">
+    <!-- OpenGraph / Social Media Meta Tags -->
+    <meta property="og:title" content="Stratix AI | AI Solutions for Business Growth">
+    <meta property="og:description" content="Innovative AI solutions designed to help startups and growing businesses compete in the digital age.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://stratixai.com">
+    <meta property="og:image" content="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png">
+    <!-- Favicon -->
+    <link rel="icon" href="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" type="image/png">
     <title>Stratix AI | AI Solutions for Business Growth</title>
+    <!-- Preconnect to external resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css"></noscript>
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Stratix AI",
+      "url": "https://stratixai.com",
+      "logo": "https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png",
+      "description": "Innovative AI solutions for the modern business",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "San Francisco",
+        "addressRegion": "CA",
+        "postalCode": "94107",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "contact@stratixai.com"
+      }
+    }
+    </script>
     <style>
         :root {
             --primary: #2563eb;
@@ -77,7 +111,7 @@
         #splash img {
             width: 150px;
             height: auto;
-            animation: pulse 2s;
+            animation: pulse 2s infinite;
         }
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -837,19 +871,19 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo">
+                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo" loading="lazy">
             </div>
             <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#industries">Industries</a>
-                <a href="#contact">Contact</a>
-                <a class="cta-btn" href="#signup">Free Demo</a>
-                <div class="dark-mode-toggle">
+                <a href="#about" aria-label="About Section">About</a>
+                <a href="#services" aria-label="Services Section">Services</a>
+                <a href="#industries" aria-label="Industries Section">Industries</a>
+                <a href="#contact" aria-label="Contact Section">Contact</a>
+                <a class="cta-btn" href="#signup" aria-label="Free Demo">Free Demo</a>
+                <div class="dark-mode-toggle" aria-label="Toggle Dark Mode" role="button" tabindex="0">
                     <div class="toggle-thumb"></div>
                 </div>
             </div>
-            <button id="menu-toggle" aria-label="Toggle Navigation">☰</button>
+            <button id="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false">☰</button>
         </nav>
     </header>
     <main>
@@ -857,10 +891,10 @@
             <div class="hero-content">
                 <h1>Transform Your Business with <span class="gradient-text typing-text">AI</span></h1>
                 <p>Innovative AI solutions designed to help startups and growing businesses compete in the digital age.</p>
-                <button onclick="window.location.href='#contact'">Get Started Today</button>
+                <button onclick="window.location.href='#contact'" aria-label="Get Started">Get Started Today</button>
             </div>    
             <div class="animated-illustration">
-                <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <!-- AI network illustration -->
                     <circle cx="250" cy="150" r="100" fill="none" stroke="var(--primary)" stroke-width="2" stroke-dasharray="5,5"/>
                     <circle cx="250" cy="150" r="70" fill="none" stroke="var(--primary)" stroke-width="2" stroke-dasharray="3,3"/>  
@@ -889,7 +923,8 @@
                         <span class="ai-chip"><i class="fas fa-bolt" style="margin-right: 5px;"></i> Fast Implementation</span>
                         <span class="ai-chip"><i class="fas fa-lock" style="margin-right: 5px;"></i> Secure By Design</span>
                         <span class="ai-chip"><i class="fas fa-sync-alt" style="margin-right: 5px;"></i> Continuous Learning</span>
-                        <span class="ai-chip"><i class="fas fa-expand" style="margin-right: 5px;"></i> Scalable Solutions</span>
+                        <span class="ai-chip"><i class="fas fa-expand" style="margin-right: 5px
+                                            <span class="ai-chip"><i class="fas fa-expand" style="margin-right: 5px;"></i> Scalable Solutions</span>
                     </div>
                 </div>
                 <div class="network-grid">
@@ -940,7 +975,7 @@
                     </div>
                 </div>
                 <div class="tech-card">
-                   <h3><i class="fas fa-chart-line" style="margin-right: 10px;"></i> Data Analytics</h3>
+                    <h3><i class="fas fa-chart-line" style="margin-right: 10px;"></i> Data Analytics</h3>
                     <p>Transform your raw data into actionable insights with our advanced analytics platforms.</p>
                     <div style="margin-top: 1rem;">
                         <span class="ai-chip">Visualization</span>
@@ -1000,13 +1035,14 @@
             <div class="contact-form">
                 <p>Ready to transform your business with AI? Contact us for a free consultation.</p>
                 <form id="contactForm">
+                    <input type="hidden" name="_csrf" value="csrf-token-placeholder">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" required aria-required="true">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" required aria-required="true">
                     </div>
                     <div class="form-group">
                         <label for="company">Company</label>
@@ -1014,7 +1050,7 @@
                     </div>
                     <div class="form-group">
                         <label for="service">Service of Interest</label>
-                        <select id="service" name="service">
+                        <select id="service" name="service" aria-label="Select a service">
                             <option value="">Select a service</option>
                             <option value="consulting">AI Consulting</option>
                             <option value="ml">Machine Learning</option>
@@ -1026,9 +1062,10 @@
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" required></textarea>
+                        <textarea id="message" name="message" required aria-required="true"></textarea>
                     </div>
-                    <button type="submit">Send Message</button>
+                    <div class="form-group" aria-live="polite" id="formStatus"></div>
+                    <button type="submit" aria-label="Send Message">Send Message</button>
                 </form>
             </div>
         </section>
@@ -1036,7 +1073,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo">
+                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo" loading="lazy">
                 <p>Innovative AI solutions for the modern business.</p>
                 <div class="social-links">
                     <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -1084,168 +1121,296 @@
     </button>
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
     <script>
+        // Feature detection
+        const supportsSmoothScroll = 'scrollBehavior' in document.documentElement.style;
         // Wait for the DOM to be fully loaded
         document.addEventListener('DOMContentLoaded', function() {
             // Splash screen animation
             setTimeout(function() {
-                document.getElementById('splash').style.opacity = '0';
-                setTimeout(function() {
-                    document.getElementById('splash').style.display = 'none';
-                }, 1000);
-            }, 1500);
-            // Initialize Locomotive Scroll
-            const scroll = new LocomotiveScroll({
-                el: document.querySelector('main'),
-                smooth: true,
-                smartphone: {
-                    smooth: true
-                },
-                tablet: {
-                    smooth: true
+                const splash = document.getElementById('splash');
+                if (splash) {
+                    splash.style.opacity = '0';
+                    setTimeout(function() {
+                        splash.style.display = 'none';
+                    }, 1000);
                 }
-            });
-            // Update scroll when content changes
-            scroll.update();
-            // Custom cursor
-            const cursor = document.querySelector('.cursor');
-            const cursorFollower = document.querySelector('.cursor-follower');
-            const links = document.querySelectorAll('a, button, .ai-chip, input, textarea, select');
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';    
-                // Follower with delay
-                setTimeout(() => {
-                    cursorFollower.style.left = e.clientX + 'px';
-                    cursorFollower.style.top = e.clientY + 'px';
-                }, 100);
-            });
-            // Cursor hover effects
-            links.forEach(link => {
-                link.addEventListener('mouseenter', () => {
-                    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.2)';
-                });  
-                link.addEventListener('mouseleave', () => {
-                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+            }, 1500);
+            // Initialize Locomotive Scroll with fallback
+            try {
+                const scroll = new LocomotiveScroll({
+                    el: document.querySelector('main'),
+                    smooth: true,
+                    smartphone: { smooth: true },
+                    tablet: { smooth: true }
                 });
-            });
-            // Mobile menu toggle
+                // Update scroll when content changes
+                if (scroll && typeof scroll.update === 'function') {
+                    scroll.update();
+                }
+            } catch (e) {
+                console.error('Locomotive Scroll initialization failed:', e);
+                if (supportsSmoothScroll) {
+                    document.documentElement.style.scrollBehavior = 'smooth';
+                }
+            }
+            // Custom cursor with fallback for touch devices
+            if (!('ontouchstart' in window || navigator.maxTouchPoints)) {
+                const cursor = document.querySelector('.cursor');
+                const cursorFollower = document.querySelector('.cursor-follower');
+                const links = document.querySelectorAll('a, button, .ai-chip, input, textarea, select');
+                document.addEventListener('mousemove', (e) => {
+                    if (cursor) {
+                        cursor.style.left = e.clientX + 'px';
+                        cursor.style.top = e.clientY + 'px';
+                    }
+                    // Follower with delay
+                    setTimeout(() => {
+                        if (cursorFollower) {
+                            cursorFollower.style.left = e.clientX + 'px';
+                            cursorFollower.style.top = e.clientY + 'px';
+                        }
+                    }, 100);
+                });
+                // Cursor hover effects
+                if (links.length && cursor && cursorFollower) {
+                    links.forEach(link => {
+                        link.addEventListener('mouseenter', () => {
+                            cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                            cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.2)';
+                        });  
+                        link.addEventListener('mouseleave', () => {
+                            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                            cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+                        });
+                    });
+                }
+            } else {
+                // Remove custom cursor elements on touch devices
+                const cursor = document.querySelector('.cursor');
+                const cursorFollower = document.querySelector('.cursor-follower');
+                if (cursor) cursor.remove();
+                if (cursorFollower) cursorFollower.remove();
+                document.body.style.cursor = 'default';
+            }
+            // Mobile menu toggle with ARIA attributes
             const menuToggle = document.getElementById('menu-toggle');
             const navLinks = document.querySelector('.nav-links');
-            menuToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('show');
-                menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
-            });
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    const isExpanded = navLinks.classList.toggle('show');
+                    menuToggle.setAttribute('aria-expanded', isExpanded);
+                    menuToggle.textContent = isExpanded ? '✕' : '☰';
+                });
+            }
             // Close mobile menu when clicking a link
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) {
+                    if (window.innerWidth <= 768 && navLinks && menuToggle) {
                         navLinks.classList.remove('show');
+                        menuToggle.setAttribute('aria-expanded', 'false');
                         menuToggle.textContent = '☰';
                     }
                 });
             });
-            // Dark mode toggle
+            // Dark mode toggle with localStorage
             const darkModeToggle = document.querySelector('.dark-mode-toggle');
-            darkModeToggle.addEventListener('click', () => {
+            if (darkModeToggle) {
+                darkModeToggle.addEventListener('click', toggleDarkMode);
+                darkModeToggle.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleDarkMode();
+                    }
+                });
+            }
+            function toggleDarkMode() {
                 document.body.classList.toggle('dark-mode');
-                localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-            });
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                localStorage.setItem('darkMode', isDarkMode);
+            }
             // Check for saved dark mode preference
             if (localStorage.getItem('darkMode') === 'true') {
                 document.body.classList.add('dark-mode');
             }
-            // Back to top button
+            // Back to top button with smooth scroll polyfill if needed
             const backToTopButton = document.getElementById('back-to-top');
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTopButton.classList.add('visible');
-                } else {
-                    backToTopButton.classList.remove('visible');
-                }
-            });
-            backToTopButton.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
+            if (backToTopButton) {
+                window.addEventListener('scroll', () => {
+                    if (window.pageYOffset > 300) {
+                        backToTopButton.classList.add('visible');
+                    } else {
+                        backToTopButton.classList.remove('visible');
+                    }
                 });
-            });
-            // Form submission
+                backToTopButton.addEventListener('click', () => {
+                    if (supportsSmoothScroll) {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        // Fallback for browsers without smooth scroll
+                        const scrollStep = -window.scrollY / (500 / 15);
+                        const scrollInterval = setInterval(() => {
+                            if (window.scrollY !== 0) {
+                                window.scrollBy(0, scrollStep);
+                            } else {
+                                clearInterval(scrollInterval);
+                            }
+                        }, 15);
+                    }
+                });
+            }
+            // Form submission with fetch API
             const contactForm = document.getElementById('contactForm');
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();  
-                // Get form values
-                const formData = new FormData(contactForm);
-                const data = Object.fromEntries(formData);      
-                // Here you would typically send the data to a server
-                console.log('Form submitted:', data);  
-                // Show success message
-                alert('Thank you for your message! We will get back to you soon.');
-                contactForm.reset();
-            });
+            const formStatus = document.getElementById('formStatus');
+            if (contactForm) {
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const submitButton = contactForm.querySelector('button[type="submit"]');  
+                    try {
+                        // Disable submit button during submission
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Sending...';    
+                        // Get form values
+                        const formData = new FormData(contactForm);
+                        const data = Object.fromEntries(formData);   
+                        // In a real implementation, you would send this to your server
+                        console.log('Form submitted:', data);
+                        // Simulate API call delay
+                        await new Promise(resolve => setTimeout(resolve, 1500));
+                        // Show success message
+                        if (formStatus) {
+                            formStatus.textContent = 'Thank you for your message! We will get back to you soon.';
+                            formStatus.style.color = 'var(--success)';
+                        }
+                        contactForm.reset();
+                    } catch (error) {
+                        console.error('Form submission error:', error);
+                        if (formStatus) {
+                            formStatus.textContent = 'There was an error submitting your message. Please try again.';
+                            formStatus.style.color = 'red';
+                        }
+                    } finally {
+                        // Re-enable submit button
+                        if (submitButton) {
+                            submitButton.disabled = false;
+                            submitButton.textContent = 'Send Message';
+                        } 
+                        // Clear status message after 5 seconds
+                        if (formStatus) {
+                            setTimeout(() => {
+                                formStatus.textContent = '';
+                            }, 5000);
+                        }
+                    }
+                });
+            }
             // Loading bar animation
             const loadingBar = document.querySelector('.loading-bar');
-            window.addEventListener('scroll', () => {
-                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const scrolled = (window.scrollY / scrollHeight) * 100;
-                loadingBar.style.width = scrolled + '%';
-            });
-            // Typing animation
-            const typingText = document.querySelector('.typing-text');
-            const words = ['AI', 'Machine Learning', 'Automation', 'Innovation'];
-            let wordIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            let isEnd = false;
-            function type() {
-                const currentWord = words[wordIndex];
-                const currentChar = currentWord.substring(0, charIndex);
-                typingText.textContent = currentChar;  
-                if (!isDeleting && charIndex < currentWord.length) {
-                    // Typing
-                    charIndex++;
-                    setTimeout(type, 100);
-                } else if (isDeleting && charIndex > 0) {
-                    // Deleting
-                    charIndex--;
-                    setTimeout(type, 50);
-                } else {
-                    // Change word
-                    isDeleting = !isDeleting;
-                    if (!isDeleting) {
-                        wordIndex = (wordIndex + 1) % words.length;
-                    }
-                    setTimeout(type, 1000);
-                }
-            }  
-            // Start typing animation
-            setTimeout(type, 1000);
-            // Fade-in animation for sections
-            const fadeElements = document.querySelectorAll('.fade-in');
-            function checkFade() {
-                fadeElements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight; 
-                    if (elementTop < windowHeight - 100) {
-                        element.style.animation = 'fadeIn 1s forwards';
-                    }
+            if (loadingBar) {
+                window.addEventListener('scroll', () => {
+                    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const scrolled = (window.scrollY / scrollHeight) * 100;
+                    loadingBar.style.width = scrolled + '%';
                 });
-            }    
-            // Initial check
-            checkFade(); 
-            // Check on scroll
-            window.addEventListener('scroll', checkFade);
+            }
+            // Typing animation with error handling
+            const typingText = document.querySelector('.typing-text');
+            if (typingText) {
+                const words = ['AI', 'Machine Learning', 'Automation', 'Innovation'];
+                let wordIndex = 0;
+                let charIndex = 0;
+                let isDeleting = false;
+                let isEnd = false;
+                function type() {
+                    if (!typingText) return;      
+                    const currentWord = words[wordIndex];
+                    const currentChar = currentWord.substring(0, charIndex);
+                    typingText.textContent = currentChar;   
+                    if (!isDeleting && charIndex < currentWord.length) {
+                        // Typing
+                        charIndex++;
+                        setTimeout(type, 100);
+                    } else if (isDeleting && charIndex > 0) {
+                        // Deleting
+                        charIndex--;
+                        setTimeout(type, 50);
+                    } else {
+                        // Change word
+                        isDeleting = !isDeleting;
+                        if (!isDeleting) {
+                            wordIndex = (wordIndex + 1) % words.length;
+                        }
+                        setTimeout(type, 1000);
+                    }
+                }
+                // Start typing animation
+                setTimeout(type, 1000);
+            }
+            // Fade-in animation for sections with intersection observer
+            const fadeElements = document.querySelectorAll('.fade-in');
+            if (fadeElements.length) {
+                if ('IntersectionObserver' in window) {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.style.animation = 'fadeIn 1s forwards';
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    fadeElements.forEach(element => {
+                        observer.observe(element);
+                    });
+                } else {
+                    // Fallback for browsers without IntersectionObserver
+                    function checkFade() {
+                        fadeElements.forEach(element => {
+                            const elementTop = element.getBoundingClientRect().top;
+                            const windowHeight = window.innerHeight; 
+                            if (elementTop < windowHeight - 100) {
+                                element.style.animation = 'fadeIn 1s forwards';
+                            }
+                        });
+                    } 
+                    // Initial check
+                    checkFade(); 
+                    // Check on scroll
+                    window.addEventListener('scroll', checkFade);
+                }
+            }
             // Header scroll effect
             const header = document.querySelector('header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            }
+            // Add focus styles for keyboard navigation
+            document.addEventListener('keyup', function(e) {
+                if (e.key === 'Tab') {
+                    document.documentElement.classList.add('keyboard-navigation');
                 }
             });
+            document.addEventListener('mousedown', function() {
+                document.documentElement.classList.remove('keyboard-navigation');
+            });
         });
+        // Add keyboard focus styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .keyboard-navigation a:focus,
+            .keyboard-navigation button:focus,
+            .keyboard-navigation input:focus,
+            .keyboard-navigation textarea:focus,
+            .keyboard-navigation select:focus {
+                outline: 2px solid var(--primary);
+                outline-offset: 2px;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
