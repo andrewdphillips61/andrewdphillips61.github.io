@@ -940,8 +940,7 @@
                     </div>
                 </div>
                 <div class="tech-card">
-                    <h3><i class=" 
-                                        <h3><i class="fas fa-chart-line" style="margin-right: 10px;"></i> Data Analytics</h3>
+                   <h3><i class="fas fa-chart-line" style="margin-right: 10px;"></i> Data Analytics</h3>
                     <p>Transform your raw data into actionable insights with our advanced analytics platforms.</p>
                     <div style="margin-top: 1rem;">
                         <span class="ai-chip">Visualization</span>
