@@ -107,7 +107,7 @@
         #splash img {
             width: 150px;
             height: auto;
-            animation: pulse 2s infinite;
+            animation: pulse 2s;
         }
         @keyframes pulse {
             0% { transform: scale(1); }
