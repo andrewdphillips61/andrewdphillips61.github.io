@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -939,28 +940,29 @@
                     </div>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="tech-card">
-                    <h3><i class="fas fa-eye" style="margin-right: 10px;"></i> Computer Vision</h3>
-                    <p>Image and video analysis solutions to automate visual inspection and recognition tasks.</p>
+                    <h3><i class=" 
+                                        <h3><i class="fas fa-chart-line" style="margin-right: 10px;"></i> Data Analytics</h3>
+                    <p>Transform your raw data into actionable insights with our advanced analytics platforms.</p>
                     <div style="margin-top: 1rem;">
-                        <span class="ai-chip">Object Detection</span>
-                        <span class="ai-chip">Quality Control</span>
-                    </div>
-                </div>
-                <div class="tech-card">
-                    <h3><i class="fas fa-database" style="margin-right: 10px;"></i> Data Solutions</h3>
-                    <p>Turn your raw data into actionable intelligence with our comprehensive data analysis pipelines.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="ai-chip">Analytics</span>
                         <span class="ai-chip">Visualization</span>
+                        <span class="ai-chip">Real-time</span>
+                        <span class="ai-chip">Dashboards</span>
                     </div>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-puzzle-piece" style="margin-right: 10px;"></i> AI Integration</h3>
-                    <p>Seamless implementation of AI capabilities into your existing systems and workflows.</p>
+                    <h3><i class="fas fa-cogs" style="margin-right: 10px;"></i> Process Automation</h3>
+                    <p>Streamline operations and reduce costs with intelligent automation solutions.</p>
                     <div style="margin-top: 1rem;">
-                        <span class="ai-chip">APIs</span>
-                        <span class="ai-chip">Microservices</span>
+                        <span class="ai-chip">RPA</span>
+                        <span class="ai-chip">Workflows</span>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-shield-alt" style="margin-right: 10px;"></i> AI Security</h3>
+                    <p>Protect your business with AI-powered threat detection and prevention systems.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="ai-chip">Anomaly Detection</span>
+                        <span class="ai-chip">Fraud Prevention</span>
                     </div>
                 </div>
             </div>
@@ -969,69 +971,43 @@
             <h2>Industries We Serve</h2>
             <div class="industries-list">
                 <div class="tech-card">
-                    <h3><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i> E-commerce</h3>
-                    <p>Enhance customer experiences with personalized recommendations and intelligent search.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="ai-chip">Recommendations</span>
-                        <span class="ai-chip">Visual Search</span>
-                    </div>
-                </div>
-                <div class="tech-card">
                     <h3><i class="fas fa-heartbeat" style="margin-right: 10px;"></i> Healthcare</h3>
-                    <p>Support medical professionals with diagnostic tools and patient management systems.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="ai-chip">Diagnostics</span>
-                        <span class="ai-chip">Patient Care</span>
-                    </div>
+                    <p>AI solutions for diagnostics, patient care optimization, and medical research acceleration.</p>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-chart-line" style="margin-right: 10px;"></i> Finance</h3>
-                    <p>Detect fraud, assess risk, and personalize financial services with AI-powered solutions.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="ai-chip">Fraud Detection</span>
-                        <span class="ai-chip">Risk Assessment</span>
-                    </div>
+                    <h3><i class="fas fa-money-bill-wave" style="margin-right: 10px;"></i> Finance</h3>
+                    <p>Fraud detection, risk assessment, algorithmic trading, and personalized banking.</p>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i> Retail</h3>
+                    <p>Personalized recommendations, inventory optimization, and customer experience enhancement.</p>
                 </div>
                 <div class="tech-card">
                     <h3><i class="fas fa-industry" style="margin-right: 10px;"></i> Manufacturing</h3>
-                    <p>Optimize production lines and quality control with intelligent monitoring systems.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="ai-chip">Predictive Maintenance</span>
-                        <span class="ai-chip">Quality Control</span>
-                    </div>
+                    <p>Predictive maintenance, quality control, and supply chain optimization.</p>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-bullseye" style="margin-right: 10px;"></i> Marketing</h3>
-                    <p>Create more effective campaigns with AI-driven customer insights and content generation.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="ai-chip">Customer Insights</span>
-                        <span class="ai-chip">Content Generation</span>
-                    </div>
+                    <h3><i class="fas fa-graduation-cap" style="margin-right: 10px;"></i> Education</h3>
+                    <p>Adaptive learning platforms, automated grading, and student performance analytics.</p>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-wifi" style="margin-right: 10px;"></i> Technology</h3>
-                    <p>Enhance your tech products with cutting-edge AI capabilities and intelligent features.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="ai-chip">SaaS</span>
-                        <span class="ai-chip">Developer Tools</span>
-                    </div>
+                    <h3><i class="fas fa-truck" style="margin-right: 10px;"></i> Logistics</h3>
+                    <p>Route optimization, demand forecasting, and autonomous delivery systems.</p>
                 </div>
             </div>
         </section>
-        <section id="contact" class="fade-in" style="padding-bottom: 0;">
+        <section id="contact" class="fade-in gradient-bg">
+            <h2>Get In Touch</h2>
             <div class="contact-form">
-                <h2>Let's Build Something Amazing</h2>
-                <p>As a new startup, we're excited to work with innovative partners. Reach out to discuss how we can help bring your AI vision to life.</p>
-                <form id="contactForm" action="#" method="POST">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                        <div class="form-group">
-                            <label for="name">Name*</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email*</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
+                <p>Ready to transform your business with AI? Contact us for a free consultation.</p>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="company">Company</label>
@@ -1044,23 +1020,17 @@
                             <option value="consulting">AI Consulting</option>
                             <option value="ml">Machine Learning</option>
                             <option value="nlp">NLP Solutions</option>
-                            <option value="vision">Computer Vision</option>
-                            <option value="data">Data Solutions</option>
-                            <option value="integration">AI Integration</option>
+                            <option value="analytics">Data Analytics</option>
+                            <option value="automation">Process Automation</option>
+                            <option value="security">AI Security</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="message">How can we help you?*</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
                     </div>
-                    <button type="submit">Send Message <i class="fas fa-paper-plane" style="margin-left: 8px;"></i></button>
+                    <button type="submit">Send Message</button>
                 </form>
-            </div>   
-            <div style="margin-top: 4rem; text-align: center;">
-                <h3>Prefer to email us directly?</h3>
-                <p style="font-size: 1.2rem; margin-top: 1rem;">
-                    <a href="mailto:hello@stratixai.com" style="color: var(--primary); text-decoration: none; font-weight: 600;">hello@stratixai.com</a>
-                </p>
             </div>
         </section>
     </main>
@@ -1068,29 +1038,32 @@
         <div class="footer-content">
             <div class="footer-logo">
                 <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo">
-                <p>Building the future of business AI, one solution at a time.</p>
+                <p>Innovative AI solutions for the modern business.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
             <div class="footer-links">
-                <h3>Quick Links</h3>
+                <h3>Company</h3>
                 <ul>
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#industries">Industries</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
                 </ul>
             </div>
             <div class="footer-links">
                 <h3>Resources</h3>
                 <ul>
-                    <li><a href="#">Blog</a></li>
                     <li><a href="#">Documentation</a></li>
                     <li><a href="#">API Reference</a></li>
                     <li><a href="#">Case Studies</a></li>
+                    <li><a href="#">Whitepapers</a></li>
+                    <li><a href="#">FAQ</a></li>
                 </ul>
             </div>
             <div class="footer-links">
@@ -1098,6 +1071,7 @@
                 <ul>
                     <li><a href="#">Privacy Policy</a></li>
                     <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Security</a></li>
                     <li><a href="#">Cookie Policy</a></li>
                 </ul>
             </div>
@@ -1106,48 +1080,93 @@
             <p>&copy; 2024 Stratix AI. All rights reserved.</p>
         </div>
     </footer>
-    <button id="back-to-top" aria-label="Back to top">↑</button>
+    <button id="back-to-top" aria-label="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Splash screen
-            const splash = document.getElementById('splash');
-            setTimeout(() => {
-                splash.style.opacity = '0';
-                setTimeout(() => splash.style.display = 'none', 1000);
-            }, 2000);
+        // Wait for the DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Splash screen animation
+            setTimeout(function() {
+                document.getElementById('splash').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('splash').style.display = 'none';
+                }, 1000);
+            }, 1500);
+            // Initialize Locomotive Scroll
+            const scroll = new LocomotiveScroll({
+                el: document.querySelector('main'),
+                smooth: true,
+                smartphone: {
+                    smooth: true
+                },
+                tablet: {
+                    smooth: true
+                }
+            });
+            // Update scroll when content changes
+            scroll.update();
+            // Custom cursor
+            const cursor = document.querySelector('.cursor');
+            const cursorFollower = document.querySelector('.cursor-follower');
+            const links = document.querySelectorAll('a, button, .ai-chip, input, textarea, select');
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';    
+                // Follower with delay
+                setTimeout(() => {
+                    cursorFollower.style.left = e.clientX + 'px';
+                    cursorFollower.style.top = e.clientY + 'px';
+                }, 100);
+            });
+            // Cursor hover effects
+            links.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.2)';
+                });  
+                link.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+                });
+            });
             // Mobile menu toggle
             const menuToggle = document.getElementById('menu-toggle');
             const navLinks = document.querySelector('.nav-links');
             menuToggle.addEventListener('click', () => {
                 navLinks.classList.toggle('show');
-                menuToggle.innerHTML = navLinks.classList.contains('show') ? '✕' : '☰';
+                menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
             });
             // Close mobile menu when clicking a link
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
-                    navLinks.classList.remove('show');
-                    menuToggle.innerHTML = '☰';
+                    if (window.innerWidth <= 768) {
+                        navLinks.classList.remove('show');
+                        menuToggle.textContent = '☰';
+                    }
                 });
             });
-            // Header scroll effect
-            const header = document.querySelector('header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
+            // Dark mode toggle
+            const darkModeToggle = document.querySelector('.dark-mode-toggle');
+            darkModeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
             });
+            // Check for saved dark mode preference
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+            }
             // Back to top button
-            const backToTop = document.getElementById('back-to-top');
+            const backToTopButton = document.getElementById('back-to-top');
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
-                    backToTop.classList.add('visible');
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
                 } else {
-                    backToTop.classList.remove('visible');
+                    backToTopButton.classList.remove('visible');
                 }
             });
-            backToTop.addEventListener('click', () => {
+            backToTopButton.addEventListener('click', () => {
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
@@ -1156,30 +1175,76 @@
             // Form submission
             const contactForm = document.getElementById('contactForm');
             contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                // Here you would typically send the form data to your server
+                e.preventDefault();  
+                // Get form values
+                const formData = new FormData(contactForm);
+                const data = Object.fromEntries(formData);      
+                // Here you would typically send the data to a server
+                console.log('Form submitted:', data);  
+                // Show success message
                 alert('Thank you for your message! We will get back to you soon.');
                 contactForm.reset();
             });
-            // Animate elements when they come into view
-            const fadeEls = document.querySelectorAll('.fade-in');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = `fadeIn 1s ease forwards`;
-                        observer.unobserve(entry.target);
+            // Loading bar animation
+            const loadingBar = document.querySelector('.loading-bar');
+            window.addEventListener('scroll', () => {
+                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrolled = (window.scrollY / scrollHeight) * 100;
+                loadingBar.style.width = scrolled + '%';
+            });
+            // Typing animation
+            const typingText = document.querySelector('.typing-text');
+            const words = ['AI', 'Machine Learning', 'Automation', 'Innovation'];
+            let wordIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let isEnd = false;
+            function type() {
+                const currentWord = words[wordIndex];
+                const currentChar = currentWord.substring(0, charIndex);
+                typingText.textContent = currentChar;  
+                if (!isDeleting && charIndex < currentWord.length) {
+                    // Typing
+                    charIndex++;
+                    setTimeout(type, 100);
+                } else if (isDeleting && charIndex > 0) {
+                    // Deleting
+                    charIndex--;
+                    setTimeout(type, 50);
+                } else {
+                    // Change word
+                    isDeleting = !isDeleting;
+                    if (!isDeleting) {
+                        wordIndex = (wordIndex + 1) % words.length;
+                    }
+                    setTimeout(type, 1000);
+                }
+            }  
+            // Start typing animation
+            setTimeout(type, 1000);
+            // Fade-in animation for sections
+            const fadeElements = document.querySelectorAll('.fade-in');
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight; 
+                    if (elementTop < windowHeight - 100) {
+                        element.style.animation = 'fadeIn 1s forwards';
                     }
                 });
-            }, { threshold: 0.1 });
-            fadeEls.forEach(el => observer.observe(el));
-            // Tech card hover effects
-            document.querySelectorAll('.tech-card').forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const x = e.pageX - card.offsetLeft;
-                    const y = e.pageY - card.offsetTop;  
-                    card.style.setProperty('--mouse-x', `${x}px`);
-                    card.style.setProperty('--mouse-y', `${y}px`);
-                });
+            }    
+            // Initial check
+            checkFade(); 
+            // Check on scroll
+            window.addEventListener('scroll', checkFade);
+            // Header scroll effect
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
             });
         });
     </script>
