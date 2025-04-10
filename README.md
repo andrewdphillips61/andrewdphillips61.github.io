@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://res.cloudinary.com/dtjasyr7k/image/upload/v1712589087/Stratix_AI_Logo_2_ry4p3z.png">
     <style>
         :root {
             --primary: #2563eb;
@@ -661,7 +661,7 @@
 
 <body>
     <div id="splash">
-        <img src="https://drive.google.com/uc?id=14n0I2p7w7cp83dr9zv6m9HT2rIcqdXNJ&export=view" alt="Stratix AI Logo">
+        <img src="https://res.cloudinary.com/dtjasyr7k/image/upload/v1712589087/Stratix_AI_Logo_2_ry4p3z.png" alt="Stratix AI Logo">
     </div>
     <div class="floating-shapes">
         <div class="shape shape-1"></div>
@@ -898,7 +898,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="https://drive.google.com/uc?id=14n0I2p7w7cp83dr9zv6m9HT2rIcqdXNJ&export=view" alt="Stratix AI Logo">
+                <img src="https://res.cloudinary.com/dtjasyr7k/image/upload/v1712589087/Stratix_AI_Logo_2_ry4p3z.png" alt="Stratix AI Logo">
                 <p>Building the future of business AI, one solution at a time.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-twitter"></i></a>
