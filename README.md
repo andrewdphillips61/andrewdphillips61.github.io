@@ -54,12 +54,8 @@
             --cursor-x: 0px;
             --cursor-y: 0px;
         }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-body {
-    cursor: default;
+       body {
+    cursor: default; /* Set cursor visibility for better accessibility */
 }
         body {
             font-family: 'Space Grotesk', sans-serif;
@@ -854,8 +850,8 @@ body {
                 <a href="#industries" aria-label="Industries Section">Industries</a>
                 <a href="#contact" aria-label="Contact Section">Contact</a>
                 <a class="cta-btn" href="#signup" aria-label="Free Demo">Free Demo</a>
-                <button class="dark-mode-toggle" aria-label="Toggle Dark Mode">
-    <div class="toggle-thumb"></div>
+               <button class="dark-mode-toggle" aria-label="Toggle Dark Mode">
+    <span class="toggle-thumb" aria-hidden="true"></span>
 </button>
             <button id="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false">☰</button>
         </nav>
@@ -880,13 +876,13 @@ body {
                     <circle cx="250" cy="50" r="8" fill="var(--primary)" class="pulse-dot" style="top: 40px; left: 240px; animation-delay: 1s;"/>
                     <circle cx="250" cy="250" r="8" fill="var(--primary)" class="pulse-dot" style="top: 240px; left: 240px; animation-delay: 1.5s;"/>
                     <!-- Connecting lines -->
-                   @media (prefers-reduced-motion: reduce) {
+                   /* Move the CSS rule for reduced-motion to the stylesheet */
+@media (prefers-reduced-motion: reduce) {
     * {
         animation: none;
         transition: none;
     }
 }
-                    <line x1="250" y1="150" x2="150" y2="150" stroke="var(--primary)" stroke-width="2" stroke-opacity="0.3"/>
                     <line x1="250" y1="150" x2="350" y2="150" stroke="var(--primary)" stroke-width="2" stroke-opacity="0.3"/>
                     <line x1="250" y1="150" x2="250" y2="50" stroke="var(--primary)" stroke-width="2" stroke-opacity="0.3"/>
                     <line x1="250" y1="150" x2="250" y2="250" stroke="var(--primary)" stroke-width="2" stroke-opacity="0.3"/>
@@ -904,8 +900,7 @@ body {
                         <span class="ai-chip"><i class="fas fa-bolt" style="margin-right: 5px;"></i> Fast Implementation</span>
                         <span class="ai-chip"><i class="fas fa-lock" style="margin-right: 5px;"></i> Secure By Design</span>
                         <span class="ai-chip"><i class="fas fa-sync-alt" style="margin-right: 5px;"></i> Continuous Learning</span>
-                        <span class="ai-chip"><i class="fas fa-expand" style="margin-right: 5px;"></i> Scalable Solutions</span>
-                                            <span class="ai-chip"><i class="fas fa-expand" style="margin-right: 5px;"></i> Scalable Solutions</span>
+    <span class="ai-chip"><i class="fas fa-expand" style="margin-right: 5px;"></i> Scalable Solutions</span>
                     </div>
                 </div>
                 <div class="network-grid">
@@ -1117,17 +1112,17 @@ body {
                 }
             }, 1500);
             // Initialize Locomotive Scroll with fallback
-            try {       const mainElement = document.querySelector('main');
-if (mainElement) {
-    const scroll = new LocomotiveScroll({
-        el: mainElement,
-        ...
-    });
+           try {
+    const mainElement = document.querySelector('main');
+    if (mainElement) {
+        const scroll = new LocomotiveScroll({
+            el: mainElement,
+            smooth: true,
+            smartphone: { smooth: true },
+            tablet: { smooth: true }
+        });
+    }
 }
-                    smooth: true,
-                    smartphone: { smooth: true },
-                    tablet: { smooth: true }
-                });
                 // Update scroll when content changes
                 if (scroll && typeof scroll.update === 'function') {
                     scroll.update();
