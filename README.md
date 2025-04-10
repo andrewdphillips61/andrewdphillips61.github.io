@@ -661,7 +661,7 @@
 
 <body>
     <div id="splash">
-        <img src="https://res.cloudinary.com/dtjasyr7k/image/upload/v1712589087/Stratix_AI_Logo_2_ry4p3z.png" alt="Stratix AI Logo">
+        <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo">
     </div>
     <div class="floating-shapes">
         <div class="shape shape-1"></div>
@@ -898,7 +898,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="https://res.cloudinary.com/dtjasyr7k/image/upload/v1712589087/Stratix_AI_Logo_2_ry4p3z.png" alt="Stratix AI Logo">
+                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo">
                 <p>Building the future of business AI, one solution at a time.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-twitter"></i></a>
