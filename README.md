@@ -671,7 +671,7 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="https://drive.google.com/uc?id=14n0I2p7w7cp83dr9zv6m9HT2rIcqdXNJ&export=view" alt="Stratix AI Logo">
+                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo">
             </div>
             <div class="nav-links">
                 <a href="#about">About</a>
