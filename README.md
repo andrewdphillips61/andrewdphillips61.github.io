@@ -2,14 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Stratix AI - Cutting-edge AI solutions for businesses">
+    <!-- OpenGraph / Social Media Meta Tags -->
+    <meta property="og:title" content="Stratix AI | AI Solutions for Business Growth">
+    <meta property="og:description" content="Innovative AI solutions designed to help startups and growing businesses compete in the digital age.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://stratixai.com">
+    <meta property="og:image" content="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png">
+    <!-- Favicon -->
+    <link rel="icon" href="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" type="image/png">
     <title>Stratix AI | AI Solutions for Business Growth</title>
+    <!-- Preconnect to external resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css"></noscript>
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Stratix AI",
+      "url": "https://stratixai.com",
+      "logo": "https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png",
+      "description": "Innovative AI solutions for the modern business",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "San Francisco",
+        "addressRegion": "CA",
+        "postalCode": "94107",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "contact@stratixai.com"
+      }
+    }
+    </script>
     <style>
         :root {
             --primary: #2563eb;
@@ -837,19 +871,19 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo">
+                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo" loading="lazy">
             </div>
             <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#industries">Industries</a>
-                <a href="#contact">Contact</a>
-                <a class="cta-btn" href="#signup">Free Demo</a>
-                <div class="dark-mode-toggle">
+                <a href="#about" aria-label="About Section">About</a>
+                <a href="#services" aria-label="Services Section">Services</a>
+                <a href="#industries" aria-label="Industries Section">Industries</a>
+                <a href="#contact" aria-label="Contact Section">Contact</a>
+                <a class="cta-btn" href="#signup" aria-label="Free Demo">Free Demo</a>
+                <div class="dark-mode-toggle" aria-label="Toggle Dark Mode" role="button" tabindex="0">
                     <div class="toggle-thumb"></div>
                 </div>
             </div>
-            <button id="menu-toggle" aria-label="Toggle Navigation">☰</button>
+            <button id="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false">☰</button>
         </nav>
     </header>
     <main>
@@ -857,10 +891,10 @@
             <div class="hero-content">
                 <h1>Transform Your Business with <span class="gradient-text typing-text">AI</span></h1>
                 <p>Innovative AI solutions designed to help startups and growing businesses compete in the digital age.</p>
-                <button onclick="window.location.href='#contact'">Get Started Today</button>
+                <button onclick="window.location.href='#contact'" aria-label="Get Started">Get Started Today</button>
             </div>    
             <div class="animated-illustration">
-                <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <!-- AI network illustration -->
                     <circle cx="250" cy="150" r="100" fill="none" stroke="var(--primary)" stroke-width="2" stroke-dasharray="5,5"/>
                     <circle cx="250" cy="150" r="70" fill="none" stroke="var(--primary)" stroke-width="2" stroke-dasharray="3,3"/>  
@@ -889,364 +923,4 @@
                         <span class="ai-chip"><i class="fas fa-bolt" style="margin-right: 5px;"></i> Fast Implementation</span>
                         <span class="ai-chip"><i class="fas fa-lock" style="margin-right: 5px;"></i> Secure By Design</span>
                         <span class="ai-chip"><i class="fas fa-sync-alt" style="margin-right: 5px;"></i> Continuous Learning</span>
-                        <span class="ai-chip"><i class="fas fa-expand" style="margin-right: 5px;"></i> Scalable Solutions</span>
-                    </div>
-                </div>
-                <div class="network-grid">
-                    <div class="network-node">
-                        <i class="fas fa-rocket" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                        <h3>Innovation</h3>
-                        <p>Pushing boundaries with cutting-edge AI research</p>
-                    </div>
-                    <div class="network-node">
-                        <i class="fas fa-handshake" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                        <h3>Partnership</h3>
-                        <p>Collaborative approach to solving problems</p>
-                    </div>
-                    <div class="network-node">
-                        <i class="fas fa-lightbulb" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                        <h3>Creativity</h3>
-                        <p>Unique solutions tailored to your needs</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="services" class="fade-in gradient-bg">
-            <h2>Our Services</h2>
-            <div class="services-list">
-                <div class="tech-card">
-                    <h3><i class="fas fa-robot" style="margin-right: 10px;"></i> AI Consulting</h3>
-                    <p>Strategic guidance to help you identify the best AI opportunities for your specific business needs and goals.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="ai-chip">Strategy</span>
-                        <span class="ai-chip">Roadmapping</span>
-                        <span class="ai-chip">Implementation</span>
-                    </div>
-                </div>
-                <div class="tech-card">
-                    <h3><i class="fas fa-brain" style="margin-right: 10px;"></i> Machine Learning</h3>
-                    <p>Custom ML models designed to extract insights from your data and automate complex processes.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="ai-chip">Predictive Analytics</span>
-                        <span class="ai-chip">Automation</span>
-                    </div>
-                </div>
-                <div class="tech-card">
-                    <h3><i class="fas fa-comment-dots" style="margin-right: 10px;"></i> NLP Solutions</h3>
-                    <p>Natural language processing to help you understand and interact with customers more effectively.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="ai-chip">Chatbots</span>
-                        <span class="ai-chip">Sentiment Analysis</span>
-                    </div>
-                </div>
-                <div class="tech-card">
-                    <h3><i class=" 
-                                        <h3><i class="fas fa-chart-line" style="margin-right: 10px;"></i> Data Analytics</h3>
-                    <p>Transform your raw data into actionable insights with our advanced analytics platforms.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="ai-chip">Visualization</span>
-                        <span class="ai-chip">Real-time</span>
-                        <span class="ai-chip">Dashboards</span>
-                    </div>
-                </div>
-                <div class="tech-card">
-                    <h3><i class="fas fa-cogs" style="margin-right: 10px;"></i> Process Automation</h3>
-                    <p>Streamline operations and reduce costs with intelligent automation solutions.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="ai-chip">RPA</span>
-                        <span class="ai-chip">Workflows</span>
-                    </div>
-                </div>
-                <div class="tech-card">
-                    <h3><i class="fas fa-shield-alt" style="margin-right: 10px;"></i> AI Security</h3>
-                    <p>Protect your business with AI-powered threat detection and prevention systems.</p>
-                    <div style="margin-top: 1rem;">
-                        <span class="ai-chip">Anomaly Detection</span>
-                        <span class="ai-chip">Fraud Prevention</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="industries" class="fade-in">
-            <h2>Industries We Serve</h2>
-            <div class="industries-list">
-                <div class="tech-card">
-                    <h3><i class="fas fa-heartbeat" style="margin-right: 10px;"></i> Healthcare</h3>
-                    <p>AI solutions for diagnostics, patient care optimization, and medical research acceleration.</p>
-                </div>
-                <div class="tech-card">
-                    <h3><i class="fas fa-money-bill-wave" style="margin-right: 10px;"></i> Finance</h3>
-                    <p>Fraud detection, risk assessment, algorithmic trading, and personalized banking.</p>
-                </div>
-                <div class="tech-card">
-                    <h3><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i> Retail</h3>
-                    <p>Personalized recommendations, inventory optimization, and customer experience enhancement.</p>
-                </div>
-                <div class="tech-card">
-                    <h3><i class="fas fa-industry" style="margin-right: 10px;"></i> Manufacturing</h3>
-                    <p>Predictive maintenance, quality control, and supply chain optimization.</p>
-                </div>
-                <div class="tech-card">
-                    <h3><i class="fas fa-graduation-cap" style="margin-right: 10px;"></i> Education</h3>
-                    <p>Adaptive learning platforms, automated grading, and student performance analytics.</p>
-                </div>
-                <div class="tech-card">
-                    <h3><i class="fas fa-truck" style="margin-right: 10px;"></i> Logistics</h3>
-                    <p>Route optimization, demand forecasting, and autonomous delivery systems.</p>
-                </div>
-            </div>
-        </section>
-        <section id="contact" class="fade-in gradient-bg">
-            <h2>Get In Touch</h2>
-            <div class="contact-form">
-                <p>Ready to transform your business with AI? Contact us for a free consultation.</p>
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Company</label>
-                        <input type="text" id="company" name="company">
-                    </div>
-                    <div class="form-group">
-                        <label for="service">Service of Interest</label>
-                        <select id="service" name="service">
-                            <option value="">Select a service</option>
-                            <option value="consulting">AI Consulting</option>
-                            <option value="ml">Machine Learning</option>
-                            <option value="nlp">NLP Solutions</option>
-                            <option value="analytics">Data Analytics</option>
-                            <option value="automation">Process Automation</option>
-                            <option value="security">AI Security</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit">Send Message</button>
-                </form>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo">
-                <p>Innovative AI solutions for the modern business.</p>
-                <div class="social-links">
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            <div class="footer-links">
-                <h3>Company</h3>
-                <ul>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#industries">Industries</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h3>Resources</h3>
-                <ul>
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">API Reference</a></li>
-                    <li><a href="#">Case Studies</a></li>
-                    <li><a href="#">Whitepapers</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h3>Legal</h3>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Security</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Stratix AI. All rights reserved.</p>
-        </div>
-    </footer>
-    <button id="back-to-top" aria-label="Back to Top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
-    <script>
-        // Wait for the DOM to be fully loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Splash screen animation
-            setTimeout(function() {
-                document.getElementById('splash').style.opacity = '0';
-                setTimeout(function() {
-                    document.getElementById('splash').style.display = 'none';
-                }, 1000);
-            }, 1500);
-            // Initialize Locomotive Scroll
-            const scroll = new LocomotiveScroll({
-                el: document.querySelector('main'),
-                smooth: true,
-                smartphone: {
-                    smooth: true
-                },
-                tablet: {
-                    smooth: true
-                }
-            });
-            // Update scroll when content changes
-            scroll.update();
-            // Custom cursor
-            const cursor = document.querySelector('.cursor');
-            const cursorFollower = document.querySelector('.cursor-follower');
-            const links = document.querySelectorAll('a, button, .ai-chip, input, textarea, select');
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';    
-                // Follower with delay
-                setTimeout(() => {
-                    cursorFollower.style.left = e.clientX + 'px';
-                    cursorFollower.style.top = e.clientY + 'px';
-                }, 100);
-            });
-            // Cursor hover effects
-            links.forEach(link => {
-                link.addEventListener('mouseenter', () => {
-                    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.2)';
-                });  
-                link.addEventListener('mouseleave', () => {
-                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
-                });
-            });
-            // Mobile menu toggle
-            const menuToggle = document.getElementById('menu-toggle');
-            const navLinks = document.querySelector('.nav-links');
-            menuToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('show');
-                menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
-            });
-            // Close mobile menu when clicking a link
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) {
-                        navLinks.classList.remove('show');
-                        menuToggle.textContent = '☰';
-                    }
-                });
-            });
-            // Dark mode toggle
-            const darkModeToggle = document.querySelector('.dark-mode-toggle');
-            darkModeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-            });
-            // Check for saved dark mode preference
-            if (localStorage.getItem('darkMode') === 'true') {
-                document.body.classList.add('dark-mode');
-            }
-            // Back to top button
-            const backToTopButton = document.getElementById('back-to-top');
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTopButton.classList.add('visible');
-                } else {
-                    backToTopButton.classList.remove('visible');
-                }
-            });
-            backToTopButton.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-            // Form submission
-            const contactForm = document.getElementById('contactForm');
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();  
-                // Get form values
-                const formData = new FormData(contactForm);
-                const data = Object.fromEntries(formData);      
-                // Here you would typically send the data to a server
-                console.log('Form submitted:', data);  
-                // Show success message
-                alert('Thank you for your message! We will get back to you soon.');
-                contactForm.reset();
-            });
-            // Loading bar animation
-            const loadingBar = document.querySelector('.loading-bar');
-            window.addEventListener('scroll', () => {
-                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const scrolled = (window.scrollY / scrollHeight) * 100;
-                loadingBar.style.width = scrolled + '%';
-            });
-            // Typing animation
-            const typingText = document.querySelector('.typing-text');
-            const words = ['AI', 'Machine Learning', 'Automation', 'Innovation'];
-            let wordIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            let isEnd = false;
-            function type() {
-                const currentWord = words[wordIndex];
-                const currentChar = currentWord.substring(0, charIndex);
-                typingText.textContent = currentChar;  
-                if (!isDeleting && charIndex < currentWord.length) {
-                    // Typing
-                    charIndex++;
-                    setTimeout(type, 100);
-                } else if (isDeleting && charIndex > 0) {
-                    // Deleting
-                    charIndex--;
-                    setTimeout(type, 50);
-                } else {
-                    // Change word
-                    isDeleting = !isDeleting;
-                    if (!isDeleting) {
-                        wordIndex = (wordIndex + 1) % words.length;
-                    }
-                    setTimeout(type, 1000);
-                }
-            }  
-            // Start typing animation
-            setTimeout(type, 1000);
-            // Fade-in animation for sections
-            const fadeElements = document.querySelectorAll('.fade-in');
-            function checkFade() {
-                fadeElements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight; 
-                    if (elementTop < windowHeight - 100) {
-                        element.style.animation = 'fadeIn 1s forwards';
-                    }
-                });
-            }    
-            // Initial check
-            checkFade(); 
-            // Check on scroll
-            window.addEventListener('scroll', checkFade);
-            // Header scroll effect
-            const header = document.querySelector('header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                        <span class="ai-chip"><i class="fas fa-expand" style="margin-right: 5px
