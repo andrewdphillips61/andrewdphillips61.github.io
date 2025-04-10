@@ -841,19 +841,21 @@
     </div>
     <header>
         <nav>
-            <div class="logo">
-                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo" loading="lazy">
-            </div>
-            <div class="nav-links">
-                <a href="#about" aria-label="About Section">About</a>
-                <a href="#services" aria-label="Services Section">Services</a>
-                <a href="#industries" aria-label="Industries Section">Industries</a>
-                <a href="#contact" aria-label="Contact Section">Contact</a>
-                <a class="cta-btn" href="#signup" aria-label="Free Demo">Free Demo</a>
-               <button class="dark-mode-toggle" aria-label="Toggle Dark Mode">
-    <span class="toggle-thumb" aria-hidden="true"></span>
-</button>
-            <button id="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false">☰</button>
+    <div class="logo">
+        <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo" loading="lazy">
+    </div>
+    <div class="nav-links">
+        <a href="#about" aria-label="About Section">About</a>
+        <a href="#services" aria-label="Services Section">Services</a>
+        <a href="#industries" aria-label="Industries Section">Industries</a>
+        <a href="#contact" aria-label="Contact Section">Contact</a>
+        <a class="cta-btn" href="#signup" aria-label="Free Demo">Free Demo</a>
+        <button class="dark-mode-toggle" aria-label="Toggle Dark Mode">
+            <span class="toggle-thumb" aria-hidden="true"></span>
+        </button>
+        <button id="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false">☰</button>
+    </div>
+</nav>
         </nav>
     </header>
     <main>
@@ -1389,10 +1391,40 @@
 <footer>
 </footer>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Your code here...
-});
-</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Splash screen animation
+        setTimeout(function() {
+            const splash = document.getElementById('splash');
+            if (splash) {
+                splash.style.opacity = '0';
+                setTimeout(function() {
+                    splash.style.display = 'none';
+                }, 1000);
+            }
+        }, 1500);
+        // Initialize Locomotive Scroll
+        try {
+            const mainElement = document.querySelector('main');
+            if (mainElement) {
+                const scroll = new LocomotiveScroll({
+                    el: mainElement,
+                    smooth: true,
+                    smartphone: { smooth: true },
+                    tablet: { smooth: true }
+                }); 
+                if (scroll && typeof scroll.update === 'function') {
+                    scroll.update();
+                }
+            }
+        } catch (e) {
+            console.error('Locomotive Scroll initialization failed:', e);
+            if ('scrollBehavior' in document.documentElement.style) {
+                document.documentElement.style.scrollBehavior = 'smooth';
+            }
+        }
+        // Rest of your JavaScript code...
+    });
         const splash = document.getElementById('splash');
         if (splash) {
           splash.style.opacity = '0';
