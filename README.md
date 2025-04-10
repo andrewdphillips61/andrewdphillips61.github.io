@@ -1114,7 +1114,17 @@
             smartphone: { smooth: true },
             tablet: { smooth: true }
         });
+        // Update scroll when content changes
+        if (scroll && typeof scroll.update === 'function') {
+            scroll.update();
+        }
     }
+} catch (e) {
+    console.error('Locomotive Scroll initialization failed:', e);
+    if (supportsSmoothScroll) {
+        document.documentElement.style.scrollBehavior = 'smooth';
+    }
+}
 }
                 // Update scroll when content changes
                 if (scroll && typeof scroll.update === 'function') {
@@ -1375,8 +1385,14 @@
   <footer>
     </footer>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(function() {
+   </main>
+<footer>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Your code here...
+});
+</script>
         const splash = document.getElementById('splash');
         if (splash) {
           splash.style.opacity = '0';
