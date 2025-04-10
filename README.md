@@ -7,7 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
     <style>
         :root {
             --primary: #2563eb;
@@ -16,11 +17,14 @@
             --light: #f8fafc;
             --gray: #94a3b8;
             --success: #10b981;
+            --cursor-x: 0px;
+            --cursor-y: 0px;
         }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            cursor: none;
         }
         body {
             font-family: 'Space Grotesk', sans-serif;
@@ -28,6 +32,32 @@
             color: var(--dark);
             background-color: var(--light);
             overflow-x: hidden;
+            transition: background 0.5s ease;
+        }
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        body.dark-mode section:nth-child(even) {
+            background-color: #1e293b;
+        }
+        body.dark-mode .tech-card,
+        body.dark-mode .network-node,
+        body.dark-mode .contact-form {
+            background-color: #1e293b;
+            border-color: #334155;
+            color: #f8fafc;
+        }
+        body.dark-mode p {
+            color: #cbd5e1;
+        }
+        body.dark-mode input,
+        body.dark-mode textarea,
+        body.dark-mode select {
+            background: #1e293b;
+            border-color: #334155;
+            color: #f8fafc;
         }
         /* Splash Screen */
         #splash {
@@ -52,6 +82,31 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
+        }
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            mix-blend-mode: difference;
+            pointer-events: none;
+            z-index: 999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+        }
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.4s ease, width 0.3s ease, height 0.3s ease;
+            opacity: 0.3;
         }
         /* Floating Shapes Background */
         .floating-shapes {
@@ -102,6 +157,9 @@
         .gradient-bg {
             background: radial-gradient(circle at 70% 30%, rgba(37, 99, 235, 0.08) 0%, rgba(255,255,255,1) 60%);
         }
+        body.dark-mode .gradient-bg {
+            background: radial-gradient(circle at 70% 30%, rgba(37, 99, 235, 0.1) 0%, rgba(15, 23, 42, 1) 60%);
+        }
         .gradient-text {
             background: linear-gradient(90deg, var(--primary), #7c3aed);
             -webkit-background-clip: text;
@@ -118,6 +176,10 @@
             overflow: hidden;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             border: 1px solid rgba(0, 0, 0, 0.03);
+            will-change: transform;
+        }
+        body.dark-mode .tech-card {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         .tech-card::before {
             content: '';
@@ -135,6 +197,9 @@
             transform: translateY(-8px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
         }
+        body.dark-mode .tech-card:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
         .tech-card:hover::before {
             transform: rotate(45deg) translate(10%, 10%);
         }
@@ -150,9 +215,15 @@
             margin-bottom: 0.5rem;
             transition: all 0.3s ease;
         }
+        body.dark-mode .ai-chip {
+            background: rgba(37, 99, 235, 0.2);
+        }
         .ai-chip:hover {
             background: rgba(37, 99, 235, 0.2);
             transform: translateY(-2px);
+        }
+        body.dark-mode .ai-chip:hover {
+            background: rgba(37, 99, 235, 0.3);
         }
         /* Animated Illustrations */
         .animated-illustration {
@@ -189,6 +260,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            will-change: transform;
         }
         .network-node::after {
             content: '';
@@ -203,6 +275,9 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
         }
+        body.dark-mode .network-node:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
         /* Header */
         header {
             position: fixed;
@@ -214,9 +289,16 @@
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
+        body.dark-mode header {
+            background-color: rgba(15, 23, 42, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
         header.scrolled {
             background-color: rgba(255, 255, 255, 0.98);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        body.dark-mode header.scrolled {
+            background-color: rgba(15, 23, 42, 0.98);
         }
         nav {
             display: flex;
@@ -245,6 +327,9 @@
             font-weight: 500;
             transition: color 0.3s ease;
             position: relative;
+        }
+        body.dark-mode .nav-links a {
+            color: #f8fafc;
         }
         .nav-links a:hover {
             color: var(--primary);
@@ -296,12 +381,42 @@
             background: none;
             border: none;
             font-size: 1.5rem;
-            cursor: pointer;
+            cursor: none;
             color: var(--dark);
             transition: transform 0.3s ease;
         }
+        body.dark-mode #menu-toggle {
+            color: #f8fafc;
+        }
         #menu-toggle:hover {
             transform: scale(1.1);
+        }
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: #e2e8f0;
+            border-radius: 12px;
+            cursor: none;
+            transition: background 0.3s ease;
+            margin-left: 1rem;
+        }
+        body.dark-mode .dark-mode-toggle {
+            background: #334155;
+        }
+        .toggle-thumb {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        body.dark-mode .toggle-thumb {
+            transform: translateX(26px);
         }
         /* Main Content */
         main {
@@ -317,6 +432,9 @@
         }
         section:nth-child(even) {
             background-color: #f1f5f9;
+        }
+        body.dark-mode section:nth-child(even) {
+            background-color: #1e293b;
         }
         h1, h2, h3 {
             line-height: 1.2;
@@ -351,6 +469,9 @@
             margin-bottom: 1rem;
             color: var(--gray);
         }
+        body.dark-mode p {
+            color: #94a3b8;
+        }
         /* Hero Section */
         .hero {
             min-height: 80vh;
@@ -379,7 +500,7 @@
             padding: 1rem 2rem;
             font-size: 1.1rem;
             border-radius: 8px;
-            cursor: pointer;
+            cursor: none;
             font-weight: 600;
             transition: all 0.4s ease;
             position: relative;
@@ -405,6 +526,21 @@
         .hero button:hover::after {
             left: 100%;
         }
+        /* Typing Animation */
+        .typing-text {
+            display: inline-block;
+            position: relative;
+        }
+        .typing-text::after {
+            content: '|';
+            position: absolute;
+            right: -8px;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
         /* Grid Layouts */
         .services-list, .industries-list {
             display: grid;
@@ -422,6 +558,9 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             position: relative;
             overflow: hidden;
+        }
+        body.dark-mode .contact-form {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         .contact-form::before {
             content: '';
@@ -450,6 +589,9 @@
             margin-bottom: 0.5rem;
             display: block;
         }
+        body.dark-mode label {
+            color: #f8fafc;
+        }
         input, textarea, select {
             padding: 0.8rem 1rem;
             border: 1px solid #e2e8f0;
@@ -466,6 +608,12 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
             background: white;
         }
+        body.dark-mode input:focus,
+        body.dark-mode textarea:focus,
+        body.dark-mode select:focus {
+            background: #1e293b;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
         textarea {
             resize: vertical;
             min-height: 150px;
@@ -477,7 +625,7 @@
             padding: 1rem;
             font-size: 1rem;
             border-radius: 8px;
-            cursor: pointer;
+            cursor: none;
             font-weight: 600;
             transition: all 0.3s ease;
             margin-top: 1rem;
@@ -569,7 +717,6 @@
         /* Animations */
         .fade-in {
             opacity: 0;
-            animation: fadeIn 1s ease forwards;
         }
         @keyframes fadeIn {
             to { opacity: 1; }
@@ -588,7 +735,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
+            cursor: none;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
@@ -602,6 +749,16 @@
         #back-to-top:hover {
             background-color: var(--primary-dark);
             transform: translateY(-5px);
+        }
+        /* Loading Bar */
+        .loading-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), #7c3aed);
+            z-index: 1000;
+            transition: width 0.4s ease;
         }
         /* Mobile Styles */
         @media (max-width: 768px) {
@@ -623,6 +780,10 @@
                 box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
                 transform: translateY(-150%);
                 transition: transform 0.3s ease;
+            }
+            body.dark-mode .nav-links {
+                background-color: #1e293b;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
             }
             .nav-links.show {
                 transform: translateY(0);
@@ -653,14 +814,20 @@
             .social-links {
                 justify-content: center;
             }
+            .network-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
 <body>
+    <div class="loading-bar"></div>
     <div id="splash">
         <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo">
     </div>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
     <div class="floating-shapes">
         <div class="shape shape-1"></div>
         <div class="shape shape-2"></div>
@@ -677,6 +844,9 @@
                 <a href="#industries">Industries</a>
                 <a href="#contact">Contact</a>
                 <a class="cta-btn" href="#signup">Free Demo</a>
+                <div class="dark-mode-toggle">
+                    <div class="toggle-thumb"></div>
+                </div>
             </div>
             <button id="menu-toggle" aria-label="Toggle Navigation">☰</button>
         </nav>
@@ -684,7 +854,7 @@
     <main>
         <section class="hero gradient-bg fade-in" id="hero">
             <div class="hero-content">
-                <h1>Transform Your Business with <span class="gradient-text">AI</span></h1>
+                <h1>Transform Your Business with <span class="gradient-text typing-text">AI</span></h1>
                 <p>Innovative AI solutions designed to help startups and growing businesses compete in the digital age.</p>
                 <button onclick="window.location.href='#contact'">Get Started Today</button>
             </div>    
@@ -769,6 +939,7 @@
                     </div>
                 </div>
                 <div class="tech-card">
+                    <h3><i class="tech-card">
                     <h3><i class="fas fa-eye" style="margin-right: 10px;"></i> Computer Vision</h3>
                     <p>Image and video analysis solutions to automate visual inspection and recognition tasks.</p>
                     <div style="margin-top: 1rem;">
