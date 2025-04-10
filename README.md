@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -55,8 +56,8 @@
             --cursor-y: 0px;
         }
        body {
-    cursor: default; /* Set cursor visibility for better accessibility */
-}
+            cursor: default; /* Set cursor visibility for better accessibility */
+        }
         body {
             font-family: 'Space Grotesk', sans-serif;
             line-height: 1.6;
@@ -245,7 +246,7 @@
             height: 12px;
             background: var(--primary);
             border-radius: 50%;
-            animation: pulse 2s ;
+            animation: pulse 2s infinite;
         }
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 1; }
@@ -387,7 +388,7 @@
             background: none;
             border: none;
             font-size: 1.5rem;
-            cursor: none;
+            cursor: pointer;
             color: var(--dark);
             transition: transform 0.3s ease;
         }
@@ -404,7 +405,7 @@
             height: 24px;
             background: #e2e8f0;
             border-radius: 12px;
-            cursor: none;
+            cursor: pointer;
             transition: background 0.3s ease;
             margin-left: 1rem;
         }
@@ -506,7 +507,7 @@
             padding: 1rem 2rem;
             font-size: 1.1rem;
             border-radius: 8px;
-            cursor: none;
+            cursor: pointer;
             font-weight: 600;
             transition: all 0.4s ease;
             position: relative;
@@ -631,7 +632,7 @@
             padding: 1rem;
             font-size: 1rem;
             border-radius: 8px;
-            cursor: none;
+            cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
             margin-top: 1rem;
@@ -741,7 +742,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            cursor: none;
+            cursor: pointer;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
@@ -841,21 +842,20 @@
     </div>
     <header>
         <nav>
-    <div class="logo">
-        <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo" loading="lazy">
-    </div>
-    <div class="nav-links">
-        <a href="#about" aria-label="About Section">About</a>
-        <a href="#services" aria-label="Services Section">Services</a>
-        <a href="#industries" aria-label="Industries Section">Industries</a>
-        <a href="#contact" aria-label="Contact Section">Contact</a>
-        <a class="cta-btn" href="#signup" aria-label="Free Demo">Free Demo</a>
-        <button class="dark-mode-toggle" aria-label="Toggle Dark Mode">
-            <span class="toggle-thumb" aria-hidden="true"></span>
-        </button>
-        <button id="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false">☰</button>
-    </div>
-</nav>
+            <div class="logo">
+                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo" loading="lazy">
+            </div>
+            <div class="nav-links">
+                <a href="#about" aria-label="About Section">About</a>
+                <a href="#services" aria-label="Services Section">Services</a>
+                <a href="#industries" aria-label="Industries Section">Industries</a>
+                <a href="#contact" aria-label="Contact Section">Contact</a>
+                <a class="cta-btn" href="#signup" aria-label="Free Demo">Free Demo</a>
+                <button class="dark-mode-toggle" aria-label="Toggle Dark Mode">
+                    <span class="toggle-thumb" aria-hidden="true"></span>
+                </button>
+                <button id="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false">☰</button>
+            </div>
         </nav>
     </header>
     <main>
@@ -867,7 +867,7 @@
             </div>    
             <div class="animated-illustration">
                <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svgDesc">
-    <title id="svgDesc">AI network illustration showing nodes and connections</title>
+                    <title id="svgDesc">AI network illustration showing nodes and connections</title>
                     <!-- AI network illustration -->
                     <circle cx="250" cy="150" r="100" fill="none" stroke="var(--primary)" stroke-width="2" stroke-dasharray="5,5"/>
                     <circle cx="250" cy="150" r="70" fill="none" stroke="var(--primary)" stroke-width="2" stroke-dasharray="3,3"/>  
@@ -895,7 +895,7 @@
                         <span class="ai-chip"><i class="fas fa-bolt" style="margin-right: 5px;"></i> Fast Implementation</span>
                         <span class="ai-chip"><i class="fas fa-lock" style="margin-right: 5px;"></i> Secure By Design</span>
                         <span class="ai-chip"><i class="fas fa-sync-alt" style="margin-right: 5px;"></i> Continuous Learning</span>
-    <span class="ai-chip"><i class="fas fa-expand" style="margin-right: 5px;"></i> Scalable Solutions</span>
+                        <span class="ai-chip"><i class="fas fa-expand" style="margin-right: 5px;"></i> Scalable Solutions</span>
                     </div>
                 </div>
                 <div class="network-grid">
@@ -1107,30 +1107,19 @@
                 }
             }, 1500);
             // Initialize Locomotive Scroll with fallback
-           try {
-    const mainElement = document.querySelector('main');
-    if (mainElement) {
-        const scroll = new LocomotiveScroll({
-            el: mainElement,
-            smooth: true,
-            smartphone: { smooth: true },
-            tablet: { smooth: true }
-        });
-        // Update scroll when content changes
-        if (scroll && typeof scroll.update === 'function') {
-            scroll.update();
-        }
-    }
-} catch (e) {
-    console.error('Locomotive Scroll initialization failed:', e);
-    if (supportsSmoothScroll) {
-        document.documentElement.style.scrollBehavior = 'smooth';
-    }
-}
-}
-                // Update scroll when content changes
-                if (scroll && typeof scroll.update === 'function') {
-                    scroll.update();
+            try {
+                const mainElement = document.querySelector('main');
+                if (mainElement) {
+                    const scroll = new LocomotiveScroll({
+                        el: mainElement,
+                        smooth: true,
+                        smartphone: { smooth: true },
+                        tablet: { smooth: true }
+                    });   
+                    // Update scroll when content changes
+                    if (scroll && typeof scroll.update === 'function') {
+                        scroll.update();
+                    }
                 }
             } catch (e) {
                 console.error('Locomotive Scroll initialization failed:', e);
@@ -1196,7 +1185,7 @@
                         menuToggle.textContent = '☰';
                     }
                 });
-            });
+            });    
             // Dark mode toggle with localStorage
             const darkModeToggle = document.querySelector('.dark-mode-toggle');
             if (darkModeToggle) {
@@ -1304,12 +1293,12 @@
                 let wordIndex = 0;
                 let charIndex = 0;
                 let isDeleting = false;
-                let isEnd = false;
+                let isEnd = false;  
                 function type() {
-                    if (!typingText) return;      
+                    if (!typingText) return;          
                     const currentWord = words[wordIndex];
                     const currentChar = currentWord.substring(0, charIndex);
-                    typingText.textContent = currentChar;   
+                    typingText.textContent = currentChar;     
                     if (!isDeleting && charIndex < currentWord.length) {
                         // Typing
                         charIndex++;
@@ -1326,7 +1315,7 @@
                         }
                         setTimeout(type, 1000);
                     }
-                }
+                }   
                 // Start typing animation
                 setTimeout(type, 1000);
             }
@@ -1341,7 +1330,7 @@
                                 observer.unobserve(entry.target);
                             }
                         });
-                    }, { threshold: 0.1 });
+                    }, { threshold: 0.1 });  
                     fadeElements.forEach(element => {
                         observer.observe(element);
                     });
@@ -1372,7 +1361,7 @@
                         header.classList.remove('scrolled');
                     }
                 });
-            }
+            } 
             // Add focus styles for keyboard navigation
             document.addEventListener('keyup', function(e) {
                 if (e.key === 'Tab') {
@@ -1382,73 +1371,20 @@
             document.addEventListener('mousedown', function() {
                 document.documentElement.classList.remove('keyboard-navigation');
             });
-        });
-        </main>
-  <footer>
-    </footer>
-  <script>
-   </main>
-<footer>
-</footer>
-<script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Splash screen animation
-        setTimeout(function() {
-            const splash = document.getElementById('splash');
-            if (splash) {
-                splash.style.opacity = '0';
-                setTimeout(function() {
-                    splash.style.display = 'none';
-                }, 1000);
-            }
-        }, 1500);
-        // Initialize Locomotive Scroll
-        try {
-            const mainElement = document.querySelector('main');
-            if (mainElement) {
-                const scroll = new LocomotiveScroll({
-                    el: mainElement,
-                    smooth: true,
-                    smartphone: { smooth: true },
-                    tablet: { smooth: true }
-                }); 
-                if (scroll && typeof scroll.update === 'function') {
-                    scroll.update();
+            // Add keyboard focus styles
+            const style = document.createElement('style');
+            style.textContent = `
+                .keyboard-navigation a:focus,
+                .keyboard-navigation button:focus,
+                .keyboard-navigation input:focus,
+                .keyboard-navigation textarea:focus,
+                .keyboard-navigation select:focus {
+                    outline: 2px solid var(--primary);
+                    outline-offset: 2px;
                 }
-            }
-        } catch (e) {
-            console.error('Locomotive Scroll initialization failed:', e);
-            if ('scrollBehavior' in document.documentElement.style) {
-                document.documentElement.style.scrollBehavior = 'smooth';
-            }
-        }
-        // Rest of your JavaScript code...
-    });
-        const splash = document.getElementById('splash');
-        if (splash) {
-          splash.style.opacity = '0';
-          setTimeout(function() {
-            splash.style.display = 'none';
-          }, 1000); // Wait for the fade-out transition
-        }
-      }, 2000); // Adjust the delay (in milliseconds) as needed
-    });
-  </script>
-</body>
-        // Add keyboard focus styles
-        const style = document.createElement('style');
-        style.textContent = `
-            .keyboard-navigation a:focus,
-            .keyboard-navigation button:focus,
-            .keyboard-navigation input:focus,
-            .keyboard-navigation textarea:focus,
-            .keyboard-navigation select:focus {
-                outline: 2px solid var(--primary);
-                outline-offset: 2px;
-            }
-        `;
-        document.head.appendChild(style);
+            `;
+            document.head.appendChild(style);
+        });
     </script>
 </body>
 </html>
