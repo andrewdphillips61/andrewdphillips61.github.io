@@ -245,7 +245,7 @@
             height: 12px;
             background: var(--primary);
             border-radius: 50%;
-            animation: pulse 2s infinite;
+            animation: pulse 2s ;
         }
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 1; }
