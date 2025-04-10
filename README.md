@@ -117,31 +117,6 @@
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
-        /* Custom Cursor */
-        .cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: var(--primary);
-            mix-blend-mode: difference;
-            pointer-events: none;
-            z-index: 999;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
-        }
-        .cursor-follower {
-            position: fixed;
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--primary);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 998;
-            transform: translate(-50%, -50%);
-            transition: transform 0.4s ease, width 0.3s ease, height 0.3s ease;
-            opacity: 0.3;
-        }
         /* Floating Shapes Background */
         .floating-shapes {
             position: absolute;
