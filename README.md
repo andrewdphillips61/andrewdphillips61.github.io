@@ -888,7 +888,7 @@
             <div class="about-content">
                 <div class="tech-card" style="max-width: 1000px; margin: 0 auto;">
                     <h3 style="color: var(--primary); margin-bottom: 1rem;">The Future of Business AI Starts Here</h3>
-                    <p>Stratix AI is a forward-thinking startup dedicated to bringing powerful AI solutions to businesses at all stages. Founded in 2024, we're building the tools that will help shape the future of intelligent business operations.</p>
+                    <p>Stratix AI is a forward-thinking startup dedicated to bringing powerful AI solutions to businesses at all stages. Founded in 2025, we're building the tools that will help shape the future of intelligent business operations.</p>
                     <p>Our team combines cutting-edge technical expertise with a deep understanding of business challenges. We're passionate about creating AI solutions that are both powerful and accessible.</p>
                     <div style="margin-top: 2rem; display: flex; flex-wrap: wrap;">
                         <span class="ai-chip"><i class="fas fa-bolt" style="margin-right: 5px;"></i> Fast Implementation</span>
@@ -1083,7 +1083,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Stratix AI. All rights reserved.</p>
+            <p>&copy; 2025 Stratix AI. All rights reserved.</p>
         </div>
     </footer>
     <button id="back-to-top" aria-label="Back to Top">
