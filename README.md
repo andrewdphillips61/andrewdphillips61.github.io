@@ -58,8 +58,9 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none;
-        }
+body {
+    cursor: default;
+}
         body {
             font-family: 'Space Grotesk', sans-serif;
             line-height: 1.6;
@@ -853,10 +854,9 @@
                 <a href="#industries" aria-label="Industries Section">Industries</a>
                 <a href="#contact" aria-label="Contact Section">Contact</a>
                 <a class="cta-btn" href="#signup" aria-label="Free Demo">Free Demo</a>
-                <div class="dark-mode-toggle" aria-label="Toggle Dark Mode" role="button" tabindex="0">
-                    <div class="toggle-thumb"></div>
-                </div>
-            </div>
+                <button class="dark-mode-toggle" aria-label="Toggle Dark Mode">
+    <div class="toggle-thumb"></div>
+</button>
             <button id="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false">☰</button>
         </nav>
     </header>
@@ -868,7 +868,8 @@
                 <button onclick="window.location.href='#contact'" aria-label="Get Started">Get Started Today</button>
             </div>    
             <div class="animated-illustration">
-                <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+               <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svgDesc">
+    <title id="svgDesc">AI network illustration showing nodes and connections</title>
                     <!-- AI network illustration -->
                     <circle cx="250" cy="150" r="100" fill="none" stroke="var(--primary)" stroke-width="2" stroke-dasharray="5,5"/>
                     <circle cx="250" cy="150" r="70" fill="none" stroke="var(--primary)" stroke-width="2" stroke-dasharray="3,3"/>  
@@ -879,6 +880,12 @@
                     <circle cx="250" cy="50" r="8" fill="var(--primary)" class="pulse-dot" style="top: 40px; left: 240px; animation-delay: 1s;"/>
                     <circle cx="250" cy="250" r="8" fill="var(--primary)" class="pulse-dot" style="top: 240px; left: 240px; animation-delay: 1.5s;"/>
                     <!-- Connecting lines -->
+                   @media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none;
+        transition: none;
+    }
+}
                     <line x1="250" y1="150" x2="150" y2="150" stroke="var(--primary)" stroke-width="2" stroke-opacity="0.3"/>
                     <line x1="250" y1="150" x2="350" y2="150" stroke="var(--primary)" stroke-width="2" stroke-opacity="0.3"/>
                     <line x1="250" y1="150" x2="250" y2="50" stroke="var(--primary)" stroke-width="2" stroke-opacity="0.3"/>
@@ -897,7 +904,7 @@
                         <span class="ai-chip"><i class="fas fa-bolt" style="margin-right: 5px;"></i> Fast Implementation</span>
                         <span class="ai-chip"><i class="fas fa-lock" style="margin-right: 5px;"></i> Secure By Design</span>
                         <span class="ai-chip"><i class="fas fa-sync-alt" style="margin-right: 5px;"></i> Continuous Learning</span>
-                        <span class="ai-chip"><i class="fas fa-expand" style="margin-right: 5px
+                        <span class="ai-chip"><i class="fas fa-expand" style="margin-right: 5px;"></i> Scalable Solutions</span>
                                             <span class="ai-chip"><i class="fas fa-expand" style="margin-right: 5px;"></i> Scalable Solutions</span>
                     </div>
                 </div>
@@ -1110,9 +1117,13 @@
                 }
             }, 1500);
             // Initialize Locomotive Scroll with fallback
-            try {
-                const scroll = new LocomotiveScroll({
-                    el: document.querySelector('main'),
+            try {       const mainElement = document.querySelector('main');
+if (mainElement) {
+    const scroll = new LocomotiveScroll({
+        el: mainElement,
+        ...
+    });
+}
                     smooth: true,
                     smartphone: { smooth: true },
                     tablet: { smooth: true }
