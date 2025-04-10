@@ -1371,6 +1371,23 @@
                 document.documentElement.classList.remove('keyboard-navigation');
             });
         });
+        </main>
+  <footer>
+    </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        const splash = document.getElementById('splash');
+        if (splash) {
+          splash.style.opacity = '0';
+          setTimeout(function() {
+            splash.style.display = 'none';
+          }, 1000); // Wait for the fade-out transition
+        }
+      }, 2000); // Adjust the delay (in milliseconds) as needed
+    });
+  </script>
+</body>
         // Add keyboard focus styles
         const style = document.createElement('style');
         style.textContent = `
