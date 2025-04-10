@@ -876,13 +876,6 @@
                     <circle cx="250" cy="50" r="8" fill="var(--primary)" class="pulse-dot" style="top: 40px; left: 240px; animation-delay: 1s;"/>
                     <circle cx="250" cy="250" r="8" fill="var(--primary)" class="pulse-dot" style="top: 240px; left: 240px; animation-delay: 1.5s;"/>
                     <!-- Connecting lines -->
-                   /* Move the CSS rule for reduced-motion to the stylesheet */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation: none;
-        transition: none;
-    }
-}
                     <line x1="250" y1="150" x2="350" y2="150" stroke="var(--primary)" stroke-width="2" stroke-opacity="0.3"/>
                     <line x1="250" y1="150" x2="250" y2="50" stroke="var(--primary)" stroke-width="2" stroke-opacity="0.3"/>
                     <line x1="250" y1="150" x2="250" y2="250" stroke="var(--primary)" stroke-width="2" stroke-opacity="0.3"/>
