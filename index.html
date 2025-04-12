@@ -1,50 +1,31 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Stratix AI - Cutting-edge AI solutions for businesses">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="/css/styles.min.css" as="style">
+    <link rel="preload" href="/js/scripts.min.js" as="script">
+    <link rel="preload" href="https://res.cloudinary.com/dhpl09d00/image/upload/w_150,f_auto,q_70/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" as="image">
+    
     <!-- OpenGraph / Social Media Meta Tags -->
     <meta property="og:title" content="Stratix AI | AI Solutions for Business Growth">
     <meta property="og:description" content="Innovative AI solutions designed to help startups and growing businesses compete in the digital age.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://stratixai.com">
-    <meta property="og:image" content="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png">
+    <meta property="og:image" content="https://res.cloudinary.com/dhpl09d00/image/upload/w_800,f_auto,q_70/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="600">
+    
     <!-- Favicon -->
-    <link rel="icon" href="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" type="image/png">
+    <link rel="icon" href="https://res.cloudinary.com/dhpl09d00/image/upload/w_32,f_auto,q_70/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" type="image/png">
+    
     <title>Stratix AI | AI Solutions for Business Growth</title>
-    <!-- Preconnect to external resources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css"></noscript>
-    <!-- Calendly styles -->
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Stratix AI",
-      "url": "https://stratixai.com",
-      "logo": "https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png",
-      "description": "Innovative AI solutions for the modern business",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "San Francisco",
-        "addressRegion": "CA",
-        "postalCode": "94107",
-        "addressCountry": "US"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "customer support",
-        "email": "andrew@stratixautomation.com"
-      }
-    }
-    </script>
+    
+    <!-- Inline Critical CSS -->
     <style>
         :root {
             --primary: #2563eb;
@@ -437,20 +418,6 @@
         }
         
         /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 100;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        body.dark-mode header {
-            background-color: rgba(15, 23, 42, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
         header.scrolled {
             background-color: rgba(255, 255, 255, 0.98);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -580,31 +547,6 @@
         }
         
         /* Main Content */
-        main {
-            padding-top: 80px;
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-        }
-        section {
-            padding: 6rem 2rem;
-            scroll-margin-top: 80px;
-            position: relative;
-        }
-        section:nth-child(even) {
-            background-color: #f1f5f9;
-        }
-        body.dark-mode section:nth-child(even) {
-            background-color: #1e293b;
-        }
-        h1, h2, h3 {
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-        }
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-        }
         h2 {
             font-size: 2.5rem;
             text-align: center;
@@ -881,14 +823,6 @@
             margin-top: 2rem;
         }
         
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-        }
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-        
         /* Back to Top Button */
         #back-to-top {
             position: fixed;
@@ -928,45 +862,6 @@
             background: linear-gradient(90deg, var(--primary), #7c3aed);
             z-index: 1000;
             transition: width 0.4s ease;
-        }
-        
-        /* Calendly Modal Styles */
-        #calendly-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        #calendly-modal button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            z-index: 10000;
-        }
-        #calendly-modal button:hover {
-            transform: scale(1.2);
-        }
-        .calendly-inline-widget {
-            width: 90%;
-            height: 90%;
-            max-width: 1000px;
-            max-height: 700px;
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
         }
         
         /* Mobile Styles */
@@ -1026,21 +921,49 @@
             .network-grid {
                 grid-template-columns: 1fr;
             }
-            .calendly-inline-widget {
-                width: 95%;
-                height: 80%;
-            }
         }
     </style>
+    
+    <!-- Non-critical CSS loaded async -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="/css/styles.min.css" media="print" onload="this.media='all'">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Stratix AI",
+      "url": "https://stratixai.com",
+      "logo": "https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png",
+      "description": "Innovative AI solutions for the modern business",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "San Francisco",
+        "addressRegion": "CA",
+        "postalCode": "94107",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "andrew@stratixautomation.com"
+      }
+    }
+    </script>
 </head>
 
 <body>
     <!-- Skip to Content Link -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
+    <!-- Loading Bar -->
     <div class="loading-bar"></div>
+    
+    <!-- Splash Screen -->
     <div id="splash">
-        <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo">
+        <img src="https://res.cloudinary.com/dhpl09d00/image/upload/w_150,f_auto,q_70/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo" width="150" height="150" loading="eager" decoding="async">
     </div>
     
     <!-- Cookie Consent Banner -->
@@ -1055,17 +978,12 @@
         </div>
     </div>
     
-    <!-- Calendly Modal -->
-    <div id="calendly-modal">
-        <button aria-label="Close scheduling modal">×</button>
-        <div class="calendly-inline-widget" data-url="https://calendly.com/andrew-stratixautomation/30min"></div>
-    </div>
-    
+    <!-- Header -->
     <header>
         <nav aria-label="Main navigation">
             <div class="logo">
                 <a href="#hero">
-                    <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo" loading="lazy">
+                    <img src="https://res.cloudinary.com/dhpl09d00/image/upload/w_120,f_auto,q_70/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo" width="120" height="40" loading="eager" decoding="async">
                 </a>
             </div>
             <div class="nav-links">
@@ -1084,6 +1002,7 @@
     </header>
     
     <main id="main-content">
+        <!-- Hero Section -->
         <section class="hero gradient-bg fade-in" id="hero" aria-labelledby="hero-heading">
             <div class="hero-content">
                 <h1 id="hero-heading">Transform Your Business with <span class="gradient-text typing-text">AI</span></h1>
@@ -1091,52 +1010,41 @@
                 <button class="calendly-trigger" aria-label="Get Started">Get Started Today</button>
             </div>    
             <div class="animated-illustration">
-               <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svgDesc">
-                    <title id="svgDesc">AI network illustration showing nodes and connections</title>
-                    <!-- AI network illustration -->
-                    <circle cx="250" cy="150" r="100" fill="none" stroke="var(--primary)" stroke-width="2" stroke-dasharray="5,5"/>
-                    <circle cx="250" cy="150" r="70" fill="none" stroke="var(--primary)" stroke-width="2" stroke-dasharray="3,3"/>  
-                    <!-- Nodes -->
-                    <circle cx="250" cy="150" r="10" fill="var(--primary)"/>
-                    <circle cx="150" cy="150" r="8" fill="var(--primary)" class="pulse-dot" style="top: 140px; left: 140px;"/>
-                    <circle cx="350" cy="150" r="8" fill="var(--primary)" class="pulse-dot" style="top: 140px; left: 340px; animation-delay: 0.5s;"/>
-                    <circle cx="250" cy="50" r="8" fill="var(--primary)" class="pulse-dot" style="top: 40px; left: 240px; animation-delay: 1s;"/>
-                    <circle cx="250" cy="250" r="8" fill="var(--primary)" class="pulse-dot" style="top: 240px; left: 240px; animation-delay: 1.5s;"/>
-                    <!-- Connecting lines -->
-                    <line x1="250" y1="150" x2="350" y2="150" stroke="var(--primary)" stroke-width="2" stroke-opacity="0.3"/>
-                    <line x1="250" y1="150" x2="250" y2="50" stroke="var(--primary)" stroke-width="2" stroke-opacity="0.3"/>
-                    <line x1="250" y1="150" x2="250" y2="250" stroke="var(--primary)" stroke-width="2" stroke-opacity="0.3"/>
-                </svg>
+                <picture>
+                    <source srcset="https://res.cloudinary.com/dhpl09d00/image/upload/f_auto,q_70/v1744120867/ai-network.webp" type="image/webp">
+                    <img src="https://res.cloudinary.com/dhpl09d00/image/upload/f_auto,q_70/v1744120867/ai-network.png" alt="AI network illustration showing nodes and connections" width="500" height="300" loading="lazy" decoding="async">
+                </picture>
             </div>
         </section>
         
+        <!-- About Section -->
         <section id="about" class="fade-in" aria-labelledby="about-heading">
             <h2 id="about-heading">About Us</h2>
             <div class="about-content">
-                <div class="tech-card" style="max-width: 1000px; margin: 0 auto;">
-                    <h3 style="color: var(--primary); margin-bottom: 1rem;">The Future of Business AI Starts Here</h3>
+                <div class="tech-card">
+                    <h3>The Future of Business AI Starts Here</h3>
                     <p>Stratix AI is a forward-thinking startup dedicated to bringing powerful AI solutions to businesses at all stages. Founded in 2025, we're building the tools that will help shape the future of intelligent business operations.</p>
                     <p>Our team combines cutting-edge technical expertise with a deep understanding of business challenges. We're passionate about creating AI solutions that are both powerful and accessible.</p>
-                    <div style="margin-top: 2rem; display: flex; flex-wrap: wrap;">
-                        <span class="ai-chip"><i class="fas fa-bolt" aria-hidden="true" style="margin-right: 5px;"></i> Fast Implementation</span>
-                        <span class="ai-chip"><i class="fas fa-lock" aria-hidden="true" style="margin-right: 5px;"></i> Secure By Design</span>
-                        <span class="ai-chip"><i class="fas fa-sync-alt" aria-hidden="true" style="margin-right: 5px;"></i> Continuous Learning</span>
-                        <span class="ai-chip"><i class="fas fa-expand" aria-hidden="true" style="margin-right: 5px;"></i> Scalable Solutions</span>
+                    <div class="ai-chips">
+                        <span class="ai-chip"><i class="fas fa-bolt" aria-hidden="true"></i> Fast Implementation</span>
+                        <span class="ai-chip"><i class="fas fa-lock" aria-hidden="true"></i> Secure By Design</span>
+                        <span class="ai-chip"><i class="fas fa-sync-alt" aria-hidden="true"></i> Continuous Learning</span>
+                        <span class="ai-chip"><i class="fas fa-expand" aria-hidden="true"></i> Scalable Solutions</span>
                     </div>
                 </div>
                 <div class="network-grid">
                     <div class="network-node">
-                        <i class="fas fa-rocket" aria-hidden="true" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <i class="fas fa-rocket" aria-hidden="true"></i>
                         <h3>Innovation</h3>
                         <p>Pushing boundaries with cutting-edge AI research</p>
                     </div>
                     <div class="network-node">
-                        <i class="fas fa-handshake" aria-hidden="true" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <i class="fas fa-handshake" aria-hidden="true"></i>
                         <h3>Partnership</h3>
                         <p>Collaborative approach to solving problems</p>
                     </div>
                     <div class="network-node">
-                        <i class="fas fa-lightbulb" aria-hidden="true" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <i class="fas fa-lightbulb" aria-hidden="true"></i>
                         <h3>Creativity</h3>
                         <p>Unique solutions tailored to your needs</p>
                     </div>
@@ -1144,238 +1052,237 @@
             </div>
         </section>
         
+        <!-- Services Section -->
         <section id="services" class="fade-in gradient-bg" aria-labelledby="services-heading">
             <h2 id="services-heading">Our Services</h2>
             <div class="services-list">
                 <div class="tech-card">
-                    <h3><i class="fas fa-robot" aria-hidden="true" style="margin-right: 10px;"></i> AI Consulting</h3>
+                    <h3><i class="fas fa-robot" aria-hidden="true"></i> AI Consulting</h3>
                     <p>Strategic guidance to help you identify the best AI opportunities for your specific business needs and goals.</p>
-                    <div style="margin-top: 1rem;">
+                    <div class="ai-chips">
                         <span class="ai-chip">Strategy</span>
                         <span class="ai-chip">Roadmapping</span>
                         <span class="ai-chip">Implementation</span>
                     </div>
-                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                    <button class="cta-btn calendly-trigger">Schedule Consultation</button>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-brain" aria-hidden="true" style="margin-right: 10px;"></i> Machine Learning</h3>
+                    <h3><i class="fas fa-brain" aria-hidden="true"></i> Machine Learning</h3>
                     <p>Custom ML models designed to extract insights from your data and automate complex processes.</p>
-                    <div style="margin-top: 1rem;">
+                    <div class="ai-chips">
                         <span class="ai-chip">Predictive Analytics</span>
                         <span class="ai-chip">Automation</span>
                     </div>
-                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                    <button class="cta-btn calendly-trigger">Schedule Consultation</button>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-comment-dots" aria-hidden="true" style="margin-right: 10px;"></i> NLP Solutions</h3>
+                    <h3><i class="fas fa-comment-dots" aria-hidden="true"></i> NLP Solutions</h3>
                     <p>Natural language processing to help you understand and interact with customers more effectively.</p>
-                    <div style="margin-top: 1rem;">
+                    <div class="ai-chips">
                         <span class="ai-chip">Chatbots</span>
                         <span class="ai-chip">Sentiment Analysis</span>
                     </div>
-                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                    <button class="cta-btn calendly-trigger">Schedule Consultation</button>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-chart-line" aria-hidden="true" style="margin-right: 10px;"></i> Data Analytics</h3>
+                    <h3><i class="fas fa-chart-line" aria-hidden="true"></i> Data Analytics</h3>
                     <p>Transform your raw data into actionable insights with our advanced analytics platforms.</p>
-                    <div style="margin-top: 1rem;">
+                    <div class="ai-chips">
                         <span class="ai-chip">Visualization</span>
                         <span class="ai-chip">Real-time</span>
                         <span class="ai-chip">Dashboards</span>
                     </div>
-                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                    <button class="cta-btn calendly-trigger">Schedule Consultation</button>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-cogs" aria-hidden="true" style="margin-right: 10px;"></i> Process Automation</h3>
+                    <h3><i class="fas fa-cogs" aria-hidden="true"></i> Process Automation</h3>
                     <p>Streamline operations and reduce costs with intelligent automation solutions.</p>
-                    <div style="margin-top: 1rem;">
+                    <div class="ai-chips">
                         <span class="ai-chip">RPA</span>
                         <span class="ai-chip">Workflows</span>
                     </div>
-                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                    <button class="cta-btn calendly-trigger">Schedule Consultation</button>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-shield-alt" aria-hidden="true" style="margin-right: 10px;"></i> AI Security</h3>
+                    <h3><i class="fas fa-shield-alt" aria-hidden="true"></i> AI Security</h3>
                     <p>Protect your business with AI-powered threat detection and prevention systems.</p>
-                    <div style="margin-top: 1rem;">
+                    <div class="ai-chips">
                         <span class="ai-chip">Anomaly Detection</span>
                         <span class="ai-chip">Fraud Prevention</span>
                     </div>
-                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                    <button class="cta-btn calendly-trigger">Schedule Consultation</button>
                 </div>
             </div>
         </section>
         
+        <!-- Industries Section -->
         <section id="industries" class="fade-in" aria-labelledby="industries-heading">
             <h2 id="industries-heading">Industries We Serve</h2>
             <div class="industries-list">
                 <div class="tech-card">
-                    <h3><i class="fas fa-heartbeat" aria-hidden="true" style="margin-right: 10px;"></i> Healthcare</h3>
+                    <h3><i class="fas fa-heartbeat" aria-hidden="true"></i> Healthcare</h3>
                     <p>AI solutions for diagnostics, patient care optimization, and medical research acceleration.</p>
-                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
+                    <button class="cta-btn calendly-trigger">Learn More</button>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-money-bill-wave" aria-hidden="true" style="margin-right: 10px;"></i> Finance</h3>
+                    <h3><i class="fas fa-money-bill-wave" aria-hidden="true"></i> Finance</h3>
                     <p>Fraud detection, risk assessment, algorithmic trading, and personalized banking.</p>
-                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
+                    <button class="cta-btn calendly-trigger">Learn More</button>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-shopping-cart" aria-hidden="true" style="margin-right: 10px;"></i> Retail</h3>
+                    <h3><i class="fas fa-shopping-cart" aria-hidden="true"></i> Retail</h3>
                     <p>Personalized recommendations, inventory optimization, and customer experience enhancement.</p>
-                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
+                    <button class="cta-btn calendly-trigger">Learn More</button>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-industry" aria-hidden="true" style="margin-right: 10px;"></i> Manufacturing</h3>
+                    <h3><i class="fas fa-industry" aria-hidden="true"></i> Manufacturing</h3>
                     <p>Predictive maintenance, quality control, and supply chain optimization.</p>
-                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
+                    <button class="cta-btn calendly-trigger">Learn More</button>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-graduation-cap" aria-hidden="true" style="margin-right: 10px;"></i> Education</h3>
+                    <h3><i class="fas fa-graduation-cap" aria-hidden="true"></i> Education</h3>
                     <p>Adaptive learning platforms, automated grading, and student performance analytics.</p>
-                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
+                    <button class="cta-btn calendly-trigger">Learn More</button>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-truck" aria-hidden="true" style="margin-right: 10px;"></i> Logistics</h3>
+                    <h3><i class="fas fa-truck" aria-hidden="true"></i> Logistics</h3>
                     <p>Route optimization, demand forecasting, and autonomous delivery systems.</p>
-                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
+                    <button class="cta-btn calendly-trigger">Learn More</button>
                 </div>
             </div>
         </section>
         
-        <!-- Privacy Policy Section -->
+        <!-- Privacy Section -->
         <section id="privacy" class="fade-in" aria-labelledby="privacy-heading">
-            <div class="container">
-                <h2 id="privacy-heading">Privacy Policy</h2>
-                <div class="tech-card">
-                    <p><strong>Last Updated:</strong> April 7, 2025</p>
-                    
-                    <h3>1. Information We Collect</h3>
-                    <p>We collect both personal and non-personal information when you interact with our services:</p>
-                    <ul>
-                        <li><strong>Personal Data:</strong> Name, email, phone number, company details</li>
-                        <li><strong>Usage Data:</strong> IP address, browser type, pages visited</li>
-                        <li><strong>Cookies:</strong> Session cookies, preference cookies, security cookies</li>
-                    </ul>
+            <h2 id="privacy-heading">Privacy Policy</h2>
+            <div class="tech-card">
+                <p><strong>Last Updated:</strong> April 7, 2025</p>
+                
+                <h3>1. Information We Collect</h3>
+                <p>We collect both personal and non-personal information when you interact with our services:</p>
+                <ul>
+                    <li><strong>Personal Data:</strong> Name, email, phone number, company details</li>
+                    <li><strong>Usage Data:</strong> IP address, browser type, pages visited</li>
+                    <li><strong>Cookies:</strong> Session cookies, preference cookies, security cookies</li>
+                </ul>
 
-                    <h3>2. How We Use Your Information</h3>
-                    <p>We use the information we collect to:</p>
-                    <ul>
-                        <li>Provide and maintain our services</li>
-                        <li>Improve and personalize user experience</li>
-                        <li>Communicate with you about products/services</li>
-                        <li>Analyze usage and trends</li>
-                        <li>Prevent fraud and enhance security</li>
-                    </ul>
+                <h3>2. How We Use Your Information</h3>
+                <p>We use the information we collect to:</p>
+                <ul>
+                    <li>Provide and maintain our services</li>
+                    <li>Improve and personalize user experience</li>
+                    <li>Communicate with you about products/services</li>
+                    <li>Analyze usage and trends</li>
+                    <li>Prevent fraud and enhance security</li>
+                </ul>
 
-                    <h3>3. Data Sharing and Disclosure</h3>
-                    <p>We may share your information with:</p>
-                    <ul>
-                        <li>Service providers who assist with our business operations</li>
-                        <li>Legal authorities when required by law</li>
-                        <li>Business partners with your consent</li>
-                    </ul>
-                    <p>We do not sell your personal information to third parties.</p>
+                <h3>3. Data Sharing and Disclosure</h3>
+                <p>We may share your information with:</p>
+                <ul>
+                    <li>Service providers who assist with our business operations</li>
+                    <li>Legal authorities when required by law</li>
+                    <li>Business partners with your consent</li>
+                </ul>
+                <p>We do not sell your personal information to third parties.</p>
 
-                    <h3>4. Data Security</h3>
-                    <p>We implement appropriate technical and organizational measures to protect your personal data, including:</p>
-                    <ul>
-                        <li>Encryption of sensitive data</li>
-                        <li>Regular security assessments</li>
-                        <li>Access controls</li>
-                    </ul>
+                <h3>4. Data Security</h3>
+                <p>We implement appropriate technical and organizational measures to protect your personal data, including:</p>
+                <ul>
+                    <li>Encryption of sensitive data</li>
+                    <li>Regular security assessments</li>
+                    <li>Access controls</li>
+                </ul>
 
-                    <h3>5. GDPR Compliance (EU Users)</h3>
-                    <p>Under the General Data Protection Regulation (GDPR), you have:</p>
-                    <ul>
-                        <li>The right to access, correct, or delete your data</li>
-                        <li>The right to restrict or object to processing</li>
-                        <li>The right to data portability</li>
-                        <li>The right to withdraw consent at any time</li>
-                    </ul>
-                    <p>To exercise these rights, <a href="#contact">contact us</a> or email <strong>privacy@stratixai.com</strong>.</p>
+                <h3>5. GDPR Compliance (EU Users)</h3>
+                <p>Under the General Data Protection Regulation (GDPR), you have:</p>
+                <ul>
+                    <li>The right to access, correct, or delete your data</li>
+                    <li>The right to restrict or object to processing</li>
+                    <li>The right to data portability</li>
+                    <li>The right to withdraw consent at any time</li>
+                </ul>
+                <p>To exercise these rights, <a href="#contact">contact us</a> or email <strong>privacy@stratixai.com</strong>.</p>
 
-                    <h3>6. CCPA Compliance (California Users)</h3>
-                    <p>Under the California Consumer Privacy Act (CCPA), you have:</p>
-                    <ul>
-                        <li>The right to know what personal data is collected</li>
-                        <li>The right to delete personal data (with exceptions)</li>
-                        <li>The right to opt-out of data sales</li>
-                        <li>The right to non-discrimination for exercising your rights</li>
-                    </ul>
-                    <p>To submit a CCPA request, use our <a href="#contact">contact form</a> and select "Privacy Request".</p>
+                <h3>6. CCPA Compliance (California Users)</h3>
+                <p>Under the California Consumer Privacy Act (CCPA), you have:</p>
+                <ul>
+                    <li>The right to know what personal data is collected</li>
+                    <li>The right to delete personal data (with exceptions)</li>
+                    <li>The right to opt-out of data sales</li>
+                    <li>The right to non-discrimination for exercising your rights</li>
+                </ul>
+                <p>To submit a CCPA request, use our <a href="#contact">contact form</a> and select "Privacy Request".</p>
 
-                    <h3>7. Cookie Policy</h3>
-                    <p>We use cookies to:</p>
-                    <ul>
-                        <li>Remember user preferences</li>
-                        <li>Analyze site traffic</li>
-                        <li>Improve user experience</li>
-                    </ul>
-                    <p>You can manage cookies in your browser settings or via our cookie banner.</p>
+                <h3>7. Cookie Policy</h3>
+                <p>We use cookies to:</p>
+                <ul>
+                    <li>Remember user preferences</li>
+                    <li>Analyze site traffic</li>
+                    <li>Improve user experience</li>
+                </ul>
+                <p>You can manage cookies in your browser settings or via our cookie banner.</p>
 
-                    <h3>8. Changes to This Policy</h3>
-                    <p>We may update this Privacy Policy periodically. We'll notify you of significant changes by posting the new policy on our website.</p>
+                <h3>8. Changes to This Policy</h3>
+                <p>We may update this Privacy Policy periodically. We'll notify you of significant changes by posting the new policy on our website.</p>
 
-                    <h3>9. Contact Us</h3>
-                    <p>For privacy requests or questions: <a href="#contact">Contact Form</a> or email <strong>privacy@stratixai.com</strong>.</p>
-                </div>
+                <h3>9. Contact Us</h3>
+                <p>For privacy requests or questions: <a href="#contact">Contact Form</a> or email <strong>privacy@stratixai.com</strong>.</p>
             </div>
         </section>
 
+        <!-- Contact Section -->
         <section id="contact" class="fade-in gradient-bg" aria-labelledby="contact-heading">
-            <div class="container">
-                <h2 id="contact-heading" class="section-title">Contact Us</h2>
-                <div class="contact-form">
-                    <p>Ready to transform your business with AI? Contact us for a free consultation.</p>
-                    <form id="contactForm" action="https://formspree.io/f/xqapwjzg" method="POST">
-                        <input type="hidden" name="_subject" value="New Contact from Stratix AI Website">
-                        <input type="hidden" name="_replyto" value="andrew@stratixautomation.com">
-                        
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="company">Company</label>
-                            <input type="text" id="company" name="company">
-                        </div>
-                        <div class="form-group">
-                            <label for="service">Service of Interest</label>
-                            <select id="service" name="service" aria-label="Select a service">
-                                <option value="">Select a service</option>
-                                <option value="consulting">AI Consulting</option>
-                                <option value="ml">Machine Learning</option>
-                                <option value="nlp">NLP Solutions</option>
-                                <option value="analytics">Data Analytics</option>
-                                <option value="automation">Process Automation</option>
-                                <option value="security">AI Security</option>
-                                <option value="privacy_request">Privacy Request</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" required aria-required="true"></textarea>
-                        </div>
-                        <div class="form-group" aria-live="polite" id="formStatus"></div>
-                        <button type="submit">Send Message</button>
-                    </form>
-                    <div style="text-align: center; margin-top: 2rem;">
-                        <p>Or schedule a meeting directly:</p>
-                        <button class="calendly-trigger cta-btn" style="margin: 0 auto;">Schedule a Call</button>
+            <h2 id="contact-heading">Contact Us</h2>
+            <div class="contact-form">
+                <p>Ready to transform your business with AI? Contact us for a free consultation.</p>
+                <form id="contactForm" action="https://formspree.io/f/xqapwjzg" method="POST">
+                    <input type="hidden" name="_subject" value="New Contact from Stratix AI Website">
+                    <input type="hidden" name="_replyto" value="andrew@stratixautomation.com">
+                    
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required aria-required="true">
                     </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required aria-required="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service of Interest</label>
+                        <select id="service" name="service" aria-label="Select a service">
+                            <option value="">Select a service</option>
+                            <option value="consulting">AI Consulting</option>
+                            <option value="ml">Machine Learning</option>
+                            <option value="nlp">NLP Solutions</option>
+                            <option value="analytics">Data Analytics</option>
+                            <option value="automation">Process Automation</option>
+                            <option value="security">AI Security</option>
+                            <option value="privacy_request">Privacy Request</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required aria-required="true"></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <p>Or schedule a meeting directly:</p>
+                    <button class="calendly-trigger cta-btn" style="margin: 0 auto;">Schedule a Call</button>
                 </div>
             </div>
         </section>
     </main>
     
+    <!-- Footer -->
     <footer aria-label="Footer">
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo" loading="lazy">
+                <img src="https://res.cloudinary.com/dhpl09d00/image/upload/w_120,f_auto,q_70/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo" width="120" height="40" loading="lazy" decoding="async">
                 <p>Innovative AI solutions for the modern business.</p>
                 <div class="social-links">
                     <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
@@ -1417,112 +1324,46 @@
         </div>
     </footer>
     
+    <!-- Back to Top Button -->
     <button id="back-to-top" aria-label="Back to Top">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
     
-    <!-- Calendly script -->
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://res.cloudinary.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://assets.calendly.com">
+    
+    <!-- Load non-critical scripts -->
     <script>
-        // Cookie Consent Banner Functionality
+        // Load scripts after page load
+        function loadScript(src, async = true) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.async = async;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.body.appendChild(script);
+            });
+        }
+        
+        // Initialize after DOM loads
         document.addEventListener('DOMContentLoaded', function() {
-            const cookieBanner = document.getElementById('cookieBanner');
-            const acceptCookies = document.getElementById('acceptCookies');
-            const declineCookies = document.getElementById('declineCookies');
-
-            // Check if user already made a choice
-            if (localStorage.getItem('cookiesAccepted') === 'true') {
-                cookieBanner.classList.add('hidden');
-                loadAnalytics(); // Load analytics if accepted
-            } else if (localStorage.getItem('cookiesAccepted') === 'false') {
-                cookieBanner.classList.add('hidden');
-            }
-
-            // Handle accept button
-            acceptCookies.addEventListener('click', function() {
-                localStorage.setItem('cookiesAccepted', 'true');
-                cookieBanner.classList.add('hidden');
-                loadAnalytics();
-            });
-
-            // Handle decline button
-            declineCookies.addEventListener('click', function() {
-                localStorage.setItem('cookiesAccepted', 'false');
-                cookieBanner.classList.add('hidden');
-                // Delete existing cookies
-                document.cookie.split(";").forEach(function(c) {
-                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-                });
-            });
-
-            function loadAnalytics() {
-                // Replace with your actual analytics code
-                console.log('Analytics loaded');
-                // Example: window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}
-            }
-
-            // Initialize Calendly Modal
-            function initCalendlyModal() {
-                const modal = document.getElementById('calendly-modal');
-                const closeBtn = modal.querySelector('button');
-                
-                // Add event listeners
-                document.querySelectorAll('.calendly-trigger').forEach(el => {
-                    el.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        modal.style.display = 'flex';
-                        Calendly.initInlineWidget(modal.querySelector('.calendly-inline-widget'));
-                        return false;
-                    });
-                });
-                
-                closeBtn.addEventListener('click', () => {
-                    modal.style.display = 'none';
-                });
-                
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        modal.style.display = 'none';
-                    }
-                });
-            }
-            initCalendlyModal();
-
-            // Splash screen animation
+            // Remove splash screen
             setTimeout(function() {
                 const splash = document.getElementById('splash');
                 if (splash) {
                     splash.style.opacity = '0';
-                    setTimeout(function() {
-                        splash.style.display = 'none';
-                    }, 1000);
+                    setTimeout(() => splash.remove(), 500);
                 }
             }, 1500);
             
-            // Initialize Locomotive Scroll with fallback
-            try {
-                const mainElement = document.querySelector('main');
-                if (mainElement) {
-                    const scroll = new LocomotiveScroll({
-                        el: mainElement,
-                        smooth: true,
-                        smartphone: { smooth: true },
-                        tablet: { smooth: true }
-                    });   
-                    // Update scroll when content changes
-                    if (scroll && typeof scroll.update === 'function') {
-                        scroll.update();
-                    }
-                }
-            } catch (e) {
-                console.error('Locomotive Scroll initialization failed:', e);
-                if ('scrollBehavior' in document.documentElement.style) {
-                    document.documentElement.style.scrollBehavior = 'smooth';
-                }
-            }
+            // Load main scripts
+            loadScript('/js/scripts.min.js');
             
-            // Mobile menu toggle with ARIA attributes
+            // Initialize mobile menu
             const menuToggle = document.getElementById('menu-toggle');
             const navLinks = document.querySelector('.nav-links');
             if (menuToggle && navLinks) {
@@ -1533,84 +1374,80 @@
                 });
             }
             
-            // Close mobile menu when clicking a link
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth <= 768 && navLinks && menuToggle) {
-                        navLinks.classList.remove('show');
-                        menuToggle.setAttribute('aria-expanded', 'false');
-                        menuToggle.textContent = '☰';
-                    }
-                });
-            });    
-            
-            // Dark mode toggle with localStorage
+            // Initialize dark mode
             const darkModeToggle = document.querySelector('.dark-mode-toggle');
             if (darkModeToggle) {
-                darkModeToggle.addEventListener('click', toggleDarkMode);
-                darkModeToggle.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        toggleDarkMode();
-                    }
+                if (localStorage.getItem('darkMode') === 'true') {
+                    document.body.classList.add('dark-mode');
+                    darkModeToggle.setAttribute('aria-pressed', 'true');
+                }
+                
+                darkModeToggle.addEventListener('click', () => {
+                    document.body.classList.toggle('dark-mode');
+                    const isDark = document.body.classList.contains('dark-mode');
+                    localStorage.setItem('darkMode', isDark);
+                    darkModeToggle.setAttribute('aria-pressed', isDark);
                 });
             }
             
-            function toggleDarkMode() {
-                document.body.classList.toggle('dark-mode');
-                const isDarkMode = document.body.classList.contains('dark-mode');
-                localStorage.setItem('darkMode', isDarkMode);
-                darkModeToggle.setAttribute('aria-pressed', isDarkMode);
-            }
-            
-            // Check for saved dark mode preference
-            if (localStorage.getItem('darkMode') === 'true') {
-                document.body.classList.add('dark-mode');
-                darkModeToggle.setAttribute('aria-pressed', 'true');
-            }
-            
-            // Back to top button with smooth scroll polyfill if needed
-            const backToTopButton = document.getElementById('back-to-top');
-            if (backToTopButton) {
+            // Initialize back to top button
+            const backToTop = document.getElementById('back-to-top');
+            if (backToTop) {
                 window.addEventListener('scroll', () => {
                     if (window.pageYOffset > 300) {
-                        backToTopButton.classList.add('visible');
+                        backToTop.classList.add('visible');
                     } else {
-                        backToTopButton.classList.remove('visible');
+                        backToTop.classList.remove('visible');
                     }
                 });
-                backToTopButton.addEventListener('click', () => {
-                    if ('scrollBehavior' in document.documentElement.style) {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else {
-                        // Fallback for browsers without smooth scroll
-                        const scrollStep = -window.scrollY / (500 / 15);
-                        const scrollInterval = setInterval(() => {
-                            if (window.scrollY !== 0) {
-                                window.scrollBy(0, scrollStep);
-                            } else {
-                                clearInterval(scrollInterval);
-                            }
-                        }, 15);
-                    }
+                
+                backToTop.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             }
             
-            // Form submission with fetch API
+            // Initialize cookie banner
+            const cookieBanner = document.getElementById('cookieBanner');
+            if (cookieBanner) {
+                const acceptBtn = document.getElementById('acceptCookies');
+                const declineBtn = document.getElementById('declineCookies');
+                
+                if (localStorage.getItem('cookiesAccepted') !== null) {
+                    cookieBanner.style.display = 'none';
+                }
+                
+                acceptBtn?.addEventListener('click', () => {
+                    localStorage.setItem('cookiesAccepted', 'true');
+                    cookieBanner.style.display = 'none';
+                });
+                
+                declineBtn?.addEventListener('click', () => {
+                    localStorage.setItem('cookiesAccepted', 'false');
+                    cookieBanner.style.display = 'none';
+                    document.cookie.split(";").forEach(function(c) {
+                        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+                    });
+                });
+            }
+            
+            // Initialize form submission
             const contactForm = document.getElementById('contactForm');
-            const formStatus = document.getElementById('formStatus');
             if (contactForm) {
                 contactForm.addEventListener('submit', async (e) => {
                     e.preventDefault();
                     const submitButton = contactForm.querySelector('button[type="submit"]');
+                    const formStatus = document.createElement('div');
+                    formStatus.setAttribute('aria-live', 'polite');
+                    contactForm.appendChild(formStatus);
                     
                     try {
                         // Show loading state
                         submitButton.disabled = true;
                         submitButton.textContent = 'Sending...';
                         formStatus.textContent = '';
+                        formStatus.style.color = '';
                         
-                        // Send form data to Formspree
+                        // Send form data
                         const response = await fetch(contactForm.action, {
                             method: 'POST',
                             body: new FormData(contactForm),
@@ -1641,29 +1478,20 @@
                 });
             }
             
-            // Loading bar animation
-            const loadingBar = document.querySelector('.loading-bar');
-            if (loadingBar) {
-                window.addEventListener('scroll', () => {
-                    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-                    const scrolled = (window.scrollY / scrollHeight) * 100;
-                    loadingBar.style.width = scrolled + '%';
-                });
-            }
-            
-            // Typing animation with error handling
+            // Initialize typing animation
             const typingText = document.querySelector('.typing-text');
             if (typingText) {
                 const words = ['AI', 'Machine Learning', 'Automation', 'Innovation'];
                 let wordIndex = 0;
                 let charIndex = 0;
                 let isDeleting = false;
-                let isEnd = false;  
+                let isEnd = false;
+                
                 function type() {
-                    if (!typingText) return;          
                     const currentWord = words[wordIndex];
                     const currentChar = currentWord.substring(0, charIndex);
-                    typingText.textContent = currentChar;     
+                    typingText.textContent = currentChar;
+                    
                     if (!isDeleting && charIndex < currentWord.length) {
                         // Typing
                         charIndex++;
@@ -1680,14 +1508,41 @@
                         }
                         setTimeout(type, 1000);
                     }
-                }   
+                }
+                
                 // Start typing animation
                 setTimeout(type, 1000);
             }
             
-            // Fade-in animation for sections with intersection observer
+            // Initialize Calendly triggers
+            const calendlyTriggers = document.querySelectorAll('.calendly-trigger');
+            if (calendlyTriggers.length > 0) {
+                calendlyTriggers.forEach(trigger => {
+                    trigger.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        loadScript('https://assets.calendly.com/assets/external/widget.js')
+                            .then(() => {
+                                Calendly.initPopupWidget({
+                                    url: 'https://calendly.com/andrew-stratixautomation/30min'
+                                });
+                            });
+                    });
+                });
+            }
+            
+            // Initialize loading bar
+            const loadingBar = document.querySelector('.loading-bar');
+            if (loadingBar) {
+                window.addEventListener('scroll', () => {
+                    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const scrolled = (window.scrollY / scrollHeight) * 100;
+                    loadingBar.style.width = scrolled + '%';
+                });
+            }
+            
+            // Initialize intersection observer for animations
             const fadeElements = document.querySelectorAll('.fade-in');
-            if (fadeElements.length) {
+            if (fadeElements.length > 0) {
                 if ('IntersectionObserver' in window) {
                     const observer = new IntersectionObserver((entries) => {
                         entries.forEach(entry => {
@@ -1696,7 +1551,8 @@
                                 observer.unobserve(entry.target);
                             }
                         });
-                    }, { threshold: 0.1 });  
+                    }, { threshold: 0.1 });
+                    
                     fadeElements.forEach(element => {
                         observer.observe(element);
                     });
@@ -1705,20 +1561,19 @@
                     function checkFade() {
                         fadeElements.forEach(element => {
                             const elementTop = element.getBoundingClientRect().top;
-                            const windowHeight = window.innerHeight; 
+                            const windowHeight = window.innerHeight;
                             if (elementTop < windowHeight - 100) {
                                 element.style.animation = 'fadeIn 1s forwards';
                             }
                         });
-                    } 
-                    // Initial check
-                    checkFade(); 
-                    // Check on scroll
+                    }
+                    
                     window.addEventListener('scroll', checkFade);
+                    checkFade();
                 }
             }
             
-            // Header scroll effect
+            // Initialize header scroll effect
             const header = document.querySelector('header');
             if (header) {
                 window.addEventListener('scroll', () => {
@@ -1728,32 +1583,7 @@
                         header.classList.remove('scrolled');
                     }
                 });
-            } 
-            
-            // Add focus styles for keyboard navigation
-            document.addEventListener('keyup', function(e) {
-                if (e.key === 'Tab') {
-                    document.documentElement.classList.add('keyboard-navigation');
-                }
-            });
-            
-            document.addEventListener('mousedown', function() {
-                document.documentElement.classList.remove('keyboard-navigation');
-            });
-            
-            // Add keyboard focus styles
-            const style = document.createElement('style');
-            style.textContent = `
-                .keyboard-navigation a:focus,
-                .keyboard-navigation button:focus,
-                .keyboard-navigation input:focus,
-                .keyboard-navigation textarea:focus,
-                .keyboard-navigation select:focus {
-                    outline: 2px solid var(--primary);
-                    outline-offset: 2px;
-                }
-            `;
-            document.head.appendChild(style);
+            }
         });
     </script>
 </body>
