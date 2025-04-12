@@ -1396,9 +1396,9 @@
                         formStatus.textContent = '';
                         
                         // Send form data to Formspree
-                        const response = await fetch(form.action, {
+                        const response = await fetch(contactForm.action, {
                             method: 'POST',
-                            body: new FormData(form),
+                            body: new FormData(contactForm),
                             headers: {
                                 'Accept': 'application/json'
                             }
@@ -1408,7 +1408,7 @@
                         if (response.ok) {
                             formStatus.textContent = 'Thank you! Your message has been sent.';
                             formStatus.style.color = 'var(--success)';
-                            form.reset();
+                            contactForm.reset();
                         } else {
                             throw new Error('Failed to send message');
                         }
