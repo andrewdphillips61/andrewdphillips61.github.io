@@ -94,6 +94,112 @@
             border-width: 0;
         }
         
+        /* High Contrast Mode */
+        @media screen and (forced-colors: active) {
+            :root {
+                --primary: Highlight;
+                --primary-dark: LinkText;
+                --dark: ButtonText;
+                --light: Canvas;
+                --gray: GrayText;
+                --success: ButtonText;
+            }
+            
+            body {
+                background-color: Canvas;
+                color: ButtonText;
+            }
+            
+            .tech-card, .network-node, .contact-form {
+                border: 1px solid ButtonText;
+                forced-color-adjust: none;
+            }
+            
+            .gradient-text {
+                background: none;
+                -webkit-text-fill-color: LinkText;
+                color: LinkText;
+            }
+        }
+        
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            
+            .typing-text::after {
+                animation: none !important;
+                opacity: 0;
+            }
+            
+            .shape {
+                animation: none !important;
+            }
+            
+            .pulse-dot {
+                animation: none !important;
+            }
+        }
+        
+        /* Cookie Banner Styles */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--dark);
+            color: white;
+            padding: 1rem;
+            z-index: 1000;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        body.dark-mode .cookie-banner {
+            background: #0f172a;
+            border-top: 1px solid #334155;
+        }
+        .cookie-banner.hidden {
+            display: none;
+        }
+        .cookie-banner a {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        .cookie-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .cookie-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .cookie-accept {
+            background: var(--primary);
+            color: white;
+        }
+        .cookie-accept:hover {
+            background: var(--primary-dark);
+        }
+        .cookie-decline {
+            background: #4b5563;
+            color: white;
+        }
+        .cookie-decline:hover {
+            background: #374151;
+        }
+        
         /* Base Styles */
         body {
             font-family: 'Space Grotesk', sans-serif;
@@ -409,8 +515,6 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            border: none;
-            cursor: pointer;
         }
         .cta-btn:hover {
             background-color: var(--primary-dark);
@@ -439,7 +543,6 @@
             cursor: pointer;
             color: var(--dark);
             transition: transform 0.3s ease;
-            padding: 0.5rem;
         }
         body.dark-mode #menu-toggle {
             color: #f8fafc;
@@ -741,7 +844,6 @@
         }
         .footer-links ul {
             list-style: none;
-            padding: 0;
         }
         .footer-links li {
             margin-bottom: 0.5rem;
@@ -930,35 +1032,6 @@
                 height: 80%;
             }
         }
-        
-        /* Print Styles */
-        @media print {
-            body {
-                background: white;
-                color: black;
-                font-size: 12pt;
-            }
-            nav, footer, #back-to-top, .dark-mode-toggle, .hero button {
-                display: none !important;
-            }
-            main {
-                padding-top: 0;
-            }
-            section {
-                page-break-inside: avoid;
-                padding: 2rem 0;
-            }
-            a::after {
-                content: " (" attr(href) ")";
-                font-size: 0.8em;
-                font-weight: normal;
-            }
-            .tech-card {
-                box-shadow: none;
-                border: 1px solid #ddd;
-                page-break-inside: avoid;
-            }
-        }
     </style>
 </head>
 
@@ -969,6 +1042,18 @@
     <div class="loading-bar"></div>
     <div id="splash">
         <img src="https://res.cloudinary.com/dhpl09d00/image/upload/v1744120867/Screenshot_2025-04-07_at_9.52.00_PM_vpj01g.png" alt="Stratix AI Logo">
+    </div>
+    
+    <!-- Cookie Consent Banner -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div>
+            <p>We use cookies to enhance your experience. By continuing, you agree to our 
+            <a href="#privacy">Cookie Policy</a> and <a href="#privacy">Privacy Policy</a>.</p>
+        </div>
+        <div class="cookie-buttons">
+            <button id="declineCookies" class="cookie-btn cookie-decline">Decline</button>
+            <button id="acceptCookies" class="cookie-btn cookie-accept">Accept</button>
+        </div>
     </div>
     
     <!-- Calendly Modal -->
@@ -989,6 +1074,7 @@
                 <a href="#services">Services</a>
                 <a href="#industries">Industries</a>
                 <a href="#contact">Contact</a>
+                <a href="#privacy">Privacy</a>
                 <button class="cta-btn calendly-trigger">Free Demo</button>
                 <button class="dark-mode-toggle" aria-label="Toggle Dark Mode" aria-pressed="false">
                     <span class="toggle-thumb" aria-hidden="true"></span>
@@ -1003,7 +1089,7 @@
             <div class="hero-content">
                 <h1 id="hero-heading">Transform Your Business with <span class="gradient-text typing-text">AI</span></h1>
                 <p>Innovative AI solutions designed to help startups and growing businesses compete in the digital age.</p>
-                <button class="calendly-trigger">Get Started Today</button>
+                <button class="calendly-trigger" aria-label="Get Started">Get Started Today</button>
             </div>    
             <div class="animated-illustration">
                <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svgDesc">
@@ -1025,147 +1111,191 @@
             </div>
         </section>
         
-        <section id="about" class="about fade-in" aria-labelledby="about-heading">
-            <div class="container">
-                <h2 id="about-heading">About Us</h2>
-                <div class="about-content">
-                    <div class="tech-card" style="max-width: 1000px; margin: 0 auto;">
-                        <h3>The Future of Business AI Starts Here</h3>
-                        <p>Stratix AI is a forward-thinking startup dedicated to bringing powerful AI solutions to businesses at all stages. Founded in 2025, we're building the tools that will help shape the future of intelligent business operations.</p>
-                        <p>Our team combines cutting-edge technical expertise with a deep understanding of business challenges. We're passionate about creating AI solutions that are both powerful and accessible.</p>
-                        <div style="margin-top: 2rem; display: flex; flex-wrap: wrap;">
-                            <span class="ai-chip"><i class="fas fa-bolt" style="margin-right: 5px;" aria-hidden="true"></i> Fast Implementation</span>
-                            <span class="ai-chip"><i class="fas fa-lock" style="margin-right: 5px;" aria-hidden="true"></i> Secure By Design</span>
-                            <span class="ai-chip"><i class="fas fa-sync-alt" style="margin-right: 5px;" aria-hidden="true"></i> Continuous Learning</span>
-                            <span class="ai-chip"><i class="fas fa-expand" style="margin-right: 5px;" aria-hidden="true"></i> Scalable Solutions</span>
-                        </div>
+        <section id="about" class="fade-in" aria-labelledby="about-heading">
+            <h2 id="about-heading">About Us</h2>
+            <div class="about-content">
+                <div class="tech-card" style="max-width: 1000px; margin: 0 auto;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">The Future of Business AI Starts Here</h3>
+                    <p>Stratix AI is a forward-thinking startup dedicated to bringing powerful AI solutions to businesses at all stages. Founded in 2025, we're building the tools that will help shape the future of intelligent business operations.</p>
+                    <p>Our team combines cutting-edge technical expertise with a deep understanding of business challenges. We're passionate about creating AI solutions that are both powerful and accessible.</p>
+                    <div style="margin-top: 2rem; display: flex; flex-wrap: wrap;">
+                        <span class="ai-chip"><i class="fas fa-bolt" aria-hidden="true" style="margin-right: 5px;"></i> Fast Implementation</span>
+                        <span class="ai-chip"><i class="fas fa-lock" aria-hidden="true" style="margin-right: 5px;"></i> Secure By Design</span>
+                        <span class="ai-chip"><i class="fas fa-sync-alt" aria-hidden="true" style="margin-right: 5px;"></i> Continuous Learning</span>
+                        <span class="ai-chip"><i class="fas fa-expand" aria-hidden="true" style="margin-right: 5px;"></i> Scalable Solutions</span>
                     </div>
-                    <div class="network-grid">
-                        <div class="network-node">
-                            <i class="fas fa-rocket" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;" aria-hidden="true"></i>
-                            <h3>Innovation</h3>
-                            <p>Pushing boundaries with cutting-edge AI research</p>
-                        </div>
-                        <div class="network-node">
-                            <i class="fas fa-handshake" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;" aria-hidden="true"></i>
-                            <h3>Partnership</h3>
-                            <p>Collaborative approach to solving problems</p>
-                        </div>
-                        <div class="network-node">
-                            <i class="fas fa-lightbulb" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;" aria-hidden="true"></i>
-                            <h3>Creativity</h3>
-                            <p>Unique solutions tailored to your needs</p>
-                        </div>
+                </div>
+                <div class="network-grid">
+                    <div class="network-node">
+                        <i class="fas fa-rocket" aria-hidden="true" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h3>Innovation</h3>
+                        <p>Pushing boundaries with cutting-edge AI research</p>
+                    </div>
+                    <div class="network-node">
+                        <i class="fas fa-handshake" aria-hidden="true" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h3>Partnership</h3>
+                        <p>Collaborative approach to solving problems</p>
+                    </div>
+                    <div class="network-node">
+                        <i class="fas fa-lightbulb" aria-hidden="true" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h3>Creativity</h3>
+                        <p>Unique solutions tailored to your needs</p>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section id="services" class="services fade-in gradient-bg" aria-labelledby="services-heading">
-            <div class="container">
-                <h2 id="services-heading">Our Services</h2>
-                <div class="services-list">
-                    <div class="tech-card">
-                        <h3><i class="fas fa-robot" style="margin-right: 10px;" aria-hidden="true"></i> AI Consulting</h3>
-                        <p>Strategic guidance to help you identify the best AI opportunities for your specific business needs and goals.</p>
-                        <div style="margin-top: 1rem;">
-                            <span class="ai-chip">Strategy</span>
-                            <span class="ai-chip">Roadmapping</span>
-                            <span class="ai-chip">Implementation</span>
-                        </div>
-                        <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+        <section id="services" class="fade-in gradient-bg" aria-labelledby="services-heading">
+            <h2 id="services-heading">Our Services</h2>
+            <div class="services-list">
+                <div class="tech-card">
+                    <h3><i class="fas fa-robot" aria-hidden="true" style="margin-right: 10px;"></i> AI Consulting</h3>
+                    <p>Strategic guidance to help you identify the best AI opportunities for your specific business needs and goals.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="ai-chip">Strategy</span>
+                        <span class="ai-chip">Roadmapping</span>
+                        <span class="ai-chip">Implementation</span>
                     </div>
-                    <div class="tech-card">
-                        <h3><i class="fas fa-brain" style="margin-right: 10px;" aria-hidden="true"></i> Machine Learning</h3>
-                        <p>Custom ML models designed to extract insights from your data and automate complex processes.</p>
-                        <div style="margin-top: 1rem;">
-                            <span class="ai-chip">Predictive Analytics</span>
-                            <span class="ai-chip">Automation</span>
-                        </div>
-                        <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-brain" aria-hidden="true" style="margin-right: 10px;"></i> Machine Learning</h3>
+                    <p>Custom ML models designed to extract insights from your data and automate complex processes.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="ai-chip">Predictive Analytics</span>
+                        <span class="ai-chip">Automation</span>
                     </div>
-                    <div class="tech-card">
-                        <h3><i class="fas fa-comment-dots" style="margin-right: 10px;" aria-hidden="true"></i> NLP Solutions</h3>
-                        <p>Natural language processing to help you understand and interact with customers more effectively.</p>
-                        <div style="margin-top: 1rem;">
-                            <span class="ai-chip">Chatbots</span>
-                            <span class="ai-chip">Sentiment Analysis</span>
-                        </div>
-                        <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-comment-dots" aria-hidden="true" style="margin-right: 10px;"></i> NLP Solutions</h3>
+                    <p>Natural language processing to help you understand and interact with customers more effectively.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="ai-chip">Chatbots</span>
+                        <span class="ai-chip">Sentiment Analysis</span>
                     </div>
-                    <div class="tech-card">
-                        <h3><i class="fas fa-chart-line" style="margin-right: 10px;" aria-hidden="true"></i> Data Analytics</h3>
-                        <p>Transform your raw data into actionable insights with our advanced analytics platforms.</p>
-                        <div style="margin-top: 1rem;">
-                            <span class="ai-chip">Visualization</span>
-                            <span class="ai-chip">Real-time</span>
-                            <span class="ai-chip">Dashboards</span>
-                        </div>
-                        <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-chart-line" aria-hidden="true" style="margin-right: 10px;"></i> Data Analytics</h3>
+                    <p>Transform your raw data into actionable insights with our advanced analytics platforms.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="ai-chip">Visualization</span>
+                        <span class="ai-chip">Real-time</span>
+                        <span class="ai-chip">Dashboards</span>
                     </div>
-                    <div class="tech-card">
-                        <h3><i class="fas fa-cogs" style="margin-right: 10px;" aria-hidden="true"></i> Process Automation</h3>
-                        <p>Streamline operations and reduce costs with intelligent automation solutions.</p>
-                        <div style="margin-top: 1rem;">
-                            <span class="ai-chip">RPA</span>
-                            <span class="ai-chip">Workflows</span>
-                        </div>
-                        <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-cogs" aria-hidden="true" style="margin-right: 10px;"></i> Process Automation</h3>
+                    <p>Streamline operations and reduce costs with intelligent automation solutions.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="ai-chip">RPA</span>
+                        <span class="ai-chip">Workflows</span>
                     </div>
-                    <div class="tech-card">
-                        <h3><i class="fas fa-shield-alt" style="margin-right: 10px;" aria-hidden="true"></i> AI Security</h3>
-                        <p>Protect your business with AI-powered threat detection and prevention systems.</p>
-                        <div style="margin-top: 1rem;">
-                            <span class="ai-chip">Anomaly Detection</span>
-                            <span class="ai-chip">Fraud Prevention</span>
-                        </div>
-                        <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-shield-alt" aria-hidden="true" style="margin-right: 10px;"></i> AI Security</h3>
+                    <p>Protect your business with AI-powered threat detection and prevention systems.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="ai-chip">Anomaly Detection</span>
+                        <span class="ai-chip">Fraud Prevention</span>
                     </div>
+                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Schedule Consultation</button>
                 </div>
             </div>
         </section>
         
-        <section id="industries" class="industries fade-in" aria-labelledby="industries-heading">
-            <div class="container">
-                <h2 id="industries-heading">Industries We Serve</h2>
-                <div class="industries-list">
-                    <div class="tech-card">
-                        <h3><i class="fas fa-heartbeat" style="margin-right: 10px;" aria-hidden="true"></i> Healthcare</h3>
-                        <p>AI solutions for diagnostics, patient care optimization, and medical research acceleration.</p>
-                        <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
-                    </div>
-                    <div class="tech-card">
-                        <h3><i class="fas fa-money-bill-wave" style="margin-right: 10px;" aria-hidden="true"></i> Finance</h3>
-                        <p>Fraud detection, risk assessment, algorithmic trading, and personalized banking.</p>
-                        <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
-                    </div>
-                    <div class="tech-card">
-                        <h3><i class="fas fa-shopping-cart" style="margin-right: 10px;" aria-hidden="true"></i> Retail</h3>
-                        <p>Personalized recommendations, inventory optimization, and customer experience enhancement.</p>
-                        <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
-                    </div>
-                    <div class="tech-card">
-                        <h3><i class="fas fa-industry" style="margin-right: 10px;" aria-hidden="true"></i> Manufacturing</h3>
-                        <p>Predictive maintenance, quality control, and supply chain optimization.</p>
-                        <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
-                    </div>
-                    <div class="tech-card">
-                        <h3><i class="fas fa-graduation-cap" style="margin-right: 10px;" aria-hidden="true"></i> Education</h3>
-                        <p>Adaptive learning platforms, automated grading, and student performance analytics.</p>
-                        <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
-                    </div>
-                    <div class="tech-card">
-                        <h3><i class="fas fa-truck" style="margin-right: 10px;" aria-hidden="true"></i> Logistics</h3>
-                        <p>Route optimization, demand forecasting, and autonomous delivery systems.</p>
-                        <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
-                    </div>
+        <section id="industries" class="fade-in" aria-labelledby="industries-heading">
+            <h2 id="industries-heading">Industries We Serve</h2>
+            <div class="industries-list">
+                <div class="tech-card">
+                    <h3><i class="fas fa-heartbeat" aria-hidden="true" style="margin-right: 10px;"></i> Healthcare</h3>
+                    <p>AI solutions for diagnostics, patient care optimization, and medical research acceleration.</p>
+                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-money-bill-wave" aria-hidden="true" style="margin-right: 10px;"></i> Finance</h3>
+                    <p>Fraud detection, risk assessment, algorithmic trading, and personalized banking.</p>
+                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-shopping-cart" aria-hidden="true" style="margin-right: 10px;"></i> Retail</h3>
+                    <p>Personalized recommendations, inventory optimization, and customer experience enhancement.</p>
+                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-industry" aria-hidden="true" style="margin-right: 10px;"></i> Manufacturing</h3>
+                    <p>Predictive maintenance, quality control, and supply chain optimization.</p>
+                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-graduation-cap" aria-hidden="true" style="margin-right: 10px;"></i> Education</h3>
+                    <p>Adaptive learning platforms, automated grading, and student performance analytics.</p>
+                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-truck" aria-hidden="true" style="margin-right: 10px;"></i> Logistics</h3>
+                    <p>Route optimization, demand forecasting, and autonomous delivery systems.</p>
+                    <button class="cta-btn calendly-trigger" style="margin-top: 1rem; width: 100%;">Learn More</button>
                 </div>
             </div>
         </section>
         
-        <section id="contact" class="contact fade-in gradient-bg" aria-labelledby="contact-heading">
+        <!-- Embedded Privacy Policy Section -->
+        <section id="privacy" class="fade-in" aria-labelledby="privacy-heading">
             <div class="container">
-                <h2 id="contact-heading">Get In Touch</h2>
+                <h2 id="privacy-heading" class="section-title">Privacy Policy</h2>
+                <div class="tech-card">
+                    <p><strong>Last Updated:</strong> April 7, 2025</p>
+                    
+                    <h3>1. Information We Collect</h3>
+                    <p>We collect both personal and non-personal information when you interact with our services:</p>
+                    <ul>
+                        <li><strong>Personal Data:</strong> Name, email, phone number, company details</li>
+                        <li><strong>Usage Data:</strong> IP address, browser type, pages visited</li>
+                        <li><strong>Cookies:</strong> Session cookies, preference cookies, security cookies</li>
+                    </ul>
+
+                    <h3>2. GDPR Compliance (EU Users)</h3>
+                    <p>Under the General Data Protection Regulation (GDPR), you have:</p>
+                    <ul>
+                        <li>The right to access, correct, or delete your data</li>
+                        <li>The right to restrict or object to processing</li>
+                        <li>The right to data portability</li>
+                        <li>The right to withdraw consent at any time</li>
+                    </ul>
+                    <p>To exercise these rights, <a href="#contact">contact us</a> or email <strong>privacy@stratixai.com</strong>.</p>
+
+                    <h3>3. CCPA Compliance (California Users)</h3>
+                    <p>Under the California Consumer Privacy Act (CCPA), you have:</p>
+                    <ul>
+                        <li>The right to know what personal data is collected</li>
+                        <li>The right to delete personal data (with exceptions)</li>
+                        <li>The right to opt-out of data sales</li>
+                        <li>The right to non-discrimination for exercising your rights</li>
+                    </ul>
+                    <p>To submit a CCPA request, use our <a href="#contact">contact form</a> and select "Privacy Request".</p>
+
+                    <h3>4. Cookie Policy</h3>
+                    <p>We use cookies to:</p>
+                    <ul>
+                        <li>Remember user preferences</li>
+                        <li>Analyze site traffic</li>
+                        <li>Improve user experience</li>
+                    </ul>
+                    <p>You can manage cookies in your browser settings or via our cookie banner.</p>
+
+                    <h3>5. Contact Us</h3>
+                    <p>For privacy requests or questions: <a href="#contact">Contact Form</a> or email <strong>privacy@stratixai.com</strong>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="fade-in gradient-bg" aria-labelledby="contact-heading">
+            <div class="container">
+                <h2 id="contact-heading" class="section-title">Contact Us</h2>
                 <div class="contact-form">
                     <p>Ready to transform your business with AI? Contact us for a free consultation.</p>
                     <form id="contactForm" action="https://formspree.io/f/xqapwjzg" method="POST">
@@ -1194,6 +1324,7 @@
                                 <option value="analytics">Data Analytics</option>
                                 <option value="automation">Process Automation</option>
                                 <option value="security">AI Security</option>
+                                <option value="privacy_request">Privacy Request</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -1230,7 +1361,7 @@
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#industries">Industries</a></li>
-                    <li><a href="#">Careers</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
                     <li><a href="#">Blog</a></li>
                 </ul>
             </div>
@@ -1239,18 +1370,16 @@
                 <ul>
                     <li><a href="#">Documentation</a></li>
                     <li><a href="#">API Reference</a></li>
-                    <li><a href="#">Case Studies</a></li>
-                    <li><a href="#">Whitepapers</a></li>
+                    <li><a href="#privacy">Cookie Policy</a></li>
                     <li><a href="#">FAQ</a></li>
                 </ul>
             </div>
             <div class="footer-links">
                 <h3>Legal</h3>
                 <ul>
-                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
                     <li><a href="#">Terms of Service</a></li>
                     <li><a href="#">Security</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
                 </ul>
             </div>
         </div>
@@ -1267,78 +1396,70 @@
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
     <script>
-        // Feature detection
-        const supportsSmoothScroll = 'scrollBehavior' in document.documentElement.style;
-        
-        // Initialize Calendly Modal
-        function initCalendlyModal() {
-            // Create modal elements
-            const modal = document.createElement('div');
-            modal.id = 'calendly-modal';
-            modal.style.display = 'none';
-            modal.style.position = 'fixed';
-            modal.style.top = '0';
-            modal.style.left = '0';
-            modal.style.width = '100%';
-            modal.style.height = '100%';
-            modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
-            modal.style.zIndex = '9999';
-            modal.style.justifyContent = 'center';
-            modal.style.alignItems = 'center';
-            modal.style.flexDirection = 'column';
-            
-            const closeBtn = document.createElement('button');
-            closeBtn.textContent = '×';
-            closeBtn.style.position = 'absolute';
-            closeBtn.style.top = '20px';
-            closeBtn.style.right = '20px';
-            closeBtn.style.background = 'transparent';
-            closeBtn.style.border = 'none';
-            closeBtn.style.color = 'white';
-            closeBtn.style.fontSize = '2rem';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.setAttribute('aria-label', 'Close scheduling modal');
-            
-            const widgetContainer = document.createElement('div');
-            widgetContainer.className = 'calendly-inline-widget';
-            widgetContainer.style.width = '90%';
-            widgetContainer.style.height = '90%';
-            widgetContainer.style.maxWidth = '1000px';
-            widgetContainer.style.maxHeight = '700px';
-            widgetContainer.style.backgroundColor = 'white';
-            widgetContainer.style.borderRadius = '16px';
-            widgetContainer.setAttribute('data-url', 'https://calendly.com/andrew-stratixautomation/30min');
-            
-            modal.appendChild(closeBtn);
-            modal.appendChild(widgetContainer);
-            document.body.appendChild(modal);
-            
-            // Add event listeners
-            document.querySelectorAll('.calendly-trigger').forEach(el => {
-                el.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    modal.style.display = 'flex';
-                    Calendly.initInlineWidget(widgetContainer);
-                    return false;
+        // Cookie Consent Banner Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const cookieBanner = document.getElementById('cookieBanner');
+            const acceptCookies = document.getElementById('acceptCookies');
+            const declineCookies = document.getElementById('declineCookies');
+
+            // Check if user already made a choice
+            if (localStorage.getItem('cookiesAccepted') === 'true') {
+                cookieBanner.classList.add('hidden');
+                loadAnalytics(); // Load analytics if accepted
+            } else if (localStorage.getItem('cookiesAccepted') === 'false') {
+                cookieBanner.classList.add('hidden');
+            }
+
+            // Handle accept button
+            acceptCookies.addEventListener('click', function() {
+                localStorage.setItem('cookiesAccepted', 'true');
+                cookieBanner.classList.add('hidden');
+                loadAnalytics();
+            });
+
+            // Handle decline button
+            declineCookies.addEventListener('click', function() {
+                localStorage.setItem('cookiesAccepted', 'false');
+                cookieBanner.classList.add('hidden');
+                // Delete existing cookies
+                document.cookie.split(";").forEach(function(c) {
+                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
                 });
             });
-            
-            closeBtn.addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
-            
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-        }
 
-        // Wait for the DOM to be fully loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Calendly modal
+            function loadAnalytics() {
+                // Replace with your actual analytics code
+                console.log('Analytics loaded');
+                // Example: window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}
+            }
+
+            // Initialize Calendly Modal
+            function initCalendlyModal() {
+                const modal = document.getElementById('calendly-modal');
+                const closeBtn = modal.querySelector('button');
+                
+                // Add event listeners
+                document.querySelectorAll('.calendly-trigger').forEach(el => {
+                    el.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        modal.style.display = 'flex';
+                        Calendly.initInlineWidget(modal.querySelector('.calendly-inline-widget'));
+                        return false;
+                    });
+                });
+                
+                closeBtn.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                });
+                
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            }
             initCalendlyModal();
-            
+
             // Splash screen animation
             setTimeout(function() {
                 const splash = document.getElementById('splash');
@@ -1367,7 +1488,7 @@
                 }
             } catch (e) {
                 console.error('Locomotive Scroll initialization failed:', e);
-                if (supportsSmoothScroll) {
+                if ('scrollBehavior' in document.documentElement.style) {
                     document.documentElement.style.scrollBehavior = 'smooth';
                 }
             }
@@ -1397,10 +1518,6 @@
             // Dark mode toggle with localStorage
             const darkModeToggle = document.querySelector('.dark-mode-toggle');
             if (darkModeToggle) {
-                // Set initial state
-                const isDarkMode = document.body.classList.contains('dark-mode');
-                darkModeToggle.setAttribute('aria-pressed', isDarkMode);
-                
                 darkModeToggle.addEventListener('click', toggleDarkMode);
                 darkModeToggle.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
@@ -1420,9 +1537,7 @@
             // Check for saved dark mode preference
             if (localStorage.getItem('darkMode') === 'true') {
                 document.body.classList.add('dark-mode');
-                if (darkModeToggle) {
-                    darkModeToggle.setAttribute('aria-pressed', 'true');
-                }
+                darkModeToggle.setAttribute('aria-pressed', 'true');
             }
             
             // Back to top button with smooth scroll polyfill if needed
@@ -1436,7 +1551,7 @@
                     }
                 });
                 backToTopButton.addEventListener('click', () => {
-                    if (supportsSmoothScroll) {
+                    if ('scrollBehavior' in document.documentElement.style) {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     } else {
                         // Fallback for browsers without smooth scroll
@@ -1605,23 +1720,11 @@
                 .keyboard-navigation input:focus,
                 .keyboard-navigation textarea:focus,
                 .keyboard-navigation select:focus {
-                    outline: 3px solid var(--primary-dark);
+                    outline: 2px solid var(--primary);
                     outline-offset: 2px;
-                }
-                
-                /* Remove outline for mouse users but keep for keyboard */
-                a:focus:not(:focus-visible),
-                button:focus:not(:focus-visible),
-                input:focus:not(:focus-visible),
-                textarea:focus:not(:focus-visible),
-                select:focus:not(:focus-visible) {
-                    outline: none;
                 }
             `;
             document.head.appendChild(style);
-            
-            // Set language attribute dynamically if needed
-            document.documentElement.lang = 'en';
         });
     </script>
 </body>
