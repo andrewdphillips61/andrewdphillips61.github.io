@@ -1,931 +1,704 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-const ItalianBrainrotBrawlers = () => {
-  const [gameState, setGameState] = useState('start'); // start, character-select, game, over, waiting
+const SurrealCharacters = () => {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
-  const [playerTeam, setPlayerTeam] = useState('blue');
-  const [scores, setScores] = useState({ blue: 0, red: 0 });
-  const [gemsCollected, setGemsCollected] = useState(0);
-  const [superCharge, setSuperCharge] = useState(0);
-  const [timeRemaining, setTimeRemaining] = useState(120); // 2 minutes
-
-  // Character definitions
+  
   const characters = [
     {
-      id: 'tralalero',
-      name: 'Tralalero Tralala',
-      description: 'Three-legged shark in Nike sneakers who jumps around quickly',
-      health: 3200,
-      speed: 6,
-      attackDamage: 800,
-      attackRange: 300,
-      attackSpeed: 700,
+      id: 'cactifante',
+      name: 'Cactifante Sandali',
+      description: 'A desert-dwelling elephant with a cactus body who controls time',
+      health: 3600,
+      speed: 3,
+      attackDamage: 950,
+      attackRange: 350,
+      attackSpeed: 900,
       attackProjectiles: 1,
       super: {
-        name: 'Shark Jump',
-        description: 'Jumps high and creates shockwave on landing, damaging and stunning enemies',
-        damage: 1500,
-        range: 250,
-        cooldown: 3000,
-        stunDuration: 1000
-      },
-      color: '#5c9ead',
-      svgData: `
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <!-- Shark body -->
-          <ellipse cx="50" cy="50" rx="30" ry="20" fill="#5c9ead" />
-          <!-- Shark fin -->
-          <polygon points="50,30 60,10 70,30" fill="#5c9ead" />
-          <!-- Eye -->
-          <circle cx="70" cy="45" r="5" fill="white" />
-          <circle cx="72" cy="45" r="2" fill="black" />
-          <!-- Three legs -->
-          <rect x="40" y="65" width="5" height="25" fill="#5c9ead" />
-          <rect x="50" y="65" width="5" height="25" fill="#5c9ead" />
-          <rect x="60" y="65" width="5" height="25" fill="#5c9ead" />
-          <!-- Nike shoes -->
-          <rect x="37" y="85" width="11" height="5" rx="2" fill="black" />
-          <rect x="47" y="85" width="11" height="5" rx="2" fill="black" />
-          <rect x="57" y="85" width="11" height="5" rx="2" fill="black" />
-          <path d="M40,87 L44,87" stroke="white" stroke-width="1" />
-          <path d="M50,87 L54,87" stroke="white" stroke-width="1" />
-          <path d="M60,87 L64,87" stroke="white" stroke-width="1" />
-      </svg>
-      `
-    },
-    {
-      id: 'bombardillo',
-      name: 'Bombardillo Crocodillo',
-      description: 'Crocodile-headed bomber with explosive projectiles',
-      health: 3800,
-      speed: 4,
-      attackDamage: 1200,
-      attackRange: 500,
-      attackSpeed: 1200,
-      attackProjectiles: 3,
-      super: {
-        name: 'Carpet Bombing',
-        description: 'Sends a barrage of bombs in all directions that explode on impact',
-        damage: 800,
+        name: 'Time Stomp',
+        description: 'Freezes enemies in time for 3 seconds while dealing damage in a large radius',
+        damage: 1100,
         range: 400,
-        cooldown: 3000,
-        bombCount: 12
-      },
-      color: '#4a6c2f',
-      svgData: `
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <!-- Crocodile head -->
-          <path d="M30,40 L80,40 L80,60 L30,60 L30,40 Z" fill="#4a6c2f" />
-          <!-- Snout -->
-          <path d="M30,40 L15,50 L30,60 Z" fill="#4a6c2f" />
-          <!-- Eyes -->
-          <circle cx="70" cy="45" r="5" fill="white" />
-          <circle cx="70" cy="45" r="2" fill="black" />
-          <circle cx="70" cy="55" r="5" fill="white" />
-          <circle cx="70" cy="55" r="2" fill="black" />
-          <!-- Body -->
-          <rect x="40" y="60" width="20" height="30" fill="#5a7f3a" />
-          <!-- Bombs -->
-          <circle cx="35" cy="75" r="7" fill="black" />
-          <circle cx="65" cy="75" r="7" fill="black" />
-          <rect x="33" y="68" width="4" height="3" fill="red" />
-          <rect x="63" y="68" width="4" height="3" fill="red" />
-      </svg>
-      `
-    },
-    {
-      id: 'spaghettini',
-      name: 'Spaghettini Linguini',
-      description: 'Living spaghetti monster who throws meatballs with deadly accuracy',
-      health: 2800,
-      speed: 5,
-      attackDamage: 1000,
-      attackRange: 400,
-      attackSpeed: 600,
-      attackProjectiles: 2,
-      super: {
-        name: 'Pasta Tsunami',
-        description: 'Creates a wave of boiling pasta that damages enemies over time',
-        damage: 200,
-        range: 350,
         cooldown: 3500,
-        duration: 3000,
-        tickRate: 300
+        stunDuration: 3000
       },
-      color: '#e7c9a9',
+      color: '#7D9E63',
       svgData: `
       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <!-- Spaghetti body -->
-          <path d="M30,50 Q40,30 50,50 Q60,70 70,50" stroke="#e7c9a9" stroke-width="8" fill="none" />
-          <path d="M35,45 Q45,60 55,45 Q65,30 75,45" stroke="#e7c9a9" stroke-width="8" fill="none" />
-          <path d="M25,55 Q35,35 45,55 Q55,75 65,55" stroke="#e7c9a9" stroke-width="8" fill="none" />
-          <!-- Eyes -->
-          <circle cx="50" cy="40" r="5" fill="white" />
-          <circle cx="50" cy="40" r="2" fill="black" />
-          <circle cx="65" cy="40" r="5" fill="white" />
-          <circle cx="65" cy="40" r="2" fill="black" />
-          <!-- Meatballs -->
-          <circle cx="40" cy="70" r="8" fill="#a3320b" />
-          <circle cx="60" cy="75" r="8" fill="#a3320b" />
+        <!-- Sandal base -->
+        <rect x="15" y="70" width="70" height="15" rx="5" fill="#8B4513" />
+        <rect x="20" y="65" width="60" height="5" rx="2" fill="#A0522D" />
+        <rect x="30" y="85" width="40" height="5" rx="2" fill="#8B4513" />
+        
+        <!-- Buckles -->
+        <rect x="25" y="67" width="15" height="3" rx="1" fill="#DAA520" />
+        <rect x="60" y="67" width="15" height="3" rx="1" fill="#DAA520" />
+        
+        <!-- Cactus body -->
+        <rect x="35" y="15" width="30" height="55" rx="5" fill="#7D9E63" />
+        <rect x="25" y="30" width="10" height="25" rx="3" fill="#7D9E63" />
+        <rect x="65" y="30" width="10" height="25" rx="3" fill="#7D9E63" />
+        
+        <!-- Cactus spines -->
+        <line x1="35" y1="25" x2="30" y2="25" stroke="#EEEEEE" stroke-width="1.5" />
+        <line x1="35" y1="35" x2="30" y2="35" stroke="#EEEEEE" stroke-width="1.5" />
+        <line x1="35" y1="45" x2="30" y2="45" stroke="#EEEEEE" stroke-width="1.5" />
+        <line x1="35" y1="55" x2="30" y2="55" stroke="#EEEEEE" stroke-width="1.5" />
+        
+        <line x1="65" y1="25" x2="70" y2="25" stroke="#EEEEEE" stroke-width="1.5" />
+        <line x1="65" y1="35" x2="70" y2="35" stroke="#EEEEEE" stroke-width="1.5" />
+        <line x1="65" y1="45" x2="70" y2="45" stroke="#EEEEEE" stroke-width="1.5" />
+        <line x1="65" y1="55" x2="70" y2="55" stroke="#EEEEEE" stroke-width="1.5" />
+        
+        <!-- Elephant head -->
+        <ellipse cx="50" cy="15" rx="15" ry="12" fill="#A9A9A9" />
+        
+        <!-- Elephant ears -->
+        <ellipse cx="35" cy="13" rx="7" ry="10" fill="#A9A9A9" />
+        <ellipse cx="65" cy="13" rx="7" ry="10" fill="#A9A9A9" />
+        
+        <!-- Elephant trunk -->
+        <path d="M50,15 C52,20 55,25 53,30" stroke="#A9A9A9" stroke-width="5" fill="none" />
+        
+        <!-- Eyes -->
+        <circle cx="45" cy="13" r="2" fill="black" />
+        <circle cx="55" cy="13" r="2" fill="black" />
+        
+        <!-- Clock face -->
+        <circle cx="75" cy="25" r="10" fill="white" stroke="black" stroke-width="1" />
+        <line x1="75" y1="25" x2="75" y2="18" stroke="black" stroke-width="1" />
+        <line x1="75" y1="25" x2="80" y2="25" stroke="black" stroke-width="1.5" />
+        <circle cx="75" cy="25" r="1" fill="black" />
+        
+        <!-- Clock numbers -->
+        <text x="74" y="17" font-size="3" text-anchor="middle">12</text>
+        <text x="83" y="26" font-size="3" text-anchor="middle">3</text>
+        <text x="74" y="33" font-size="3" text-anchor="middle">6</text>
+        <text x="67" y="26" font-size="3" text-anchor="middle">9</text>
       </svg>
       `
     },
     {
-      id: 'pizzaiolo',
-      name: 'Pizzaiolo Pepperoni',
-      description: 'Pizza chef who throws spinning razor-sharp pizzas',
+      id: 'sharkick',
+      name: 'Sharkick Veloce',
+      description: 'A speedy shark with Nike sneakers who can dash through opponents',
       health: 3000,
-      speed: 5,
+      speed: 6,
+      attackDamage: 850,
+      attackRange: 250,
+      attackSpeed: 600,
+      attackProjectiles: 1,
+      super: {
+        name: 'Feeding Frenzy',
+        description: 'Dashes rapidly between all enemies in range, dealing damage to each one',
+        damage: 950,
+        range: 500,
+        cooldown: 3200,
+        dashCount: 5
+      },
+      color: '#607D8B',
+      svgData: `
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Shark body -->
+        <path d="M25,50 C35,35 60,35 75,50 L75,65 L25,65 Z" fill="#607D8B" />
+        
+        <!-- Shark fin -->
+        <polygon points="55,35 65,25 70,35" fill="#607D8B" />
+        
+        <!-- Shark tail -->
+        <path d="M25,50 C15,40 10,55 15,65 L25,65 Z" fill="#607D8B" />
+        
+        <!-- Shark face -->
+        <path d="M75,50 L85,45 L85,70 L75,65 Z" fill="#607D8B" />
+        
+        <!-- Eye -->
+        <circle cx="70" cy="45" r="3" fill="white" />
+        <circle cx="70" cy="45" r="1.5" fill="black" />
+        
+        <!-- Teeth -->
+        <polygon points="76,55 79,55 77.5,59" fill="white" />
+        <polygon points="73,55 76,55 74.5,59" fill="white" />
+        <polygon points="70,55 73,55 71.5,59" fill="white" />
+        
+        <!-- Left Nike shoe -->
+        <path d="M25,75 C22,75 20,70 25,70 L40,70 C45,70 45,80 40,80 L25,80 Z" fill="#4FC3F7" />
+        <path d="M30,73 L38,73" stroke="white" stroke-width="1" />
+        
+        <!-- Right Nike shoe -->
+        <path d="M55,75 C52,75 50,70 55,70 L70,70 C75,70 75,80 70,80 L55,80 Z" fill="#4FC3F7" />
+        <path d="M60,73 L68,73" stroke="white" stroke-width="1" />
+        
+        <!-- Nike swoosh left -->
+        <path d="M30,75 C35,72 40,77 35,80" stroke="white" stroke-width="1.5" fill="none" />
+        
+        <!-- Nike swoosh right -->
+        <path d="M60,75 C65,72 70,77 65,80" stroke="white" stroke-width="1.5" fill="none" />
+      </svg>
+      `
+    },
+    {
+      id: 'crociplane',
+      name: 'Crociplane Bombardiere',
+      description: 'A crocodile-headed bomber plane that drops explosive projectiles from above',
+      health: 3400,
+      speed: 4,
       attackDamage: 1100,
       attackRange: 450,
+      attackSpeed: 1100,
+      attackProjectiles: 3,
+      super: {
+        name: 'Aerial Assault',
+        description: 'Takes flight briefly, becoming invulnerable while carpet bombing a large area',
+        damage: 1800,
+        range: 500,
+        cooldown: 4000,
+        duration: 3000
+      },
+      color: '#5D4037',
+      svgData: `
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Plane body -->
+        <rect x="25" y="45" width="60" height="20" rx="10" fill="silver" />
+        
+        <!-- Wings -->
+        <rect x="40" y="35" width="30" height="8" rx="4" fill="silver" />
+        <rect x="40" y="67" width="30" height="8" rx="4" fill="silver" />
+        
+        <!-- Tail -->
+        <path d="M25,55 L15,65 L15,45 L25,55 Z" fill="silver" />
+        
+        <!-- Propellers -->
+        <circle cx="30" cy="40" r="5" fill="#333" />
+        <circle cx="30" cy="70" r="5" fill="#333" />
+        <line x1="30" y1="35" x2="30" y2="45" stroke="black" stroke-width="1" />
+        <line x1="25" y1="40" x2="35" y2="40" stroke="black" stroke-width="1" />
+        <line x1="30" y1="65" x2="30" y2="75" stroke="black" stroke-width="1" />
+        <line x1="25" y1="70" x2="35" y2="70" stroke="black" stroke-width="1" />
+        
+        <!-- Crocodile head -->
+        <path d="M85,55 C95,55 95,45 85,45 Z" fill="#5D4037" />
+        <path d="M75,45 L85,45 L85,55 L75,55 Z" fill="#5D4037" />
+        
+        <!-- Teeth -->
+        <rect x="78" y="55" width="2" height="3" fill="white" />
+        <rect x="82" y="55" width="2" height="3" fill="white" />
+        <rect x="86" y="55" width="2" height="3" fill="white" />
+        
+        <!-- Eyes -->
+        <circle cx="80" cy="48" r="2" fill="white" />
+        <circle cx="80" cy="48" r="1" fill="black" />
+        
+        <!-- Bomb -->
+        <ellipse cx="50" cy="85" rx="8" ry="5" fill="black" />
+        <rect x="49" y="80" width="2" height="3" fill="red" />
+      </svg>
+      `
+    },
+    {
+      id: 'sausagini',
+      name: 'Sausagini Smilenzo',
+      description: 'A sentient sausage with an uncanny smile who can stretch to reach enemies',
+      health: 2800,
+      speed: 4,
+      attackDamage: 750,
+      attackRange: 400,
       attackSpeed: 800,
       attackProjectiles: 1,
       super: {
-        name: 'Pizza Inferno',
-        description: 'Creates a circular pizza oven area that burns enemies inside it',
-        damage: 300,
+        name: 'Creepy Carnival',
+        description: 'Summons twisted carnival minions that chase and terrify enemies, slowing them',
+        damage: 500,
+        range: 350,
+        cooldown: 3000,
+        duration: 5000,
+        minionCount: 3
+      },
+      color: '#D2691E',
+      svgData: `
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sausage body -->
+        <rect x="35" y="25" width="30" height="60" rx="15" fill="#D2691E" />
+        
+        <!-- Arms -->
+        <rect x="25" y="45" width="10" height="5" rx="2" fill="#D2691E" />
+        <rect x="65" y="45" width="10" height="5" rx="2" fill="#D2691E" />
+        
+        <!-- Legs -->
+        <rect x="40" y="85" width="5" height="10" rx="2" fill="#D2691E" />
+        <rect x="55" y="85" width="5" height="10" rx="2" fill="#D2691E" />
+        
+        <!-- Eyes -->
+        <ellipse cx="43" cy="40" rx="5" ry="7" fill="white" />
+        <ellipse cx="57" cy="40" rx="5" ry="7" fill="white" />
+        <circle cx="43" cy="40" r="3" fill="black" />
+        <circle cx="57" cy="40" r="3" fill="black" />
+        
+        <!-- Grin -->
+        <path d="M40,55 C45,65 55,65 60,55" stroke="black" stroke-width="2" fill="none" />
+        
+        <!-- Teeth -->
+        <rect x="42" y="55" width="3" height="4" fill="white" />
+        <rect x="47" y="55" width="3" height="4" fill="white" />
+        <rect x="52" y="55" width="3" height="4" fill="white" />
+        <rect x="57" y="55" width="3" height="4" fill="white" />
+      </svg>
+      `
+    },
+    {
+      id: 'cappuccina',
+      name: 'Cappuccina Balletti',
+      description: 'A ballerina with a coffee cup for a head who leaves scalding puddles on the floor',
+      health: 2600,
+      speed: 5,
+      attackDamage: 700,
+      attackRange: 300,
+      attackSpeed: 700,
+      attackProjectiles: 2,
+      super: {
+        name: 'Caffeine Rush',
+        description: 'Spins rapidly, splashing hot coffee in all directions and speeding up allies',
+        damage: 1200,
         range: 300,
         cooldown: 3000,
         duration: 4000,
-        tickRate: 500
+        allySpeedBoost: 40
       },
-      color: '#d62828',
+      color: '#BCAAA4',
       svgData: `
       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <!-- Chef hat -->
-          <path d="M30,30 Q50,15 70,30 L70,40 L30,40 Z" fill="white" />
-          <!-- Face -->
-          <circle cx="50" cy="50" r="15" fill="#f4d58d" />
-          <!-- Eyes -->
-          <circle cx="45" cy="45" r="3" fill="black" />
-          <circle cx="55" cy="45" r="3" fill="black" />
-          <!-- Mustache -->
-          <path d="M40,55 Q50,60 60,55" stroke="black" stroke-width="2" fill="none" />
-          <!-- Body -->
-          <rect x="40" y="65" width="20" height="25" fill="#d62828" />
-          <!-- Pizza -->
-          <circle cx="70" cy="70" r="12" fill="#f8c05f" />
-          <circle cx="65" cy="65" r="2" fill="#d62828" />
-          <circle cx="75" cy="70" r="2" fill="#d62828" />
-          <circle cx="70" cy="75" r="2" fill="#d62828" />
-          <circle cx="63" cy="73" r="2" fill="#d62828" />
+        <!-- Cup head -->
+        <path d="M30,35 C30,20 70,20 70,35 L75,55 C75,65 25,65 25,55 Z" fill="white" />
+        
+        <!-- Coffee -->
+        <path d="M35,30 C35,25 65,25 65,30 L70,50 C70,55 30,55 30,50 Z" fill="#795548" />
+        
+        <!-- Latte art -->
+        <path d="M40,35 C45,30 55,30 60,35" stroke="white" stroke-width="3" fill="none" />
+        <path d="M45,40 C50,35 55,40 55,40" stroke="white" stroke-width="2" fill="none" />
+        
+        <!-- Cup handle -->
+        <path d="M70,45 C80,45 80,35 70,35" stroke="white" stroke-width="4" fill="none" />
+        
+        <!-- Eyes -->
+        <ellipse cx="45" cy="45" rx="5" ry="3" fill="#4E342E" />
+        <ellipse cx="55" cy="45" rx="5" ry="3" fill="#4E342E" />
+        
+        <!-- Eyebrows -->
+        <path d="M40,40 L50,38" stroke="#4E342E" stroke-width="1.5" />
+        <path d="M50,38 L60,40" stroke="#4E342E" stroke-width="1.5" />
+        
+        <!-- Smile -->
+        <path d="M43,52 C50,58 58,52 58,52" stroke="#F44336" stroke-width="1.5" fill="none" />
+        
+        <!-- Ballerina body -->
+        <path d="M50,65 L50,85" stroke="#FFCDD2" stroke-width="3" />
+        
+        <!-- Arms -->
+        <path d="M50,70 C40,65 30,75 25,75" stroke="#FFCDD2" stroke-width="2" fill="none" />
+        <path d="M50,70 C60,60 70,60 75,65" stroke="#FFCDD2" stroke-width="2" fill="none" />
+        
+        <!-- Tutu -->
+        <ellipse cx="50" cy="70" rx="15" ry="5" fill="#F8BBD0" />
+        
+        <!-- Legs -->
+        <path d="M45,85 L40,95" stroke="#FFCDD2" stroke-width="2" fill="none" />
+        <path d="M55,85 L60,95" stroke="#FFCDD2" stroke-width="2" fill="none" />
+        
+        <!-- Ballet shoes -->
+        <path d="M38,95 L40,95 L42,98" stroke="#F8BBD0" stroke-width="2" fill="none" />
+        <path d="M58,95 L60,95 L62,98" stroke="#F8BBD0" stroke-width="2" fill="none" />
       </svg>
       `
     }
   ];
 
-  // Handle character selection
   const handleCharacterSelect = (character) => {
     setSelectedCharacter(character);
   };
 
-  // Start game
-  const startGame = () => {
-    if (selectedCharacter) {
-      setGameState('game');
-      // In a real implementation, we would initialize game state here
-    }
+  // Render character selection screen
+  const renderCharacterSelection = () => {
+    return (
+      <div className="character-options">
+        {characters.map(char => (
+          <div
+            key={char.id}
+            className={`character-option ${selectedCharacter?.id === char.id ? 'selected' : ''}`}
+            onClick={() => handleCharacterSelect(char)}
+          >
+            <div className="character-icon">
+              <div dangerouslySetInnerHTML={{ __html: char.svgData }} />
+            </div>
+            
+            <div className="character-info">
+              <h2>{char.name}</h2>
+              <p>{char.description}</p>
+              
+              <div className="ability-description">
+                <strong>Attack:</strong> Deals {char.attackDamage} damage with {char.attackProjectiles} projectile(s)
+              </div>
+              
+              <div className="super-description">
+                <strong>{char.super.name}:</strong> {char.super.description}
+              </div>
+              
+              <div className="character-stats">
+                <div>
+                  <div>Health</div>
+                  <div className="stat-bar health-stat" style={{ width: `${(char.health / 4200) * 100}%` }} />
+                </div>
+                <div>
+                  <div>Attack</div>
+                  <div className="stat-bar attack-stat" style={{ width: `${(char.attackDamage / 1200) * 100}%` }} />
+                </div>
+                <div>
+                  <div>Speed</div>
+                  <div className="stat-bar speed-stat" style={{ width: `${(char.speed / 6) * 100}%` }} />
+                </div>
+                <div>
+                  <div>Range</div>
+                  <div className="stat-bar range-stat" style={{ width: `${(char.attackRange / 500) * 100}%` }} />
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
   };
 
-  // Handle game screens based on game state
-  const renderGameContent = () => {
-    switch (gameState) {
-      case 'start':
-        return (
-          <div className="game-screen start-screen">
-            <h1>Italian Brainrot Brawlers</h1>
-            <p>A totally normal Brawl Stars-inspired battle game</p>
-            <div className="button-container">
-              <button onClick={() => setGameState('character-select')}>START GAME</button>
-              <button onClick={() => setGameState('waiting')} className="multiplayer-btn">MULTIPLAYER</button>
+  // Render character detail view
+  const renderCharacterDetail = () => {
+    if (!selectedCharacter) return null;
+    
+    return (
+      <div className="character-detail">
+        <div className="character-preview">
+          <div dangerouslySetInnerHTML={{ __html: selectedCharacter.svgData }} />
+        </div>
+        
+        <div className="character-detail-info">
+          <h1>{selectedCharacter.name}</h1>
+          <p className="character-description">{selectedCharacter.description}</p>
+          
+          <div className="stat-section">
+            <h3>Base Stats</h3>
+            <div className="stat-grid">
+              <div className="stat-item">
+                <span className="stat-label">Health:</span>
+                <span className="stat-value">{selectedCharacter.health}</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-label">Speed:</span>
+                <span className="stat-value">{selectedCharacter.speed}/6</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-label">Attack Damage:</span>
+                <span className="stat-value">{selectedCharacter.attackDamage}</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-label">Attack Range:</span>
+                <span className="stat-value">{selectedCharacter.attackRange}</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-label">Attack Speed:</span>
+                <span className="stat-value">{selectedCharacter.attackSpeed}ms</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-label">Projectiles:</span>
+                <span className="stat-value">{selectedCharacter.attackProjectiles}</span>
+              </div>
             </div>
           </div>
-        );
-      case 'character-select':
-        return (
-          <div className="game-screen character-select-screen">
-            <h1>Choose Your Brawler</h1>
-            <p>Select your unique Italian-inspired warrior</p>
-            <div className="character-options">
-              {characters.map(char => (
-                <div 
-                  key={char.id} 
-                  className={`character-option ${selectedCharacter && selectedCharacter.id === char.id ? 'selected' : ''}`}
-                  onClick={() => handleCharacterSelect(char)}
-                >
-                  <div className="character-icon" dangerouslySetInnerHTML={{ __html: char.svgData }} />
-                  <div className="character-info">
-                    <h2>{char.name}</h2>
-                    <p>{char.description}</p>
-                    <div className="ability-description">
-                      <strong>Attack:</strong> Deals {char.attackDamage} damage, fires {char.attackProjectiles} projectile(s)
-                    </div>
-                    <div className="super-description">
-                      <strong>{char.super.name}:</strong> {char.super.description}
-                    </div>
-                    <div className="character-stats">
-                      <div>
-                        <div>Health</div>
-                        <div className="stat-bar health-stat" style={{ width: `${(char.health / 4200) * 100}%` }}></div>
-                      </div>
-                      <div>
-                        <div>Attack</div>
-                        <div className="stat-bar attack-stat" style={{ width: `${(char.attackDamage / 1200) * 100}%` }}></div>
-                      </div>
-                      <div>
-                        <div>Speed</div>
-                        <div className="stat-bar speed-stat" style={{ width: `${(char.speed / 6) * 100}%` }}></div>
-                      </div>
-                      <div>
-                        <div>Range</div>
-                        <div className="stat-bar range-stat" style={{ width: `${(char.attackRange / 500) * 100}%` }}></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="button-container">
-              <button onClick={startGame} disabled={!selectedCharacter}>SELECT</button>
-              <button onClick={() => setGameState('start')} className="back-btn">BACK TO MENU</button>
+          
+          <div className="super-section">
+            <h3>Super Ability: {selectedCharacter.super.name}</h3>
+            <p>{selectedCharacter.super.description}</p>
+            <div className="stat-grid">
+              <div className="stat-item">
+                <span className="stat-label">Damage:</span>
+                <span className="stat-value">{selectedCharacter.super.damage}</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-label">Range:</span>
+                <span className="stat-value">{selectedCharacter.super.range}</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-label">Cooldown:</span>
+                <span className="stat-value">{selectedCharacter.super.cooldown}ms</span>
+              </div>
             </div>
           </div>
-        );
-      case 'waiting':
-        return (
-          <div className="game-screen waiting-screen">
-            <h1>Waiting Room</h1>
-            <p>Waiting for players to join...</p>
-            <div className="waiting-players">
-              {/* This would be populated with actual players in a real implementation */}
-              <div className="waiting-player ready">
-                <div className="waiting-player-icon" 
-                     style={{ backgroundImage: 'url("data:image/svg+xml;utf8,' + encodeURIComponent(characters[0].svgData) + '")' }}></div>
-                <div className="waiting-player-name">Player 1</div>
-                <div className="waiting-player-status">Ready</div>
-              </div>
-              <div className="waiting-player">
-                <div className="waiting-player-icon" 
-                     style={{ backgroundImage: 'url("data:image/svg+xml;utf8,' + encodeURIComponent(characters[1].svgData) + '")' }}></div>
-                <div className="waiting-player-name">Player 2</div>
-                <div className="waiting-player-status">Not Ready</div>
-              </div>
-            </div>
-            <div className="button-container">
-              <button onClick={() => setGameState('character-select')}>READY</button>
-              <button onClick={() => setGameState('start')} className="back-btn">BACK TO MENU</button>
-            </div>
-          </div>
-        );
-      case 'game':
-        return (
-          <div className="game-screen active-game">
-            <div className="game-top-ui">
-              <div className="team-score team-blue">
-                <span>Blue: </span>
-                <span>{scores.blue}</span>
-              </div>
-              <div className="gems-ui">
-                <div className="gem-icon"></div>
-                <span>{gemsCollected}</span>
-              </div>
-              <div className="team-score team-red">
-                <span>Red: </span>
-                <span>{scores.red}</span>
-              </div>
-              <div className="game-timer">{Math.floor(timeRemaining / 60)}:{(timeRemaining % 60).toString().padStart(2, '0')}</div>
-            </div>
-            
-            <div className="game-container">
-              {/* This would contain the actual game elements in a real implementation */}
-              <div className="character player" style={{ left: '50%', top: '50%' }}>
-                {selectedCharacter && <div dangerouslySetInnerHTML={{ __html: selectedCharacter.svgData }} />}
-                <div className="health-bar"><div className="health-fill"></div></div>
-                <div className={`team-indicator team-${playerTeam}-indicator`}></div>
-                <div className="character-name">{selectedCharacter?.name.split(' ')[0]}</div>
-              </div>
-              
-              {/* Simulated enemy */}
-              <div className="character bot" style={{ left: '70%', top: '40%' }}>
-                <div dangerouslySetInnerHTML={{ __html: characters[1].svgData }} />
-                <div className="health-bar"><div className="health-fill" style={{ width: '70%' }}></div></div>
-                <div className="team-indicator team-red-indicator"></div>
-                <div className="character-name">{characters[1].name.split(' ')[0]}</div>
-              </div>
-              
-              {/* Sample gem */}
-              <div className="gem" style={{ left: '30%', top: '60%' }}></div>
-              
-              {/* Sample obstacle */}
-              <div className="obstacle" style={{ left: '40%', top: '30%', width: '100px', height: '60px' }}></div>
-            </div>
-            
-            <div className="game-ui-container">
-              <div className="joystick-area">
-                <div className="joystick"></div>
-              </div>
-              <div className="action-area">
-                <div className="action-button" id="attack-button">
-                  ATTACK
-                </div>
-                <div className="action-button" id="super-button">
-                  SUPER
-                  <div className="super-meter"><div className="super-fill" style={{ width: `${superCharge}%` }}></div></div>
-                </div>
-              </div>
-            </div>
-            
-            {/* End game early button (for demo) */}
-            <button 
-              onClick={() => setGameState('over')} 
-              style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000 }}
-            >
-              END GAME
-            </button>
-          </div>
-        );
-      case 'over':
-        return (
-          <div className="game-screen game-over-screen">
-            <h1>Game Over</h1>
-            <h2>{scores.blue > scores.red ? 'Blue Team Wins!' : 'Red Team Wins!'}</h2>
-            <div className="game-stats">
-              <p>Gems Collected: {gemsCollected}</p>
-              <p>Super Attacks Used: 2</p>
-              <p>Eliminations: 4</p>
-              <p>Final Score: Blue {scores.blue} - {scores.red} Red</p>
-            </div>
-            <div className="button-container">
-              <button onClick={() => setGameState('character-select')}>PLAY AGAIN</button>
-              <button onClick={() => setGameState('start')} className="back-btn">MAIN MENU</button>
-            </div>
-          </div>
-        );
-      default:
-        return <div>Loading...</div>;
-    }
+          
+          <button className="back-button" onClick={() => setSelectedCharacter(null)}>
+            Back to Selection
+          </button>
+        </div>
+      </div>
+    );
   };
 
   return (
-    <div className="italian-brainrot-brawlers">
-      {renderGameContent()}
+    <div className="surreal-characters">
+      <style>
+      {`
+        .surreal-characters {
+          font-family: 'Poppins', sans-serif;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #f5f5f5;
+          border-radius: 15px;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+          color: #333;
+        }
+        
+        h1 {
+          font-size: 2.5rem;
+          margin-bottom: 0.5rem;
+          background: linear-gradient(45deg, #4cc9f0, #f72585);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-weight: 700;
+        }
+        
+        h2 {
+          font-size: 1.8rem;
+          margin-top: 0;
+          margin-bottom: 0.5rem;
+        }
+        
+        h3 {
+          font-size: 1.3rem;
+          margin-top: 1.5rem;
+          margin-bottom: 0.5rem;
+          border-bottom: 2px solid #4cc9f0;
+          padding-bottom: 5px;
+          display: inline-block;
+        }
+        
+        p {
+          margin: 0.5rem 0;
+          color: #555;
+        }
+        
+        .character-options {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          margin-top: 20px;
+        }
+        
+        .character-option {
+          display: flex;
+          background: white;
+          border-radius: 10px;
+          padding: 20px;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          border: 2px solid transparent;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .character-option:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .character-option.selected {
+          border-color: #4cc9f0;
+          background: rgba(76, 201, 240, 0.05);
+        }
+        
+        .character-icon {
+          width: 80px;
+          height: 80px;
+          border-radius: 10px;
+          overflow: hidden;
+          background: #f8f9fa;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 20px;
+          flex-shrink: 0;
+        }
+        
+        .character-icon svg {
+          width: 100%;
+          height: 100%;
+        }
+        
+        .character-info {
+          flex: 1;
+        }
+        
+        .ability-description, .super-description {
+          margin: 10px 0;
+          padding: 10px;
+          border-radius: 5px;
+        }
+        
+        .ability-description {
+          background: rgba(76, 201, 240, 0.1);
+        }
+        
+        .super-description {
+          background: rgba(255, 215, 0, 0.1);
+        }
+        
+        .character-stats {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 10px;
+          margin-top: 15px;
+        }
+        
+        .stat-bar {
+          height: 8px;
+          border-radius: 4px;
+          background: #ddd;
+          overflow: hidden;
+          position: relative;
+          margin-top: 5px;
+        }
+        
+        .health-stat {
+          background: linear-gradient(90deg, #f72585, #7209b7);
+        }
+        
+        .attack-stat {
+          background: linear-gradient(90deg, #ff9e00, #ff5400);
+        }
+        
+        .speed-stat {
+          background: linear-gradient(90deg, #4cc9f0, #4895ef);
+        }
+        
+        .range-stat {
+          background: linear-gradient(90deg, #b5179e, #7209b7);
+        }
+        
+        /* Character Detail View */
+        .character-detail {
+          display: flex;
+          background: white;
+          border-radius: 15px;
+          overflow: hidden;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .character-preview {
+          flex: 1;
+          background: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 30px;
+          min-height: 400px;
+        }
+        
+        .character-preview svg {
+          width: 200px;
+          height: 200px;
+        }
+        
+        .character-detail-info {
+          flex: 2;
+          padding: 30px;
+        }
+        
+        .character-description {
+          font-size: 1.2rem;
+          margin-bottom: 20px;
+        }
+        
+        .stat-section, .super-section {
+          margin-bottom: 30px;
+        }
+        
+        .stat-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 15px;
+          margin-top: 10px;
+        }
+        
+        .stat-item {
+          background: #f8f9fa;
+          padding: 10px;
+          border-radius: 8px;
+        }
+        
+        .stat-label {
+          font-weight: bold;
+          display: block;
+          margin-bottom: 5px;
+          color: #555;
+        }
+        
+        .stat-value {
+          font-size: 1.2rem;
+          color: #333;
+        }
+        
+        .back-button {
+          background: linear-gradient(45deg, #4cc9f0, #4895ef);
+          border: none;
+          color: white;
+          padding: 12px 25px;
+          font-size: 1rem;
+          font-weight: bold;
+          border-radius: 30px;
+          cursor: pointer;
+          transition: all 0.2s;
+          margin-top: 20px;
+          box-shadow: 0 4px 10px rgba(76, 201, 240, 0.3);
+        }
+        
+        .back-button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 6px 15px rgba(76, 201, 240, 0.4);
+        }
+        
+        .back-button:active {
+          transform: translateY(-1px);
+        }
+        
+        @media (max-width: 768px) {
+          .character-detail {
+            flex-direction: column;
+          }
+          
+          .character-preview {
+            min-height: 300px;
+          }
+          
+          .stat-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          
+          .character-option {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+          }
+          
+          .character-icon {
+            margin-right: 0;
+            margin-bottom: 15px;
+          }
+          
+          .character-info {
+            text-align: center;
+          }
+        }
+      `}
+      </style>
       
-      {/* Emote button and wheel would be implemented here */}
-    </div>
-  );
-};
-
-// Add CSS for the component
-const styles = `
-  .italian-brainrot-brawlers {
-    width: 100%;
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
-    font-family: 'Poppins', sans-serif;
-    background-color: #8BC6EC;
-    background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
-    color: white;
-  }
-  
-  .game-screen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    z-index: 10;
-  }
-  
-  h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    background: linear-gradient(45deg, #4cc9f0, #f72585);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 700;
-  }
-  
-  .button-container {
-    margin-top: 30px;
-    display: flex;
-    gap: 20px;
-  }
-  
-  button {
-    background: linear-gradient(45deg, #4cc9f0, #4895ef);
-    border: none;
-    padding: 15px 40px;
-    border-radius: 50px;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 6px 15px rgba(72, 149, 239, 0.4);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  
-  button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(72, 149, 239, 0.5);
-  }
-  
-  button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  .multiplayer-btn, .back-btn {
-    background: linear-gradient(45deg, #f72585, #7209b7);
-  }
-  
-  .character-options {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 600px;
-    width: 100%;
-    max-height: 60vh;
-    overflow-y: auto;
-    margin: 20px 0;
-  }
-  
-  .character-option {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: 2px solid transparent;
-    text-align: left;
-  }
-  
-  .character-option:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  }
-  
-  .character-option.selected {
-    border-color: #4cc9f0;
-    background: rgba(76, 201, 240, 0.1);
-  }
-  
-  .character-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.9);
-    margin-right: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  
-  .character-icon svg {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .character-info {
-    flex: 1;
-  }
-  
-  .character-stats {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    font-size: 0.9rem;
-  }
-  
-  .stat-bar {
-    height: 5px;
-    border-radius: 3px;
-    margin-top: 3px;
-  }
-  
-  .health-stat {
-    background: linear-gradient(90deg, #f72585, #7209b7);
-  }
-  
-  .attack-stat {
-    background: linear-gradient(90deg, #ff9e00, #ff5400);
-  }
-  
-  .speed-stat {
-    background: linear-gradient(90deg, #4cc9f0, #4895ef);
-  }
-  
-  .range-stat {
-    background: linear-gradient(90deg, #b5179e, #7209b7);
-  }
-  
-  .ability-description, .super-description {
-    font-size: 0.9rem;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 8px;
-  }
-  
-  .ability-description {
-    background: rgba(0, 0, 0, 0.3);
-    border-left: 3px solid #4cc9f0;
-  }
-  
-  .super-description {
-    background: rgba(255, 215, 0, 0.1);
-    border-left: 3px solid gold;
-  }
-  
-  .waiting-players {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin: 30px 0;
-    max-width: 800px;
-  }
-  
-  .waiting-player {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    border-radius: 15px;
-    min-width: 150px;
-    transition: all 0.3s;
-  }
-  
-  .waiting-player.ready {
-    background: rgba(76, 201, 240, 0.2);
-    border: 2px solid #4cc9f0;
-  }
-  
-  .waiting-player-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 15px;
-    background-size: cover;
-    background-position: center;
-    margin-bottom: 10px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .active-game {
-    background: transparent;
-    backdrop-filter: none;
-    padding: 0;
-    display: block;
-  }
-  
-  .game-top-ui {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    z-index: 50;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .team-score {
-    display: flex;
-    align-items: center;
-    margin: 0 15px;
-    font-size: 24px;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 8px 15px;
-    border-radius: 30px;
-  }
-  
-  .team-blue {
-    color: #4895ef;
-  }
-  
-  .team-red {
-    color: #e63946;
-  }
-  
-  .gems-ui {
-    display: flex;
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 8px 15px;
-    border-radius: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .gem-icon {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    background-color: #7b2cbf;
-    border-radius: 5px;
-    transform: rotate(45deg);
-    margin-right: 10px;
-    box-shadow: 0 0 8px rgba(123, 44, 191, 0.7);
-  }
-  
-  .game-timer {
-    font-size: 24px;
-    font-weight: bold;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    min-width: 80px;
-    text-align: center;
-  }
-  
-  .game-container {
-    width: 100%;
-    height: calc(100vh - 60px);
-    position: relative;
-    overflow: hidden;
-    background-color: #e9f5f9;
-    background-image: url('data:image/svg+xml;utf8,<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="60" height="60" fill="%23e0f0f5"/><rect x="60" y="60" width="60" height="60" fill="%23e0f0f5"/></svg>');
-    background-size: 120px 120px;
-  }
-  
-  .game-ui-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    z-index: 100;
-  }
-  
-  .joystick-area {
-    width: 150px;
-    height: 150px;
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    position: relative;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-  }
-  
-  .joystick {
-    width: 70px;
-    height: 70px;
-    background-color: rgba(50, 50, 50, 0.7);
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .action-area {
-    display: flex;
-    align-items: flex-end;
-    gap: 15px;
-  }
-  
-  .action-button {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: white;
-    font-size: 16px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: transform 0.1s, box-shadow 0.1s;
-    position: relative;
-  }
-  
-  .action-button:active {
-    transform: scale(0.95);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  #attack-button {
-    background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
-  }
-  
-  #super-button {
-    background: linear-gradient(135deg, #ff9a00 0%, #ff5e00 100%);
-  }
-  
-  .super-meter {
-    width: 90%;
-    height: 10px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    overflow: hidden;
-    margin-top: 10px;
-  }
-  
-  .super-fill {
-    height: 100%;
-    background: linear-gradient(90deg, gold, #ff9a00);
-    width: 0%;
-    transition: width 0.3s ease;
-    box-shadow: 0 0 10px gold;
-  }
-  
-  .character {
-    position: absolute;
-    width: 70px;
-    height: 70px;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-    will-change: transform;
-    z-index: 10;
-  }
-  
-  .player {
-    z-index: 20;
-  }
-  
-  .bot {
-    z-index: 15;
-  }
-  
-  .health-bar {
-    position: absolute;
-    width: 80px;
-    height: 8px;
-    background-color: rgba(0, 0, 0, 0.3);
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  
-  .health-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #4cc9f0, #4cc9f0);
-    width: 100%;
-    transition: width 0.3s ease;
-  }
-  
-  .team-indicator {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    top: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
-  }
-  
-  .team-blue-indicator {
-    background-color: #4895ef;
-    box-shadow: 0 0 10px #4895ef;
-  }
-  
-  .team-red-indicator {
-    background-color: #e63946;
-    box-shadow: 0 0 10px #e63946;
-  }
-  
-  .character-name {
-    position: absolute;
-    font-size: 12px;
-    font-weight: bold;
-    color: white;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-    top: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-    z-index: 5;
-  }
-  
-  .gem {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background-color: #7b2cbf;
-    border-radius: 5px;
-    transform: translate(-50%, -50%) rotate(45deg);
-    box-shadow: 0 0 15px rgba(123, 44, 191, 0.7);
-    z-index: 5;
-    animation: gem-pulse 2s infinite;
-  }
-  
-  @keyframes gem-pulse {
-    0% { transform: translate(-50%, -50%) rotate(45deg) scale(1); }
-    50% { transform: translate(-50%, -50%) rotate(45deg) scale(1.1); }
-    100% { transform: translate(-50%, -50%) rotate(45deg) scale(1); }
-  }
-  
-  .obstacle {
-    position: absolute;
-    background-color: #6d6875;
-    border-radius: 10px;
-    box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.3);
-    z-index: 1;
-  }
-  
-  .game-stats {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 15px;
-    max-width: 500px;
-    width: 100%;
-    margin-top: 20px;
-  }
-  
-  .game-stats p {
-    margin: 10px 0;
-    font-size: 18px;
-  }
-  
-  @media (max-width: 768px) {
-    h1 {
-      font-size: 2rem;
-    }
-    
-    .character-option {
-      flex-direction: column;
-      text-align: center;
-      padding: 15px;
-    }
-    
-    .character-info {
-      margin-left: 0;
-      margin-top: 10px;
-      text-align: center;
-    }
-    
-    .character-icon {
-      margin-right: 0;
-    }
-    
-    .game-top-ui {
-      flex-wrap: wrap;
-      padding: 10px;
-    }
-    
-    .team-score, .gems-ui {
-      font-size: 18px;
-      padding: 5px 10px;
-      margin: 5px 0;
-    }
-    
-    .game-timer {
-      font-size: 18px;
-      margin: 5px 0;
-    }
-    
-    .joystick-area {
-      width: 120px;
-      height: 120px;
-    }
-    
-    .joystick {
-      width: 60px;
-      height: 60px;
-    }
-    
-    .action-button {
-      width: 80px;
-      height: 80px;
-      font-size: 14px;
-    }
-  }
-`;
-
-// Add the CSS to the component
-const StyledItalianBrainrotBrawlers = () => {
-  return (
-    <>
-      <style>{styles}</style>
-      <ItalianBrainrotBrawlers />
-    </>
-  );
-};
-
-export default StyledItalianBrainrotBrawlers;
+      <h1>Italian Brainrot Brawlers</h1>
+      <h2>New Character Selection</h2>
+      
+      {selectedCharacter ? renderCharacterDetail() : renderCharacterSelection()}
