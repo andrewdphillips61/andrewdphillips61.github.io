@@ -1,1476 +1,931 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Italian Brainrot Brawlers</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #8BC6EC;
-            background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        #game-container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-            background-color: #e9f5f9;
-            background-image: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="30" height="30" fill="%23e0f0f5"/><rect x="30" y="30" width="30" height="30" fill="%23e0f0f5"/></svg>');
-            background-size: 60px 60px;
-            flex: 1;
-        }
-        #ui-container {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            z-index: 100;
-        }
-        #joystick-area {
-            width: 150px;
-            height: 150px;
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            position: relative;
-            touch-action: none;
-        }
-        #joystick {
-            width: 60px;
-            height: 60px;
-            background-color: rgba(50, 50, 50, 0.7);
-            border-radius: 50%;
-            position: absolute;
-            top: 45px;
-            left: 45px;
-            transform: translate(-50%, -50%);
-        }
-        #attack-button, #super-button {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background-color: rgba(255, 50, 50, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: white;
-            margin-left: 10px;
-            touch-action: none;
-        }
-        #super-button {
-            background-color: rgba(255, 215, 0, 0.7);
-        }
-        .action-area {
-            display: flex;
-            align-items: flex-end;
-        }
-        .character {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-        .player {
-            z-index: 10;
-        }
-        .bot {
-            z-index: 5;
-        }
-        .projectile {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: red;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-        }
-        .health-bar {
-            position: absolute;
-            width: 50px;
-            height: 5px;
-            background-color: #ccc;
-            top: -10px;
-            left: 0;
-        }
-        .health-fill {
-            height: 100%;
-            background-color: #0f0;
-            width: 100%;
-        }
-        .character-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: rgba(255, 255, 255, 0.7);
-            margin-right: 5px;
-        }
-        #top-ui {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-        }
-        #game-timer {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        #character-select, #game-over, #game-start {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            z-index: 999;
-        }
-        .character-option {
-            display: flex;
-            align-items: center;
-            margin: 10px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .character-option:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.2);
-        }
-        .character-info {
-            margin-left: 15px;
-        }
-        h2 {
-            margin-top: 0;
-        }
-        #gems-ui {
-            padding: 10px;
-            font-size: 20px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-        }
-        .gem {
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            background-color: #7b2cbf;
-            border-radius: 5px;
-            transform: translate(-50%, -50%) rotate(45deg);
-            box-shadow: 0 0 10px rgba(123, 44, 191, 0.7);
-        }
-        #gem-icon {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            background-color: #7b2cbf;
-            border-radius: 3px;
-            transform: rotate(45deg);
-            margin-right: 10px;
-            box-shadow: 0 0 5px rgba(123, 44, 191, 0.7);
-        }
-        .team-score {
-            display: flex;
-            align-items: center;
-            margin: 0 10px;
-        }
-        .team-blue {
-            color: #4895ef;
-        }
-        .team-red {
-            color: #e63946;
-        }
-        .score-divider {
-            margin: 0 5px;
-            font-size: 24px;
-        }
-        button {
-            background: #4895ef;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 5px;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: transform 0.2s;
-        }
-        button:hover {
-            transform: scale(1.05);
-            background: #4361ee;
-        }
-        .obstacle {
-            position: absolute;
-            background-color: #555;
-            border-radius: 5px;
-        }
-        .super-meter {
-            width: 80px;
-            height: 10px;
-            background-color: #333;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-top: 5px;
-        }
-        .super-fill {
-            height: 100%;
-            background-color: gold;
-            width: 0%;
-        }
-        .damage-text {
-            position: absolute;
-            font-weight: bold;
-            color: red;
-            font-size: 16px;
-            animation: damage-float 1s forwards;
-        }
-        @keyframes damage-float {
-            0% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-        }
-    </style>
-</head>
-<body>
-    <div id="game-start">
-        <h1>Italian Brainrot Brawlers</h1>
-        <p>A totally normal Brawl Stars-inspired battle game</p>
-        <button id="start-game-btn">START GAME</button>
-    </div>
+import React, { useState, useEffect } from 'react';
 
-    <div id="character-select" style="display: none;">
-        <h1>Choose Your Brawler</h1>
-        <div id="character-options">
-            <!-- Characters will be added here -->
-        </div>
-    </div>
+const ItalianBrainrotBrawlers = () => {
+  const [gameState, setGameState] = useState('start'); // start, character-select, game, over, waiting
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [playerTeam, setPlayerTeam] = useState('blue');
+  const [scores, setScores] = useState({ blue: 0, red: 0 });
+  const [gemsCollected, setGemsCollected] = useState(0);
+  const [superCharge, setSuperCharge] = useState(0);
+  const [timeRemaining, setTimeRemaining] = useState(120); // 2 minutes
 
-    <div id="game-over" style="display: none;">
-        <h1 id="game-result">Game Over</h1>
-        <h2 id="final-score"></h2>
-        <button id="play-again-btn">Play Again</button>
-    </div>
+  // Character definitions
+  const characters = [
+    {
+      id: 'tralalero',
+      name: 'Tralalero Tralala',
+      description: 'Three-legged shark in Nike sneakers who jumps around quickly',
+      health: 3200,
+      speed: 6,
+      attackDamage: 800,
+      attackRange: 300,
+      attackSpeed: 700,
+      attackProjectiles: 1,
+      super: {
+        name: 'Shark Jump',
+        description: 'Jumps high and creates shockwave on landing, damaging and stunning enemies',
+        damage: 1500,
+        range: 250,
+        cooldown: 3000,
+        stunDuration: 1000
+      },
+      color: '#5c9ead',
+      svgData: `
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <!-- Shark body -->
+          <ellipse cx="50" cy="50" rx="30" ry="20" fill="#5c9ead" />
+          <!-- Shark fin -->
+          <polygon points="50,30 60,10 70,30" fill="#5c9ead" />
+          <!-- Eye -->
+          <circle cx="70" cy="45" r="5" fill="white" />
+          <circle cx="72" cy="45" r="2" fill="black" />
+          <!-- Three legs -->
+          <rect x="40" y="65" width="5" height="25" fill="#5c9ead" />
+          <rect x="50" y="65" width="5" height="25" fill="#5c9ead" />
+          <rect x="60" y="65" width="5" height="25" fill="#5c9ead" />
+          <!-- Nike shoes -->
+          <rect x="37" y="85" width="11" height="5" rx="2" fill="black" />
+          <rect x="47" y="85" width="11" height="5" rx="2" fill="black" />
+          <rect x="57" y="85" width="11" height="5" rx="2" fill="black" />
+          <path d="M40,87 L44,87" stroke="white" stroke-width="1" />
+          <path d="M50,87 L54,87" stroke="white" stroke-width="1" />
+          <path d="M60,87 L64,87" stroke="white" stroke-width="1" />
+      </svg>
+      `
+    },
+    {
+      id: 'bombardillo',
+      name: 'Bombardillo Crocodillo',
+      description: 'Crocodile-headed bomber with explosive projectiles',
+      health: 3800,
+      speed: 4,
+      attackDamage: 1200,
+      attackRange: 500,
+      attackSpeed: 1200,
+      attackProjectiles: 3,
+      super: {
+        name: 'Carpet Bombing',
+        description: 'Sends a barrage of bombs in all directions that explode on impact',
+        damage: 800,
+        range: 400,
+        cooldown: 3000,
+        bombCount: 12
+      },
+      color: '#4a6c2f',
+      svgData: `
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <!-- Crocodile head -->
+          <path d="M30,40 L80,40 L80,60 L30,60 L30,40 Z" fill="#4a6c2f" />
+          <!-- Snout -->
+          <path d="M30,40 L15,50 L30,60 Z" fill="#4a6c2f" />
+          <!-- Eyes -->
+          <circle cx="70" cy="45" r="5" fill="white" />
+          <circle cx="70" cy="45" r="2" fill="black" />
+          <circle cx="70" cy="55" r="5" fill="white" />
+          <circle cx="70" cy="55" r="2" fill="black" />
+          <!-- Body -->
+          <rect x="40" y="60" width="20" height="30" fill="#5a7f3a" />
+          <!-- Bombs -->
+          <circle cx="35" cy="75" r="7" fill="black" />
+          <circle cx="65" cy="75" r="7" fill="black" />
+          <rect x="33" y="68" width="4" height="3" fill="red" />
+          <rect x="63" y="68" width="4" height="3" fill="red" />
+      </svg>
+      `
+    },
+    {
+      id: 'spaghettini',
+      name: 'Spaghettini Linguini',
+      description: 'Living spaghetti monster who throws meatballs with deadly accuracy',
+      health: 2800,
+      speed: 5,
+      attackDamage: 1000,
+      attackRange: 400,
+      attackSpeed: 600,
+      attackProjectiles: 2,
+      super: {
+        name: 'Pasta Tsunami',
+        description: 'Creates a wave of boiling pasta that damages enemies over time',
+        damage: 200,
+        range: 350,
+        cooldown: 3500,
+        duration: 3000,
+        tickRate: 300
+      },
+      color: '#e7c9a9',
+      svgData: `
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <!-- Spaghetti body -->
+          <path d="M30,50 Q40,30 50,50 Q60,70 70,50" stroke="#e7c9a9" stroke-width="8" fill="none" />
+          <path d="M35,45 Q45,60 55,45 Q65,30 75,45" stroke="#e7c9a9" stroke-width="8" fill="none" />
+          <path d="M25,55 Q35,35 45,55 Q55,75 65,55" stroke="#e7c9a9" stroke-width="8" fill="none" />
+          <!-- Eyes -->
+          <circle cx="50" cy="40" r="5" fill="white" />
+          <circle cx="50" cy="40" r="2" fill="black" />
+          <circle cx="65" cy="40" r="5" fill="white" />
+          <circle cx="65" cy="40" r="2" fill="black" />
+          <!-- Meatballs -->
+          <circle cx="40" cy="70" r="8" fill="#a3320b" />
+          <circle cx="60" cy="75" r="8" fill="#a3320b" />
+      </svg>
+      `
+    },
+    {
+      id: 'pizzaiolo',
+      name: 'Pizzaiolo Pepperoni',
+      description: 'Pizza chef who throws spinning razor-sharp pizzas',
+      health: 3000,
+      speed: 5,
+      attackDamage: 1100,
+      attackRange: 450,
+      attackSpeed: 800,
+      attackProjectiles: 1,
+      super: {
+        name: 'Pizza Inferno',
+        description: 'Creates a circular pizza oven area that burns enemies inside it',
+        damage: 300,
+        range: 300,
+        cooldown: 3000,
+        duration: 4000,
+        tickRate: 500
+      },
+      color: '#d62828',
+      svgData: `
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <!-- Chef hat -->
+          <path d="M30,30 Q50,15 70,30 L70,40 L30,40 Z" fill="white" />
+          <!-- Face -->
+          <circle cx="50" cy="50" r="15" fill="#f4d58d" />
+          <!-- Eyes -->
+          <circle cx="45" cy="45" r="3" fill="black" />
+          <circle cx="55" cy="45" r="3" fill="black" />
+          <!-- Mustache -->
+          <path d="M40,55 Q50,60 60,55" stroke="black" stroke-width="2" fill="none" />
+          <!-- Body -->
+          <rect x="40" y="65" width="20" height="25" fill="#d62828" />
+          <!-- Pizza -->
+          <circle cx="70" cy="70" r="12" fill="#f8c05f" />
+          <circle cx="65" cy="65" r="2" fill="#d62828" />
+          <circle cx="75" cy="70" r="2" fill="#d62828" />
+          <circle cx="70" cy="75" r="2" fill="#d62828" />
+          <circle cx="63" cy="73" r="2" fill="#d62828" />
+      </svg>
+      `
+    }
+  ];
 
-    <div id="top-ui">
-        <div class="team-score">
-            <span>Blue:</span>
-            <span id="blue-score">0</span>
-        </div>
-        <div id="gems-ui">
-            <div id="gem-icon"></div>
-            <span id="gems-collected">0</span>
-        </div>
-        <div class="team-score">
-            <span>Red:</span>
-            <span id="red-score">0</span>
-        </div>
-        <div id="game-timer">2:00</div>
-    </div>
+  // Handle character selection
+  const handleCharacterSelect = (character) => {
+    setSelectedCharacter(character);
+  };
 
-    <div id="game-container">
-        <!-- Game elements will be created here -->
-    </div>
+  // Start game
+  const startGame = () => {
+    if (selectedCharacter) {
+      setGameState('game');
+      // In a real implementation, we would initialize game state here
+    }
+  };
 
-    <div id="ui-container">
-        <div id="joystick-area">
-            <div id="joystick"></div>
-        </div>
-        <div class="action-area">
-            <div id="attack-button">ATTACK</div>
-            <div id="super-button">SUPER</div>
-        </div>
-    </div>
-
-    <script>
-        // Game Constants and Variables
-        const GAME_WIDTH = window.innerWidth;
-        const GAME_HEIGHT = window.innerHeight;
-        const GAME_DURATION = 120; // 2 minutes in seconds
-        
-        let gameActive = false;
-        let selectedCharacter = null;
-        let player = null;
-        let bots = [];
-        let projectiles = [];
-        let obstacles = [];
-        let gems = [];
-        let playerTeam = 'blue';
-        let scores = { blue: 0, red: 0 };
-        let timeRemaining = GAME_DURATION;
-        let gameTimer = null;
-        let superCharge = 0;
-        
-        // Character definitions
-        const characters = [
-            {
-                id: 'tralalero',
-                name: 'Tralalero Tralala',
-                description: 'Three-legged shark in Nike sneakers who jumps around quickly',
-                health: 3200,
-                speed: 6,
-                attackDamage: 800,
-                attackRange: 300,
-                attackSpeed: 700,
-                attackProjectiles: 1,
-                super: {
-                    name: 'Shark Jump',
-                    description: 'Jumps high and creates shockwave on landing',
-                    damage: 1500,
-                    range: 250,
-                    cooldown: 3000
-                },
-                color: 'skyblue',
-                svgData: `
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Shark body -->
-                    <ellipse cx="50" cy="50" rx="30" ry="20" fill="#5c9ead" />
-                    <!-- Shark fin -->
-                    <polygon points="50,30 60,10 70,30" fill="#5c9ead" />
-                    <!-- Eye -->
-                    <circle cx="70" cy="45" r="5" fill="white" />
-                    <circle cx="72" cy="45" r="2" fill="black" />
-                    <!-- Three legs -->
-                    <rect x="40" y="65" width="5" height="25" fill="#5c9ead" />
-                    <rect x="50" y="65" width="5" height="25" fill="#5c9ead" />
-                    <rect x="60" y="65" width="5" height="25" fill="#5c9ead" />
-                    <!-- Nike shoes -->
-                    <rect x="37" y="85" width="11" height="5" rx="2" fill="black" />
-                    <rect x="47" y="85" width="11" height="5" rx="2" fill="black" />
-                    <rect x="57" y="85" width="11" height="5" rx="2" fill="black" />
-                    <path d="M40,87 L44,87" stroke="white" stroke-width="1" />
-                    <path d="M50,87 L54,87" stroke="white" stroke-width="1" />
-                    <path d="M60,87 L64,87" stroke="white" stroke-width="1" />
-                </svg>
-                `
-            },
-            {
-                id: 'bombardillo',
-                name: 'Bombardillo Crocodillo',
-                description: 'Crocodile-headed bomber with explosive projectiles',
-                health: 3800,
-                speed: 4,
-                attackDamage: 1200,
-                attackRange: 500,
-                attackSpeed: 1200,
-                attackProjectiles: 3,
-                super: {
-                    name: 'Carpet Bombing',
-                    description: 'Sends a barrage of bombs in all directions',
-                    damage: 800,
-                    range: 400,
-                    cooldown: 3000
-                },
-                color: 'green',
-                svgData: `
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Crocodile head -->
-                    <path d="M30,40 L80,40 L85,50 L80,60 L30,60 L30,40" fill="#4a6c2f" />
-                    <ellipse cx="35" cy="50" rx="10" ry="15" fill="#4a6c2f" />
-                    <!-- Eyes -->
-                    <circle cx="40" cy="43" r="3" fill="white" />
-                    <circle cx="40" cy="57" r="3" fill="white" />
-                    <circle cx="40" cy="43" r="1" fill="black" />
-                    <circle cx="40" cy="57" r="1" fill="black" />
-                    <!-- Teeth -->
-                    <rect x="50" y="40" width="3" height="5" fill="white" />
-                    <rect x="60" y="40" width="3" height="5" fill="white" />
-                    <rect x="70" y="40" width="3" height="5" fill="white" />
-                    <rect x="55" y="55" width="3" height="5" fill="white" />
-                    <rect x="65" y="55" width="3" height="5" fill="white" />
-                    <rect x="75" y="55" width="3" height="5" fill="white" />
-                    <!-- Bomber body -->
-                    <rect x="25" y="60" width="20" height="30" fill="#333" />
-                    <circle cx="35" cy="80" r="15" fill="#444" />
-                    <rect x="15" y="60" width="40" height="6" fill="#555" />
-                </svg>
-                `
-            },
-            {
-                id: 'tung',
-                name: 'Tung Tung Tung Sahur',
-                description: 'Wooden club with a baseball bat who has close combat power',
-                health: 4500,
-                speed: 5,
-                attackDamage: 1500,
-                attackRange: 150,
-                attackSpeed: 800,
-                attackProjectiles: 1,
-                super: {
-                    name: 'Drum Beat',
-                    description: 'Creates powerful soundwaves that push enemies back',
-                    damage: 1000,
-                    range: 300,
-                    cooldown: 2500
-                },
-                color: 'brown',
-                svgData: `
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Wooden body -->
-                    <rect x="40" y="25" width="20" height="60" rx="10" fill="#8B4513" />
-                    <ellipse cx="50" cy="25" rx="10" ry="5" fill="#8B4513" />
-                    <!-- Face -->
-                    <circle cx="45" cy="35" r="3" fill="white" />
-                    <circle cx="55" cy="35" r="3" fill="white" />
-                    <circle cx="45" cy="35" r="1" fill="black" />
-                    <circle cx="55" cy="35" r="1" fill="black" />
-                    <path d="M43,45 C47,50 53,50 57,45" stroke="black" stroke-width="2" fill="none" />
-                    <!-- Baseball bat -->
-                    <rect x="65" y="40" width="7" height="40" fill="#A0522D" />
-                    <ellipse cx="68.5" cy="35" rx="10" ry="5" fill="#A0522D" />
-                </svg>
-                `
-            },
-            {
-                id: 'ballerina',
-                name: 'Ballerina Cappuccina',
-                description: 'Cappuccino mug in tutu with rapid spinning attacks',
-                health: 2800,
-                speed: 5.5,
-                attackDamage: 650,
-                attackRange: 400,
-                attackSpeed: 500,
-                attackProjectiles: 5,
-                super: {
-                    name: 'Pirouette',
-                    description: 'Spins rapidly, dealing damage and healing allies',
-                    damage: 1200,
-                    range: 250,
-                    cooldown: 2000
-                },
-                color: 'tan',
-                svgData: `
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Cup -->
-                    <path d="M30,25 L70,25 L65,65 L35,65 Z" fill="#D2B48C" />
-                    <ellipse cx="50" cy="25" rx="20" ry="5" fill="#8B4513" />
-                    <!-- Coffee -->
-                    <path d="M35,30 L65,30 L62,50 L38,50 Z" fill="#8B4513" />
-                    <!-- Handle -->
-                    <path d="M70,30 Q85,35 70,50" stroke="#D2B48C" stroke-width="5" fill="none" />
-                    <!-- Tutu -->
-                    <ellipse cx="50" cy="65" rx="30" ry="10" fill="#FFB6C1" />
-                    <!-- Pointe shoes -->
-                    <rect x="40" y="75" width="7" height="15" rx="3" fill="#FFB6C1" />
-                    <rect x="53" y="75" width="7" height="15" rx="3" fill="#FFB6C1" />
-                    <!-- Face -->
-                    <circle cx="45" cy="40" r="3" fill="white" />
-                    <circle cx="55" cy="40" r="3" fill="white" />
-                    <circle cx="45" cy="40" r="1" fill="black" />
-                    <circle cx="55" cy="40" r="1" fill="black" />
-                    <path d="M45,45 C48,48 52,48 55,45" stroke="black" stroke-width="1" fill="none" />
-                </svg>
-                `
-            },
-            {
-                id: 'lirili',
-                name: 'Lirili Larila',
-                description: 'Cactus-elephant hybrid with long-range area attacks',
-                health: 3500,
-                speed: 4.5,
-                attackDamage: 900,
-                attackRange: 450,
-                attackSpeed: 900,
-                attackProjectiles: 3,
-                super: {
-                    name: 'Poetic Sandstorm',
-                    description: 'Creates a sandstorm that damages enemies over time',
-                    damage: 200,
-                    range: 350,
-                    cooldown: 2800
-                },
-                color: 'darkgreen',
-                svgData: `
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Cactus body -->
-                    <rect x="40" y="30" width="20" height="50" rx="5" fill="#2D572C" />
-                    <rect x="30" y="40" width="40" height="10" rx="5" fill="#2D572C" />
-                    <!-- Elephant features -->
-                    <ellipse cx="50" cy="25" rx="15" ry="10" fill="#2D572C" />
-                    <path d="M50,30 Q40,50 30,70" stroke="#2D572C" stroke-width="8" fill="none" />
-                    <!-- Eyes -->
-                    <circle cx="45" cy="22" r="2" fill="white" />
-                    <circle cx="55" cy="22" r="2" fill="white" />
-                    <circle cx="45" cy="22" r="1" fill="black" />
-                    <circle cx="55" cy="22" r="1" fill="black" />
-                    <!-- Cactus spines -->
-                    <line x1="40" y1="35" x2="35" y2="35" stroke="#2D572C" stroke-width="1" />
-                    <line x1="40" y1="45" x2="35" y2="45" stroke="#2D572C" stroke-width="1" />
-                    <line x1="40" y1="55" x2="35" y2="55" stroke="#2D572C" stroke-width="1" />
-                    <line x1="60" y1="35" x2="65" y2="35" stroke="#2D572C" stroke-width="1" />
-                    <line x1="60" y1="45" x2="65" y2="45" stroke="#2D572C" stroke-width="1" />
-                    <line x1="60" y1="55" x2="65" y2="55" stroke="#2D572C" stroke-width="1" />
-                    <!-- Sandals -->
-                    <rect x="35" y="80" width="15" height="5" rx="2" fill="#A0522D" />
-                    <rect x="50" y="80" width="15" height="5" rx="2" fill="#A0522D" />
-                </svg>
-                `
-            }
-        ];
-
-        // Initialize the game
-        function init() {
-            document.getElementById('start-game-btn').addEventListener('click', showCharacterSelect);
-            document.getElementById('play-again-btn').addEventListener('click', showCharacterSelect);
-            
-            // Setup character selection screen
-            const characterOptionsContainer = document.getElementById('character-options');
-            characters.forEach(character => {
-                const option = document.createElement('div');
-                option.className = 'character-option';
-                option.innerHTML = `
-                    <div class="character-icon" style="background-image: url('data:image/svg+xml;utf8,${encodeURIComponent(character.svgData)}')"></div>
-                    <div class="character-info">
-                        <h2>${character.name}</h2>
-                        <p>${character.description}</p>
-                        <div>Health: ${character.health}</div>
-                        <div>Attack: ${character.attackDamage}</div>
-                        <div>Super: ${character.super.name}</div>
+  // Handle game screens based on game state
+  const renderGameContent = () => {
+    switch (gameState) {
+      case 'start':
+        return (
+          <div className="game-screen start-screen">
+            <h1>Italian Brainrot Brawlers</h1>
+            <p>A totally normal Brawl Stars-inspired battle game</p>
+            <div className="button-container">
+              <button onClick={() => setGameState('character-select')}>START GAME</button>
+              <button onClick={() => setGameState('waiting')} className="multiplayer-btn">MULTIPLAYER</button>
+            </div>
+          </div>
+        );
+      case 'character-select':
+        return (
+          <div className="game-screen character-select-screen">
+            <h1>Choose Your Brawler</h1>
+            <p>Select your unique Italian-inspired warrior</p>
+            <div className="character-options">
+              {characters.map(char => (
+                <div 
+                  key={char.id} 
+                  className={`character-option ${selectedCharacter && selectedCharacter.id === char.id ? 'selected' : ''}`}
+                  onClick={() => handleCharacterSelect(char)}
+                >
+                  <div className="character-icon" dangerouslySetInnerHTML={{ __html: char.svgData }} />
+                  <div className="character-info">
+                    <h2>{char.name}</h2>
+                    <p>{char.description}</p>
+                    <div className="ability-description">
+                      <strong>Attack:</strong> Deals {char.attackDamage} damage, fires {char.attackProjectiles} projectile(s)
                     </div>
-                `;
-                option.addEventListener('click', () => selectCharacter(character));
-                characterOptionsContainer.appendChild(option);
-            });
+                    <div className="super-description">
+                      <strong>{char.super.name}:</strong> {char.super.description}
+                    </div>
+                    <div className="character-stats">
+                      <div>
+                        <div>Health</div>
+                        <div className="stat-bar health-stat" style={{ width: `${(char.health / 4200) * 100}%` }}></div>
+                      </div>
+                      <div>
+                        <div>Attack</div>
+                        <div className="stat-bar attack-stat" style={{ width: `${(char.attackDamage / 1200) * 100}%` }}></div>
+                      </div>
+                      <div>
+                        <div>Speed</div>
+                        <div className="stat-bar speed-stat" style={{ width: `${(char.speed / 6) * 100}%` }}></div>
+                      </div>
+                      <div>
+                        <div>Range</div>
+                        <div className="stat-bar range-stat" style={{ width: `${(char.attackRange / 500) * 100}%` }}></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="button-container">
+              <button onClick={startGame} disabled={!selectedCharacter}>SELECT</button>
+              <button onClick={() => setGameState('start')} className="back-btn">BACK TO MENU</button>
+            </div>
+          </div>
+        );
+      case 'waiting':
+        return (
+          <div className="game-screen waiting-screen">
+            <h1>Waiting Room</h1>
+            <p>Waiting for players to join...</p>
+            <div className="waiting-players">
+              {/* This would be populated with actual players in a real implementation */}
+              <div className="waiting-player ready">
+                <div className="waiting-player-icon" 
+                     style={{ backgroundImage: 'url("data:image/svg+xml;utf8,' + encodeURIComponent(characters[0].svgData) + '")' }}></div>
+                <div className="waiting-player-name">Player 1</div>
+                <div className="waiting-player-status">Ready</div>
+              </div>
+              <div className="waiting-player">
+                <div className="waiting-player-icon" 
+                     style={{ backgroundImage: 'url("data:image/svg+xml;utf8,' + encodeURIComponent(characters[1].svgData) + '")' }}></div>
+                <div className="waiting-player-name">Player 2</div>
+                <div className="waiting-player-status">Not Ready</div>
+              </div>
+            </div>
+            <div className="button-container">
+              <button onClick={() => setGameState('character-select')}>READY</button>
+              <button onClick={() => setGameState('start')} className="back-btn">BACK TO MENU</button>
+            </div>
+          </div>
+        );
+      case 'game':
+        return (
+          <div className="game-screen active-game">
+            <div className="game-top-ui">
+              <div className="team-score team-blue">
+                <span>Blue: </span>
+                <span>{scores.blue}</span>
+              </div>
+              <div className="gems-ui">
+                <div className="gem-icon"></div>
+                <span>{gemsCollected}</span>
+              </div>
+              <div className="team-score team-red">
+                <span>Red: </span>
+                <span>{scores.red}</span>
+              </div>
+              <div className="game-timer">{Math.floor(timeRemaining / 60)}:{(timeRemaining % 60).toString().padStart(2, '0')}</div>
+            </div>
             
-            // Setup controls
-            setupControls();
-        }
+            <div className="game-container">
+              {/* This would contain the actual game elements in a real implementation */}
+              <div className="character player" style={{ left: '50%', top: '50%' }}>
+                {selectedCharacter && <div dangerouslySetInnerHTML={{ __html: selectedCharacter.svgData }} />}
+                <div className="health-bar"><div className="health-fill"></div></div>
+                <div className={`team-indicator team-${playerTeam}-indicator`}></div>
+                <div className="character-name">{selectedCharacter?.name.split(' ')[0]}</div>
+              </div>
+              
+              {/* Simulated enemy */}
+              <div className="character bot" style={{ left: '70%', top: '40%' }}>
+                <div dangerouslySetInnerHTML={{ __html: characters[1].svgData }} />
+                <div className="health-bar"><div className="health-fill" style={{ width: '70%' }}></div></div>
+                <div className="team-indicator team-red-indicator"></div>
+                <div className="character-name">{characters[1].name.split(' ')[0]}</div>
+              </div>
+              
+              {/* Sample gem */}
+              <div className="gem" style={{ left: '30%', top: '60%' }}></div>
+              
+              {/* Sample obstacle */}
+              <div className="obstacle" style={{ left: '40%', top: '30%', width: '100px', height: '60px' }}></div>
+            </div>
+            
+            <div className="game-ui-container">
+              <div className="joystick-area">
+                <div className="joystick"></div>
+              </div>
+              <div className="action-area">
+                <div className="action-button" id="attack-button">
+                  ATTACK
+                </div>
+                <div className="action-button" id="super-button">
+                  SUPER
+                  <div className="super-meter"><div className="super-fill" style={{ width: `${superCharge}%` }}></div></div>
+                </div>
+              </div>
+            </div>
+            
+            {/* End game early button (for demo) */}
+            <button 
+              onClick={() => setGameState('over')} 
+              style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000 }}
+            >
+              END GAME
+            </button>
+          </div>
+        );
+      case 'over':
+        return (
+          <div className="game-screen game-over-screen">
+            <h1>Game Over</h1>
+            <h2>{scores.blue > scores.red ? 'Blue Team Wins!' : 'Red Team Wins!'}</h2>
+            <div className="game-stats">
+              <p>Gems Collected: {gemsCollected}</p>
+              <p>Super Attacks Used: 2</p>
+              <p>Eliminations: 4</p>
+              <p>Final Score: Blue {scores.blue} - {scores.red} Red</p>
+            </div>
+            <div className="button-container">
+              <button onClick={() => setGameState('character-select')}>PLAY AGAIN</button>
+              <button onClick={() => setGameState('start')} className="back-btn">MAIN MENU</button>
+            </div>
+          </div>
+        );
+      default:
+        return <div>Loading...</div>;
+    }
+  };
 
-        function showCharacterSelect() {
-            document.getElementById('game-start').style.display = 'none';
-            document.getElementById('game-over').style.display = 'none';
-            document.getElementById('character-select').style.display = 'flex';
-        }
+  return (
+    <div className="italian-brainrot-brawlers">
+      {renderGameContent()}
+      
+      {/* Emote button and wheel would be implemented here */}
+    </div>
+  );
+};
 
-        function selectCharacter(character) {
-            selectedCharacter = character;
-            document.getElementById('character-select').style.display = 'none';
-            startGame();
-        }
+// Add CSS for the component
+const styles = `
+  .italian-brainrot-brawlers {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    background-color: #8BC6EC;
+    background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+    color: white;
+  }
+  
+  .game-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    background: linear-gradient(45deg, #4cc9f0, #f72585);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+  }
+  
+  .button-container {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+  }
+  
+  button {
+    background: linear-gradient(45deg, #4cc9f0, #4895ef);
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 6px 15px rgba(72, 149, 239, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(72, 149, 239, 0.5);
+  }
+  
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .multiplayer-btn, .back-btn {
+    background: linear-gradient(45deg, #f72585, #7209b7);
+  }
+  
+  .character-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 60vh;
+    overflow-y: auto;
+    margin: 20px 0;
+  }
+  
+  .character-option {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+    text-align: left;
+  }
+  
+  .character-option:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .character-option.selected {
+    border-color: #4cc9f0;
+    background: rgba(76, 201, 240, 0.1);
+  }
+  
+  .character-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .character-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .character-info {
+    flex: 1;
+  }
+  
+  .character-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .stat-bar {
+    height: 5px;
+    border-radius: 3px;
+    margin-top: 3px;
+  }
+  
+  .health-stat {
+    background: linear-gradient(90deg, #f72585, #7209b7);
+  }
+  
+  .attack-stat {
+    background: linear-gradient(90deg, #ff9e00, #ff5400);
+  }
+  
+  .speed-stat {
+    background: linear-gradient(90deg, #4cc9f0, #4895ef);
+  }
+  
+  .range-stat {
+    background: linear-gradient(90deg, #b5179e, #7209b7);
+  }
+  
+  .ability-description, .super-description {
+    font-size: 0.9rem;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .ability-description {
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 3px solid #4cc9f0;
+  }
+  
+  .super-description {
+    background: rgba(255, 215, 0, 0.1);
+    border-left: 3px solid gold;
+  }
+  
+  .waiting-players {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+    max-width: 800px;
+  }
+  
+  .waiting-player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 15px;
+    min-width: 150px;
+    transition: all 0.3s;
+  }
+  
+  .waiting-player.ready {
+    background: rgba(76, 201, 240, 0.2);
+    border: 2px solid #4cc9f0;
+  }
+  
+  .waiting-player-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 15px;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 10px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .active-game {
+    background: transparent;
+    backdrop-filter: none;
+    padding: 0;
+    display: block;
+  }
+  
+  .game-top-ui {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 50;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .team-score {
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+    font-size: 24px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px 15px;
+    border-radius: 30px;
+  }
+  
+  .team-blue {
+    color: #4895ef;
+  }
+  
+  .team-red {
+    color: #e63946;
+  }
+  
+  .gems-ui {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px 15px;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .gem-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-color: #7b2cbf;
+    border-radius: 5px;
+    transform: rotate(45deg);
+    margin-right: 10px;
+    box-shadow: 0 0 8px rgba(123, 44, 191, 0.7);
+  }
+  
+  .game-timer {
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    min-width: 80px;
+    text-align: center;
+  }
+  
+  .game-container {
+    width: 100%;
+    height: calc(100vh - 60px);
+    position: relative;
+    overflow: hidden;
+    background-color: #e9f5f9;
+    background-image: url('data:image/svg+xml;utf8,<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="60" height="60" fill="%23e0f0f5"/><rect x="60" y="60" width="60" height="60" fill="%23e0f0f5"/></svg>');
+    background-size: 120px 120px;
+  }
+  
+  .game-ui-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+  }
+  
+  .joystick-area {
+    width: 150px;
+    height: 150px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+  }
+  
+  .joystick {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(50, 50, 50, 0.7);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .action-area {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+  }
+  
+  .action-button {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 16px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+    position: relative;
+  }
+  
+  .action-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  #attack-button {
+    background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
+  }
+  
+  #super-button {
+    background: linear-gradient(135deg, #ff9a00 0%, #ff5e00 100%);
+  }
+  
+  .super-meter {
+    width: 90%;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  
+  .super-fill {
+    height: 100%;
+    background: linear-gradient(90deg, gold, #ff9a00);
+    width: 0%;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px gold;
+  }
+  
+  .character {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    will-change: transform;
+    z-index: 10;
+  }
+  
+  .player {
+    z-index: 20;
+  }
+  
+  .bot {
+    z-index: 15;
+  }
+  
+  .health-bar {
+    position: absolute;
+    width: 80px;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.3);
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .health-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4cc9f0, #4cc9f0);
+    width: 100%;
+    transition: width 0.3s ease;
+  }
+  
+  .team-indicator {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+  }
+  
+  .team-blue-indicator {
+    background-color: #4895ef;
+    box-shadow: 0 0 10px #4895ef;
+  }
+  
+  .team-red-indicator {
+    background-color: #e63946;
+    box-shadow: 0 0 10px #e63946;
+  }
+  
+  .character-name {
+    position: absolute;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 5;
+  }
+  
+  .gem {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #7b2cbf;
+    border-radius: 5px;
+    transform: translate(-50%, -50%) rotate(45deg);
+    box-shadow: 0 0 15px rgba(123, 44, 191, 0.7);
+    z-index: 5;
+    animation: gem-pulse 2s infinite;
+  }
+  
+  @keyframes gem-pulse {
+    0% { transform: translate(-50%, -50%) rotate(45deg) scale(1); }
+    50% { transform: translate(-50%, -50%) rotate(45deg) scale(1.1); }
+    100% { transform: translate(-50%, -50%) rotate(45deg) scale(1); }
+  }
+  
+  .obstacle {
+    position: absolute;
+    background-color: #6d6875;
+    border-radius: 10px;
+    box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+  }
+  
+  .game-stats {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .game-stats p {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+  
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+    
+    .character-option {
+      flex-direction: column;
+      text-align: center;
+      padding: 15px;
+    }
+    
+    .character-info {
+      margin-left: 0;
+      margin-top: 10px;
+      text-align: center;
+    }
+    
+    .character-icon {
+      margin-right: 0;
+    }
+    
+    .game-top-ui {
+      flex-wrap: wrap;
+      padding: 10px;
+    }
+    
+    .team-score, .gems-ui {
+      font-size: 18px;
+      padding: 5px 10px;
+      margin: 5px 0;
+    }
+    
+    .game-timer {
+      font-size: 18px;
+      margin: 5px 0;
+    }
+    
+    .joystick-area {
+      width: 120px;
+      height: 120px;
+    }
+    
+    .joystick {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .action-button {
+      width: 80px;
+      height: 80px;
+      font-size: 14px;
+    }
+  }
+`;
 
-        function startGame() {
-            // Reset game state
-            clearGame();
-            gameActive = true;
-            timeRemaining = GAME_DURATION;
-            superCharge = 0;
-            updateSuperMeter();
-            scores = { blue: 0, red: 0 };
-            updateScores();
-            
-            // Create player
-            createPlayer();
-            
-            // Create bots (one of each other character)
-            characters.forEach(character => {
-                if (character.id !== selectedCharacter.id) {
-                    createBot(character);
-                }
-            });
-            
-            // Create obstacles
-            createObstacles();
-            
-            // Start spawning gems
-            spawnGems();
-            
-            // Start game timer
-            updateTimer();
-            gameTimer = setInterval(() => {
-                timeRemaining--;
-                updateTimer();
-                
-                if (timeRemaining <= 0) {
-                    endGame();
-                }
-            }, 1000);
-        }
+// Add the CSS to the component
+const StyledItalianBrainrotBrawlers = () => {
+  return (
+    <>
+      <style>{styles}</style>
+      <ItalianBrainrotBrawlers />
+    </>
+  );
+};
 
-        function clearGame() {
-            // Clear all game elements
-            const gameContainer = document.getElementById('game-container');
-            while (gameContainer.firstChild) {
-                gameContainer.removeChild(gameContainer.firstChild);
-            }
-            
-            // Clear game objects
-            player = null;
-            bots = [];
-            projectiles = [];
-            obstacles = [];
-            gems = [];
-            
-            // Clear intervals
-            if (gameTimer) clearInterval(gameTimer);
-        }
-
-        function createPlayer() {
-            player = {
-                x: GAME_WIDTH / 2,
-                y: GAME_HEIGHT / 2,
-                width: 50,
-                height: 50,
-                speed: selectedCharacter.speed,
-                health: selectedCharacter.health,
-                maxHealth: selectedCharacter.health,
-                direction: { x: 0, y: 0 },
-                team: playerTeam,
-                character: selectedCharacter,
-                lastAttackTime: 0,
-                lastSuperTime: 0,
-                element: document.createElement('div')
-            };
-            
-            player.element.className = 'character player';
-            player.element.style.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(selectedCharacter.svgData)}')`;
-            
-            // Add health bar
-            const healthBar = document.createElement('div');
-            healthBar.className = 'health-bar';
-            const healthFill = document.createElement('div');
-            healthFill.className = 'health-fill';
-            healthBar.appendChild(healthFill);
-            player.element.appendChild(healthBar);
-            
-            document.getElementById('game-container').appendChild(player.element);
-            updatePlayerPosition();
-        }
-
-        function createBot(character) {
-            const bot = {
-                x: Math.random() * (GAME_WIDTH - 100) + 50,
-                y: Math.random() * (GAME_HEIGHT - 200) + 100,
-                width: 50,
-                height: 50,
-                speed: character.speed * 0.8, // Slightly slower than player version
-                health: character.health,
-                maxHealth: character.health,
-                direction: { x: 0, y: 0 },
-                team: playerTeam === 'blue' ? 'red' : 'blue',
-                character: character,
-                lastAttackTime: 0,
-                lastSuperTime: 0,
-                aiState: 'idle',
-                aiTarget: null,
-                aiNextDecision: Date.now() + Math.random() * 1000,
-                gemsHeld: 0,
-                element: document.createElement('div')
-            };
-            
-            bot.element.className = 'character bot';
-            bot.element.style.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(character.svgData)}')`;
-            
-            // Add health bar
-            const healthBar = document.createElement('div');
-            healthBar.className = 'health-bar';
-            const healthFill = document.createElement('div');
-            healthFill.className = 'health-fill';
-            healthBar.appendChild(healthFill);
-            bot.element.appendChild(healthBar);
-            
-            document.getElementById('game-container').appendChild(bot.element);
-            bots.push(bot);
-            updateBotPosition(bot);
-        }
-
-        function createObstacles() {
-            // Create some random obstacles on the map
-            const obstacleCount = 10;
-            const gameContainer = document.getElementById('game-container');
-            
-            for (let i = 0; i < obstacleCount; i++) {
-                const obstacle = {
-                    x: Math.random() * (GAME_WIDTH - 200) + 100,
-                    y: Math.random() * (GAME_HEIGHT - 200) + 100,
-                    width: Math.random() * 100 + 50,
-                    height: Math.random() * 100 + 50,
-                    element: document.createElement('div')
-                };
-                
-                obstacle.element.className = 'obstacle';
-                obstacle.element.style.width = `${obstacle.width}px`;
-                obstacle.element.style.height = `${obstacle.height}px`;
-                obstacle.element.style.left = `${obstacle.x}px`;
-                obstacle.element.style.top = `${obstacle.y}px`;
-                
-                gameContainer.appendChild(obstacle.element);
-                obstacles.push(obstacle);
-            }
-        }
-
-        function spawnGems() {
-            if (!gameActive) return;
-            
-            // Spawn a gem every few seconds
-            const gem = {
-                x: Math.random() * (GAME_WIDTH - 200) + 100,
-                y: Math.random() * (GAME_HEIGHT - 200) + 100,
-                collected: false,
-                element: document.createElement('div')
-            };
-            
-            gem.element.className = 'gem';
-            gem.element.style.left = `${gem.x}px`;
-            gem.element.style.top = `${gem.y}px`;
-            
-            document.getElementById('game-container').appendChild(gem.element);
-            gems.push(gem);
-            
-            // Schedule next gem spawn
-            setTimeout(spawnGems, Math.random() * 3000 + 2000);
-        }
-
-        function updateTimer() {
-            const minutes = Math.floor(timeRemaining / 60);
-            const seconds = timeRemaining % 60;
-            document.getElementById('game-timer').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        }
-
-        function updateScores() {
-            document.getElementById('blue-score').textContent = scores.blue;
-            document.getElementById('red-score').textContent = scores.red;
-            document.getElementById('gems-collected').textContent = player.gemsHeld || 0;
-        }
-
-        function updateSuperMeter() {
-            const superFill = document.querySelector('#super-button .super-fill') || document.createElement('div');
-            if (!superFill.parentElement) {
-                superFill.className = 'super-fill';
-                document.getElementById('super-button').appendChild(superFill);
-            }
-            superFill.style.width = `${(superCharge / 100) * 100}%`;
-        }
-
-        function setupControls() {
-            const joystickArea = document.getElementById('joystick-area');
-            const joystick = document.getElementById('joystick');
-            let joystickActive = false;
-            let joystickOrigin = { x: 0, y: 0 };
-
-            // Joystick controls
-            joystickArea.addEventListener('mousedown', startJoystick);
-            joystickArea.addEventListener('touchstart', e => {
-                e.preventDefault();
-                startJoystick(e.touches[0]);
-            });
-
-            document.addEventListener('mousemove', moveJoystick);
-            document.addEventListener('touchmove', e => {
-                e.preventDefault();
-                moveJoystick(e.touches[0]);
-            });
-
-            document.addEventListener('mouseup', endJoystick);
-            document.addEventListener('touchend', endJoystick);
-
-            // Attack button
-            const attackButton = document.getElementById('attack-button');
-            attackButton.addEventListener('mousedown', playerAttack);
-            attackButton.addEventListener('touchstart', e => {
-                e.preventDefault();
-                playerAttack();
-            });
-
-            // Super button
-            const superButton = document.getElementById('super-button');
-            superButton.addEventListener('mousedown', playerSuper);
-            superButton.addEventListener('touchstart', e => {
-                e.preventDefault();
-                playerSuper();
-            });
-
-            function startJoystick(e) {
-                const rect = joystickArea.getBoundingClientRect();
-                joystickOrigin = {
-                    x: rect.left + rect.width / 2,
-                    y: rect.top + rect.height / 2
-                };
-                joystickActive = true;
-                moveJoystick(e);
-            }
-
-            function moveJoystick(e) {
-                if (!joystickActive || !player) return;
-                
-                const maxDistance = 50;
-                let dx = e.clientX - joystickOrigin.x;
-                let dy = e.clientY - joystickOrigin.y;
-                
-                // Calculate distance
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                // Normalize and apply max distance
-                if (distance > maxDistance) {
-                    dx = dx * (maxDistance / distance);
-                    dy = dy * (maxDistance / distance);
-                }
-                
-                // Update joystick position
-                joystick.style.transform = `translate(${dx}px, ${dy}px)`;
-                
-                // Update player direction
-                player.direction = {
-                    x: dx / maxDistance,
-                    y: dy / maxDistance
-                };
-            }
-
-            function endJoystick() {
-                if (!joystickActive) return;
-                
-                joystickActive = false;
-                joystick.style.transform = 'translate(0, 0)';
-                
-                if (player) {
-                    player.direction = { x: 0, y: 0 };
-                }
-            }
-        }
-
-        function playerAttack() {
-            if (!player || !gameActive) return;
-            
-            const now = Date.now();
-            if (now - player.lastAttackTime < player.character.attackSpeed) return;
-            
-            player.lastAttackTime = now;
-            
-            // Add a small super charge for each attack
-            superCharge = Math.min(100, superCharge + 10);
-            updateSuperMeter();
-            
-            // Create projectiles based on attack pattern
-            for (let i = 0; i < player.character.attackProjectiles; i++) {
-                createProjectile(
-                    player,
-                    player.character.attackDamage,
-                    player.character.attackRange,
-                    i - (player.character.attackProjectiles - 1) / 2
-                );
-            }
-        }
-
-        function playerSuper() {
-            if (!player || !gameActive || superCharge < 100) return;
-            
-            const now = Date.now();
-            if (now - player.lastSuperTime < player.character.super.cooldown) return;
-            
-            player.lastSuperTime = now;
-            superCharge = 0;
-            updateSuperMeter();
-            
-            // Different super effects based on character
-            switch (player.character.id) {
-                case 'tralalero':
-                    // Jump and create shockwave
-                    const shockwaveCount = 8;
-                    for (let i = 0; i < shockwaveCount; i++) {
-                        const angle = (i / shockwaveCount) * Math.PI * 2;
-                        createProjectile(
-                            player,
-                            player.character.super.damage,
-                            player.character.super.range,
-                            0,
-                            { x: Math.cos(angle), y: Math.sin(angle) }
-                        );
-                    }
-                    break;
-                    
-                case 'bombardillo':
-                    // Carpet bombing
-                    const bombCount = 12;
-                    for (let i = 0; i < bombCount; i++) {
-                        const angle = (i / bombCount) * Math.PI * 2;
-                        setTimeout(() => {
-                            if (player && gameActive) {
-                                createProjectile(
-                                    player,
-                                    player.character.super.damage,
-                                    player.character.super.range,
-                                    0,
-                                    { x: Math.cos(angle), y: Math.sin(angle) }
-                                );
-                            }
-                        }, i * 100);
-                    }
-                    break;
-                    
-                case 'tung':
-                    // Drum beat - push enemies back
-                    bots.forEach(bot => {
-                        if (bot.team !== player.team) {
-                            const dx = bot.x - player.x;
-                            const dy = bot.y - player.y;
-                            const distance = Math.sqrt(dx * dx + dy * dy);
-                            
-                            if (distance <= player.character.super.range) {
-                                // Calculate damage based on distance
-                                const damage = Math.round(player.character.super.damage * (1 - distance / player.character.super.range));
-                                applyDamage(bot, damage);
-                                
-                                // Push back
-                                const pushDistance = 100 * (1 - distance / player.character.super.range);
-                                const angle = Math.atan2(dy, dx);
-                                bot.x += Math.cos(angle) * pushDistance;
-                                bot.y += Math.sin(angle) * pushDistance;
-                                updateBotPosition(bot);
-                            }
-                        }
-                    });
-                    break;
-                    
-                case 'ballerina':
-                    // Pirouette - spinning attack
-                    const pirouetteAnimation = setInterval(() => {
-                        if (!player || !gameActive) {
-                            clearInterval(pirouetteAnimation);
-                            return;
-                        }
-                        
-                        const angle = (Date.now() / 100) % (Math.PI * 2);
-                        createProjectile(
-                            player,
-                            player.character.super.damage / 4,
-                            player.character.super.range,
-                            0,
-                            { x: Math.cos(angle), y: Math.sin(angle) }
-                        );
-                    }, 100);
-                    
-                    // Stop after 2 seconds
-                    setTimeout(() => {
-                        clearInterval(pirouetteAnimation);
-                    }, 2000);
-                    break;
-                    
-                case 'lirili':
-                    // Poetic Sandstorm - area effect over time
-                    const sandstormElement = document.createElement('div');
-                    sandstormElement.style.position = 'absolute';
-                    sandstormElement.style.width = `${player.character.super.range * 2}px`;
-                    sandstormElement.style.height = `${player.character.super.range * 2}px`;
-                    sandstormElement.style.borderRadius = '50%';
-                    sandstormElement.style.backgroundColor = 'rgba(210, 180, 140, 0.3)';
-                    sandstormElement.style.left = `${player.x - player.character.super.range}px`;
-                    sandstormElement.style.top = `${player.y - player.character.super.range}px`;
-                    document.getElementById('game-container').appendChild(sandstormElement);
-                    
-                    const sandstormDuration = 5000; // 5 seconds
-                    const tickInterval = 500; // damage every 0.5 seconds
-                    const startTime = Date.now();
-                    
-                    const sandstormTick = setInterval(() => {
-                        if (!gameActive || Date.now() - startTime > sandstormDuration) {
-                            clearInterval(sandstormTick);
-                            if (sandstormElement.parentNode) {
-                                sandstormElement.parentNode.removeChild(sandstormElement);
-                            }
-                            return;
-                        }
-                        
-                        // Apply damage to enemies in range
-                        bots.forEach(bot => {
-                            if (bot.team !== player.team) {
-                                const dx = bot.x - player.x;
-                                const dy = bot.y - player.y;
-                                const distance = Math.sqrt(dx * dx + dy * dy);
-                                
-                                if (distance <= player.character.super.range) {
-                                    applyDamage(bot, player.character.super.damage);
-                                }
-                            }
-                        });
-                    }, tickInterval);
-                    break;
-            }
-        }
-
-        function botAttack(bot) {
-            const now = Date.now();
-            if (now - bot.lastAttackTime < bot.character.attackSpeed) return;
-            
-            bot.lastAttackTime = now;
-            
-            // Create projectiles based on attack pattern
-            for (let i = 0; i < bot.character.attackProjectiles; i++) {
-                createProjectile(
-                    bot,
-                    bot.character.attackDamage,
-                    bot.character.attackRange,
-                    i - (bot.character.attackProjectiles - 1) / 2
-                );
-            }
-        }
-
-        function createProjectile(source, damage, range, spreadFactor = 0, direction = null) {
-            // Calculate direction if not provided
-            if (!direction) {
-                if (source === player) {
-                    // Use joystick direction for player
-                    if (source.direction.x === 0 && source.direction.y === 0) {
-                        // Default to right if no direction
-                        direction = { x: 1, y: 0 };
-                    } else {
-                        direction = { ...source.direction };
-                    }
-                } else {
-                    // For bots, aim at their target
-                    if (source.aiTarget) {
-                        const dx = source.aiTarget.x - source.x;
-                        const dy = source.aiTarget.y - source.y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-                        
-                        if (distance > 0) {
-                            direction = {
-                                x: dx / distance,
-                                y: dy / distance
-                            };
-                        } else {
-                            // Default direction if target is at same position
-                            direction = { x: 1, y: 0 };
-                        }
-                    } else {
-                        // Default direction if no target
-                        direction = { x: 1, y: 0 };
-                    }
-                }
-            }
-            
-            // Add spread
-            if (spreadFactor !== 0) {
-                const spreadAngle = Math.PI / 12 * spreadFactor; // 15 degrees per factor
-                const currentAngle = Math.atan2(direction.y, direction.x);
-                const newAngle = currentAngle + spreadAngle;
-                direction = {
-                    x: Math.cos(newAngle),
-                    y: Math.sin(newAngle)
-                };
-            }
-            
-            const speed = 10;
-            const projectile = {
-                x: source.x,
-                y: source.y,
-                direction: direction,
-                speed: speed,
-                damage: damage,
-                range: range,
-                distance: 0,
-                source: source,
-                element: document.createElement('div')
-            };
-            
-            projectile.element.className = 'projectile';
-            projectile.element.style.backgroundColor = source.character.color;
-            document.getElementById('game-container').appendChild(projectile.element);
-            
-            // Position projectile
-            updateProjectilePosition(projectile);
-            
-            projectiles.push(projectile);
-        }
-
-        function applyDamage(target, damage) {
-            target.health -= damage;
-            
-            // Update health bar
-            const healthFill = target.element.querySelector('.health-fill');
-            if (healthFill) {
-                const healthPercent = Math.max(0, target.health / target.maxHealth * 100);
-                healthFill.style.width = `${healthPercent}%`;
-            }
-            
-            // Show damage text
-            const damageText = document.createElement('div');
-            damageText.className = 'damage-text';
-            damageText.textContent = damage;
-            damageText.style.left = `${target.x}px`;
-            damageText.style.top = `${target.y - 20}px`;
-            document.getElementById('game-container').appendChild(damageText);
-            
-            // Remove damage text after animation
-            setTimeout(() => {
-                if (damageText.parentNode) {
-                    damageText.parentNode.removeChild(damageText);
-                }
-            }, 1000);
-            
-            // Check if target is defeated
-            if (target.health <= 0) {
-                handleCharacterDefeat(target);
-            }
-        }
-
-        function handleCharacterDefeat(character) {
-            // Drop gems if holding any
-            if (character.gemsHeld && character.gemsHeld > 0) {
-                for (let i = 0; i < character.gemsHeld; i++) {
-                    // Spawn a gem at character's position
-                    const gem = {
-                        x: character.x + (Math.random() * 40 - 20),
-                        y: character.y + (Math.random() * 40 - 20),
-                        collected: false,
-                        element: document.createElement('div')
-                    };
-                    
-                    gem.element.className = 'gem';
-                    gem.element.style.left = `${gem.x}px`;
-                    gem.element.style.top = `${gem.y}px`;
-                    
-                    document.getElementById('game-container').appendChild(gem.element);
-                    gems.push(gem);
-                }
-                character.gemsHeld = 0;
-            }
-            
-            if (character === player) {
-                // Player is defeated
-                character.x = GAME_WIDTH / 2;
-                character.y = GAME_HEIGHT / 2;
-                character.health = character.maxHealth;
-                updatePlayerPosition();
-            } else {
-                // Bot is defeated, respawn after delay
-                character.element.style.opacity = '0';
-                setTimeout(() => {
-                    character.x = Math.random() * (GAME_WIDTH - 100) + 50;
-                    character.y = Math.random() * (GAME_HEIGHT - 200) + 100;
-                    character.health = character.maxHealth;
-                    character.element.style.opacity = '1';
-                    updateBotPosition(character);
-                }, 3000);
-            }
-        }
-
-        function updatePlayerPosition() {
-            if (!player) return;
-            
-            player.element.style.left = `${player.x}px`;
-            player.element.style.top = `${player.y}px`;
-            
-            // Update health bar
-            const healthFill = player.element.querySelector('.health-fill');
-            if (healthFill) {
-                const healthPercent = Math.max(0, player.health / player.maxHealth * 100);
-                healthFill.style.width = `${healthPercent}%`;
-            }
-        }
-
-        function updateBotPosition(bot) {
-            bot.element.style.left = `${bot.x}px`;
-            bot.element.style.top = `${bot.y}px`;
-            
-            // Update health bar
-            const healthFill = bot.element.querySelector('.health-fill');
-            if (healthFill) {
-                const healthPercent = Math.max(0, bot.health / bot.maxHealth * 100);
-                healthFill.style.width = `${healthPercent}%`;
-            }
-        }
-
-        function updateProjectilePosition(projectile) {
-            projectile.element.style.left = `${projectile.x}px`;
-            projectile.element.style.top = `${projectile.y}px`;
-        }
-
-        function checkCollisions() {
-            // Check projectile collisions
-            for (let i = projectiles.length - 1; i >= 0; i--) {
-                const projectile = projectiles[i];
-                let hasCollided = false;
-                
-                // Check collision with obstacles
-                for (const obstacle of obstacles) {
-                    if (isColliding(projectile, obstacle)) {
-                        hasCollided = true;
-                        break;
-                    }
-                }
-                
-                // Check collision with characters
-                if (!hasCollided) {
-                    // Check collision with player
-                    if (projectile.source !== player && isColliding(projectile, player)) {
-                        applyDamage(player, projectile.damage);
-                        hasCollided = true;
-                    }
-                    
-                    // Check collision with bots
-                    if (!hasCollided) {
-                        for (const bot of bots) {
-                            if (projectile.source !== bot && projectile.source.team !== bot.team && isColliding(projectile, bot)) {
-                                applyDamage(bot, projectile.damage);
-                                hasCollided = true;
-                                break;
-                            }
-                        }
-                    }
-                }
-                
-                // Remove projectile if collided or out of range
-                if (hasCollided || projectile.distance >= projectile.range) {
-                    projectile.element.parentNode.removeChild(projectile.element);
-                    projectiles.splice(i, 1);
-                }
-            }
-            
-            // Check gem collisions with player
-            for (let i = gems.length - 1; i >= 0; i--) {
-                const gem = gems[i];
-                if (!gem.collected && isColliding(player, gem, 30)) {
-                    gem.collected = true;
-                    player.gemsHeld = (player.gemsHeld || 0) + 1;
-                    updateScores();
-                    
-                    gem.element.parentNode.removeChild(gem.element);
-                    gems.splice(i, 1);
-                }
-            }
-            
-            // Check gem collisions with bots
-            for (let b = 0; b < bots.length; b++) {
-                const bot = bots[b];
-                for (let i = gems.length - 1; i >= 0; i--) {
-                    const gem = gems[i];
-                    if (!gem.collected && isColliding(bot, gem, 30)) {
-                        gem.collected = true;
-                        bot.gemsHeld = (bot.gemsHeld || 0) + 1;
-                        
-                        gem.element.parentNode.removeChild(gem.element);
-                        gems.splice(i, 1);
-                    }
-                }
-            }
-        }
-
-        function isColliding(obj1, obj2, buffer = 0) {
-            const dist = Math.sqrt(
-                Math.pow(obj1.x - obj2.x, 2) + 
-                Math.pow(obj1.y - obj2.y, 2)
-            );
-            
-            return dist < ((obj1.width || 20) / 2 + (obj2.width || 20) / 2 + buffer);
-        }
-
-        function updateGame() {
-            if (!gameActive || !player) return;
-            
-            // Update player position
-            if (player.direction.x !== 0 || player.direction.y !== 0) {
-                const newX = player.x + player.direction.x * player.speed;
-                const newY = player.y + player.direction.y * player.speed;
-                
-                // Check for collisions with walls
-                if (newX >= 25 && newX <= GAME_WIDTH - 25) {
-                    player.x = newX;
-                }
-                
-                if (newY >= 25 && newY <= GAME_HEIGHT - 25) {
-                    player.y = newY;
-                }
-                
-                updatePlayerPosition();
-            }
-            
-            // Update projectiles
-            for (const projectile of projectiles) {
-                projectile.x += projectile.direction.x * projectile.speed;
-                projectile.y += projectile.direction.y * projectile.speed;
-                projectile.distance += projectile.speed;
-                updateProjectilePosition(projectile);
-            }
-            
-            // Update bot AI
-            updateBotAI();
-            
-            // Check collisions
-            checkCollisions();
-            
-            // Update game score
-            updateGameScore();
-            
-            // Request next frame
-            requestAnimationFrame(updateGame);
-        }
-
-        function updateBotAI() {
-            const now = Date.now();
-            
-            bots.forEach(bot => {
-                // Skip if bot is not active
-                if (bot.health <= 0) return;
-                
-                // Make AI decisions at intervals
-                if (now >= bot.aiNextDecision) {
-                    // Choose a state (idle, chase, attack, collect)
-                    const states = ['idle', 'chase', 'attack', 'collect'];
-                    const weights = [0.1, 0.3, 0.3, 0.3];
-                    
-                    // Adjust weights based on game state
-                    if (gems.length > 0) {
-                        weights[3] = 0.6; // Prefer collecting gems
-                    }
-                    
-                    if (bot.health < bot.maxHealth * 0.3) {
-                        weights[1] = 0.1; // Less likely to chase when low health
-                    }
-                    
-                    // Choose state based on weights
-                    let randomValue = Math.random();
-                    let cumulativeWeight = 0;
-                    let chosenState = 'idle';
-                    
-                    for (let i = 0; i < states.length; i++) {
-                        cumulativeWeight += weights[i];
-                        if (randomValue <= cumulativeWeight) {
-                            chosenState = states[i];
-                            break;
-                        }
-                    }
-                    
-                    bot.aiState = chosenState;
-                    
-                    // Choose target based on state
-                    switch (bot.aiState) {
-                        case 'chase':
-                        case 'attack':
-                            // Target player or a random enemy bot
-                            const potentialTargets = [player, ...bots.filter(b => b.team !== bot.team && b !== bot)];
-                            bot.aiTarget = potentialTargets[Math.floor(Math.random() * potentialTargets.length)];
-                            break;
-                            
-                        case 'collect':
-                            // Find closest gem
-                            if (gems.length > 0) {
-                                let closestGem = gems[0];
-                                let closestDistance = Math.sqrt(
-                                    Math.pow(bot.x - gems[0].x, 2) + 
-                                    Math.pow(bot.y - gems[0].y, 2)
-                                );
-                                
-                                for (let i = 1; i < gems.length; i++) {
-                                    const distance = Math.sqrt(
-                                        Math.pow(bot.x - gems[i].x, 2) + 
-                                        Math.pow(bot.y - gems[i].y, 2)
-                                    );
-                                    
-                                    if (distance < closestDistance) {
-                                        closestDistance = distance;
-                                        closestGem = gems[i];
-                                    }
-                                }
-                                
-                                bot.aiTarget = closestGem;
-                            } else {
-                                bot.aiState = 'idle';
-                            }
-                            break;
-                            
-                        case 'idle':
-                        default:
-                            // Wander randomly
-                            bot.aiTarget = {
-                                x: Math.random() * (GAME_WIDTH - 100) + 50,
-                                y: Math.random() * (GAME_HEIGHT - 200) + 100
-                            };
-                            break;
-                    }
-                    
-                    // Set next decision time
-                    bot.aiNextDecision = now + Math.random() * 2000 + 1000;
-                }
-                
-                // Execute current state
-                if (bot.aiTarget) {
-                    // Calculate direction to target
-                    const dx = bot.aiTarget.x - bot.x;
-                    const dy = bot.aiTarget.y - bot.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance > 10) {
-                        // Move towards target
-                        bot.x += (dx / distance) * bot.speed;
-                        bot.y += (dy / distance) * bot.speed;
-                        updateBotPosition(bot);
-                    }
-                    
-                    // Attack if in attack state and in range
-                    if (bot.aiState === 'attack' && distance < bot.character.attackRange) {
-                        botAttack(bot);
-                    }
-                }
-            });
-        }
-
-        function updateGameScore() {
-            // Count total gems held by each team
-            let blueGems = player.team === 'blue' ? (player.gemsHeld || 0) : 0;
-            let redGems = player.team === 'red' ? (player.gemsHeld || 0) : 0;
-            
-            bots.forEach(bot => {
-                if (bot.team === 'blue') {
-                    blueGems += bot.gemsHeld || 0;
-                } else {
-                    redGems += bot.gemsHeld || 0;
-                }
-            });
-            
-            // Update scores
-            scores.blue = blueGems;
-            scores.red = redGems;
-            updateScores();
-        }
-
-        function endGame() {
-            gameActive = false;
-            
-            // Determine winner
-            let result = 'Draw!';
-            if (scores.blue > scores.red) {
-                result = 'Blue Team Wins!';
-            } else if (scores.red > scores.blue) {
-                result = 'Red Team Wins!';
-            }
-            
-            // Show game over screen
-            document.getElementById('game-result').textContent = result;
-            document.getElementById('final-score').textContent = `Blue: ${scores.blue} - Red: ${scores.red}`;
-            document.getElementById('game-over').style.display = 'flex';
-        }
-
-        // Start game on load
-        window.addEventListener('load', () => {
-            init();
-            updateGame();
-        });
-    </script>
-</body>
-</html>
+export default StyledItalianBrainrotBrawlers;
