@@ -1,7 +1,162 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
+// Game component for battle screen
+const Game = ({ selectedCharacter, onBack }) => {
+  const [gameState, setGameState] = useState({
+    playerHealth: selectedCharacter.health,
+    enemyHealth: 3000, // Example enemy health
+    gameStatus: 'playing', // 'playing', 'won', 'lost'
+    cooldowns: {
+      basicAttack: 0,
+      superAbility: 0
+    }
+  });
+  
+  const [enemyAttackCooldown, setEnemyAttackCooldown] = useState(2000); // 2 seconds
+
+  const handleAttack = () => {
+    if (gameState.cooldowns.basicAttack > 0) return;
+    
+    setGameState(prev => ({
+      ...prev,
+      enemyHealth: Math.max(0, prev.enemyHealth - selectedCharacter.attackDamage),
+      cooldowns: {
+        ...prev.cooldowns,
+        basicAttack: selectedCharacter.attackSpeed
+      }
+    }));
+  };
+
+  const handleSuper = () => {
+    if (gameState.cooldowns.superAbility > 0) return;
+    
+    setGameState(prev => ({
+      ...prev,
+      enemyHealth: Math.max(0, prev.enemyHealth - selectedCharacter.super.damage),
+      cooldowns: {
+        ...prev.cooldowns,
+        superAbility: selectedCharacter.super.cooldown
+      }
+    }));
+  };
+
+  // Enemy attack loop
+  useEffect(() => {
+    const enemyAttackLoop = setInterval(() => {
+      if (gameState.gameStatus !== 'playing') return;
+      
+      setGameState(prev => ({
+        ...prev,
+        playerHealth: Math.max(0, prev.playerHealth - 200) // Example damage
+      }));
+    }, enemyAttackCooldown);
+    
+    return () => clearInterval(enemyAttackLoop);
+  }, [enemyAttackCooldown, gameState.gameStatus]);
+
+  // Game loop for cooldowns
+  useEffect(() => {
+    const gameLoop = setInterval(() => {
+      setGameState(prev => {
+        const newCooldowns = {
+          basicAttack: Math.max(0, prev.cooldowns.basicAttack - 100),
+          superAbility: Math.max(0, prev.cooldowns.superAbility - 100)
+        };
+        
+        // Check win/lose conditions
+        let gameStatus = prev.gameStatus;
+        if (prev.enemyHealth <= 0) gameStatus = 'won';
+        if (prev.playerHealth <= 0) gameStatus = 'lost';
+        
+        return {
+          ...prev,
+          cooldowns: newCooldowns,
+          gameStatus
+        };
+      });
+    }, 100); // Update every 100ms
+
+    return () => clearInterval(gameLoop);
+  }, []);
+
+  if (gameState.gameStatus === 'won') {
+    return (
+      <div className="game-over">
+        <h2>Victory!</h2>
+        <p>You defeated the enemy with {selectedCharacter.name}!</p>
+        <button onClick={onBack}>Back to Selection</button>
+      </div>
+    );
+  }
+
+  if (gameState.gameStatus === 'lost') {
+    return (
+      <div className="game-over">
+        <h2>Defeat!</h2>
+        <p>Your {selectedCharacter.name} was defeated.</p>
+        <button onClick={onBack}>Back to Selection</button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="game-container">
+      <div className="game-header">
+        <button onClick={onBack}>Back</button>
+        <h2>Playing as: {selectedCharacter.name}</h2>
+      </div>
+      
+      <div className="battle-area">
+        <div className="character-display">
+          <div 
+            className="character-svg" 
+            dangerouslySetInnerHTML={{ __html: selectedCharacter.svgData }} 
+          />
+          <div className="health-bar">
+            <div 
+              className="health-fill" 
+              style={{ width: `${(gameState.playerHealth / selectedCharacter.health) * 100}%` }}
+            />
+          </div>
+        </div>
+        
+        <div className="enemy-display">
+          <div className="enemy-placeholder">Enemy</div>
+          <div className="health-bar">
+            <div 
+              className="health-fill enemy-health" 
+              style={{ width: `${(gameState.enemyHealth / 3000) * 100}%` }}
+            />
+          </div>
+        </div>
+      </div>
+      
+      <div className="controls">
+        <button 
+          onClick={handleAttack}
+          disabled={gameState.cooldowns.basicAttack > 0}
+        >
+          Attack {gameState.cooldowns.basicAttack > 0 ? 
+            `(${Math.ceil(gameState.cooldowns.basicAttack/100)}s)` : ''}
+        </button>
+        
+        <button 
+          onClick={handleSuper}
+          disabled={gameState.cooldowns.superAbility > 0}
+          className="super-button"
+        >
+          {selectedCharacter.super.name} {gameState.cooldowns.superAbility > 0 ? 
+            `(${Math.ceil(gameState.cooldowns.superAbility/100)}s)` : ''}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// Main component
 const SurrealCharacters = () => {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [inGame, setInGame] = useState(false);
   
   const characters = [
     {
@@ -299,7 +454,17 @@ const SurrealCharacters = () => {
   const handleCharacterSelect = (character) => {
     setSelectedCharacter(character);
   };
-
+  
+  const handlePlay = () => {
+    if (selectedCharacter) {
+      setInGame(true);
+    }
+  };
+  
+  const handleBackFromGame = () => {
+    setInGame(false);
+  };
+  
   // Render character selection screen
   const renderCharacterSelection = () => {
     return (
@@ -414,13 +579,24 @@ const SurrealCharacters = () => {
             </div>
           </div>
           
-          <button className="back-button" onClick={() => setSelectedCharacter(null)}>
-            Back to Selection
-          </button>
+          <div className="button-group">
+            <button className="back-button" onClick={() => setSelectedCharacter(null)}>
+              Back to Selection
+            </button>
+            
+            <button className="play-button" onClick={handlePlay}>
+              Play as {selectedCharacter.name}
+            </button>
+          </div>
         </div>
       </div>
     );
   };
+  
+  // Render game or character selection based on state
+  if (inGame && selectedCharacter) {
+    return <Game selectedCharacter={selectedCharacter} onBack={handleBackFromGame} />;
+  }
 
   return (
     <div className="surreal-characters">
@@ -628,6 +804,12 @@ const SurrealCharacters = () => {
             color: #333;
           }
           
+          .button-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+          }
+          
           .back-button {
             background: linear-gradient(45deg, #4cc9f0, #4895ef);
             border: none;
@@ -638,7 +820,6 @@ const SurrealCharacters = () => {
             border-radius: 30px;
             cursor: pointer;
             transition: all 0.2s;
-            margin-top: 20px;
             box-shadow: 0 4px 10px rgba(76, 201, 240, 0.3);
           }
           
@@ -649,6 +830,192 @@ const SurrealCharacters = () => {
           
           .back-button:active {
             transform: translateY(-1px);
+          }
+          
+          .play-button {
+            background: linear-gradient(45deg, #f72585, #7209b7);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(247, 37, 133, 0.3);
+          }
+          
+          .play-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(247, 37, 133, 0.4);
+          }
+          
+          .play-button:active {
+            transform: translateY(-1px);
+          }
+          
+          /* Game Component Styles */
+          .game-container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          }
+          
+          .game-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+          }
+          
+          .game-header h2 {
+            margin: 0 0 0 20px;
+          }
+          
+          .battle-area {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 40px 0;
+            background: rgba(76, 201, 240, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+          }
+          
+          .character-display, .enemy-display {
+            text-align: center;
+            position: relative;
+          }
+          
+          .character-svg {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+            animation: character-idle 1s infinite alternate;
+          }
+          
+          @keyframes character-idle {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+          }
+          
+          .enemy-placeholder {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.5rem;
+            animation: enemy-idle 1.5s infinite alternate;
+          }
+          
+          @keyframes enemy-idle {
+            from { transform: translateY(0) rotate(0deg); }
+            to { transform: translateY(-5px) rotate(5deg); }
+          }
+          
+          .health-bar {
+            width: 200px;
+            height: 20px;
+            background: #eee;
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+          }
+          
+          .health-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4cc9f0, #4895ef);
+            transition: width 0.3s;
+          }
+          
+          .enemy-health {
+            background: linear-gradient(90deg, #f72585, #b5179e);
+          }
+          
+          .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 15px;
+          }
+          
+          .controls button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            background: #4cc9f0;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 150px;
+          }
+          
+          .controls button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          }
+          
+          .controls button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+          }
+          
+          .super-button {
+            background: linear-gradient(90deg, #f72585, #b5179e) !important;
+          }
+          
+          .game-over {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 40px auto;
+          }
+          
+          .game-over h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #4cc9f0, #f72585);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+          
+          .game-over p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+          }
+          
+          .game-over button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, #4cc9f0, #4895ef);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+          }
+          
+          .game-over button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(76, 201, 240, 0.4);
           }
           
           @media (max-width: 768px) {
@@ -678,16 +1045,18 @@ const SurrealCharacters = () => {
             .character-info {
               text-align: center;
             }
+            
+            .battle-area {
+              flex-direction: column;
+              gap: 30px;
+            }
+            
+            .controls {
+              flex-direction: column;
+              align-items: center;
+            }
+            
+            .button-group {
+              flex-direction: column;
+            }
           }
-        `}
-      </style>
-      
-      <h1>Italian Brainrot Brawlers</h1>
-      <h2>New Character Selection</h2>
-      
-      {selectedCharacter ? renderCharacterDetail() : renderCharacterSelection()}
-    </div>
-  );
-};
-
-export default SurrealCharacters;
